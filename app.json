@@ -1,15 +1,15 @@
 {
-  "name": "BoilerPlate",
-  "displayName": "Boilder Plate",
+  "name": "Geobench",
+  "displayName": "Geobench",
   "version": "1.0.0",
   "orientation": "portrait",
   "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "fr.mistergooddeal.boilerplate",
+      "bundleIdentifier": "fr.mistergooddeal.geobench",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "fr.mistergooddeal.boilerplate",
+      "package": "fr.mistergooddeal.geobench",
       "versionCode": 1
     }
 }
