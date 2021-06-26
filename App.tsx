@@ -4,44 +4,48 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { useColorScheme, Image } from "react-native";
 
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import { store } from "./src/store/store";
 import { Provider } from "react-redux";
 
-import { TemplateScreen } from "./src/screens/Template.screen";
 import { hp } from "./src/utils/functions";
 import { Lang } from "./src/constants/Lang";
 import { Colors } from "./src/constants/Colors";
+import { SettingsStack } from "./src/screens/Settings/Settings.index";
+import { CarteScreen } from "./src/screens/Carte.screen";
+import { CommunauteScreen } from "./src/screens/Communaute.screen";
+import { IndexScreens } from "./src/screens/Screens.index";
+import { LoginScreen } from "./src/screens/Settings/Login.screen";
+import { ForgotPasswordScreen } from "./src/screens/Settings/ForgotPassword.screen";
+import { RegisterScreen } from "./src/screens/Settings/Register.screen";
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
-
-  const Tab = createBottomTabNavigator();
-
+  const Stack = createStackNavigator();
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Tab.Navigator tabBarOptions={{ showLabel: false }}>
-          <Tab.Screen
-            name="Home"
-            component={TemplateScreen}
-            options={{
-              tabBarLabel: Lang.navigation.home,
-              tabBarIcon: ({ color, focused }) => (
-                <Image
-                  style={{
-                    width: hp("4%"),
-                    height: hp("4%"),
-                    tintColor: focused
-                      ? Colors.navigation.focus
-                      : Colors.navigation.unfocus,
-                  }}
-                  source={require("./src/assets/images/navigation/home.png")}
-                />
-              ),
-            }}
+        <Stack.Navigator
+          initialRouteName={"Index"}
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Index" component={IndexScreens} />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ animationEnabled: false }}
           />
-        </Tab.Navigator>
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPasswordScreen}
+            options={{ animationEnabled: true }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ animationEnabled: true }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
