@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Text } from "react-native";
 import { templateSelector } from "../store/slices/templateSlice";
 import { api } from "../api";
+import { GBContainer } from "../components/GBContainer";
 import { Colors } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
-import { GBContainer } from "../components/GBContainer";
 
-export const TemplateScreen: React.FunctionComponent<null> = () => {
+export const CommunauteScreen: React.FunctionComponent<null> = () => {
   const dispatch = useDispatch();
   const { isFetching, isSuccess, isError, errorMessage } =
     useSelector(templateSelector);
@@ -34,7 +34,7 @@ export const TemplateScreen: React.FunctionComponent<null> = () => {
       justifyContent={"center"}
       color={Colors.background}
     >
-      <Text style={{ textAlign: "center" }}>{"Template Screen"}</Text>
+      <Text style={{ textAlign: "center" }}>{"Communaute Screen"}</Text>
     </GBContainer>
   );
 };
