@@ -2,6 +2,43 @@ import * as RNLocalize from "react-native-localize";
 
 const locales = {
   fr: {
+    map: {
+      bench: "Banc",
+      no_comment: "Aucun commentaire pour ce banc...",
+      comment: "Commenter !",
+      commentSuccess: {
+        title: "Félicitation !",
+        text: "Votre commentaire a été ajouté avec succès !",
+      },
+      commentFail: {
+        title: "Oh non ! 😔",
+        text: "Il y a eu un problème durant l'ajout de votre commentaire... Veuillez réessayer plus tard !",
+      },
+      community_comments: "Commentaires de la communauté :",
+      ph_comment: "Commentaire... (entre 10 et 250 caractères)",
+      added_by: "Banc ajouté par",
+      location: {
+        text: "Ce banc est situé",
+        array: [
+          "dans un autre type de lieu",
+          "dans la rue",
+          "dans un parc",
+          "dans la forêt",
+          "sur une place publique",
+          "sur une aire de repos",
+          "en bord de mer",
+          "sur/près d'un parking",
+        ],
+      },
+      environnement: {
+        text: "entouré d'un",
+        array: [
+          "environnement calme",
+          "environnement avec quelques nuisances sonores",
+          "environnement bruyant",
+        ],
+      },
+    },
     navigation: {
       home: "Accueil",
     },
@@ -73,6 +110,43 @@ const locales = {
     },
   },
   en: {
+    map: {
+      bench: "Bench",
+      no_comment: "No comment for this bench...",
+      comment: "Comment it!",
+      commentSuccess: {
+        title: "Congratulation!",
+        text: "Your comment has been added successfully!",
+      },
+      commentFail: {
+        title: "Oh no! 😔",
+        text: "There was a problem... Please try again later!",
+      },
+      community_comments: "Community comments:",
+      ph_comment: "Comment... (between 10 and 250 chars)",
+      added_by: "Bench added by",
+      location: {
+        text: "This bench is located",
+        array: [
+          "in an other type of location",
+          "in the street",
+          "in a park",
+          "in the forest",
+          "on a public place",
+          "on a rest area",
+          "on the beach",
+          "on/near a parking",
+        ],
+      },
+      environnement: {
+        text: "surrounded by",
+        array: [
+          "a calm environment",
+          "a low noise pollution",
+          "a noisy environment",
+        ],
+      },
+    },
     navigation: {
       home: "Home",
     },
