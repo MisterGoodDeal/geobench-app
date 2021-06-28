@@ -4,10 +4,10 @@ import { Colors } from "../constants/Colors";
 import { hp } from "../utils/functions";
 
 interface GBTextProps {
-  children: string;
+  children: string | undefined;
   size: string;
   color?: string;
-  align?: "left" | "center" | "right";
+  align?: "left" | "center" | "right" | "justify";
   transform?: "capitalize" | "uppercase" | "lowercase";
   style:
     | "thin"
@@ -59,7 +59,7 @@ export const GBText: React.FunctionComponent<GBTextProps> = ({
       },
     ]}
   >
-    {children}
+    {children === undefined ? "" : children}
   </Text>
 );
 
