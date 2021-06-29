@@ -5,7 +5,6 @@ import { Colors } from "../constants/Colors";
 interface GBTemplateProps {}
 
 export const GBTemplate: React.FunctionComponent<GBTemplateProps> = ({}) => (
-export const GBTemplate: React.FunctionComponent<GBTemplateProps> = ({}) => (
   <></>
 );
 
