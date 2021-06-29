@@ -13,8 +13,10 @@ export interface Banc {
 
 export interface Map {
   bancs: Banc[];
+  imageURL?: string;
   isFetching: boolean;
   isSuccess: boolean;
   isError: boolean;
   errorMessage?: string;
+  isUploaded?: boolean;
 }
