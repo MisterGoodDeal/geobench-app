@@ -5,6 +5,10 @@ import {
   GetBancsApi,
   PostCommentApi,
   makePostCommentApi,
+  PostImageApi,
+  makePostImageApi,
+  makePostBenchApi,
+  PostBenchApi,
 } from "./benchesApi";
 import { Fetch } from "../utils";
 
@@ -77,6 +81,86 @@ const getPostCommentFetch = (fetch: Fetch, baseUrl: string): Fetch => {
     };
 
     const url = `${baseUrl}/${routeUrl}`;
+
+    const res = await fetch(url, requestInit);
+
+    return res;
+  };
+};
+
+/* POSTER UNE IMAGE */
+interface PostImageApiInterface {
+  postImage: PostImageApi;
+}
+
+export const postImageApi = (baseUrl: string): PostImageApiInterface => {
+  const PostImageFetch = getPostImageFetch(fetch, baseUrl);
+
+  return {
+    postImage: makePostImageApi(PostImageFetch),
+  };
+};
+
+const getPostImageFetch = (fetch: Fetch, baseUrl: string): Fetch => {
+  return async (input: RequestInfo, init?: RequestInit) => {
+    const routeUrl =
+      typeof input === "string"
+        ? input
+        : hasOwnProperty(input, "href")
+        ? input.href
+        : input.url;
+
+    const requestInit: RequestInit = {
+      ...init,
+      headers: {
+        ...init?.headers,
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const url = `${baseUrl}/${routeUrl}`;
+    console.log("URL => ", url);
+    console.log("REQUEST INIT => ", requestInit);
+
+    const res = await fetch(url, requestInit);
+
+    return res;
+  };
+};
+
+/* POSTER UN NOUVEAU BANC */
+interface PostBenchApiInterface {
+  postBench: PostBenchApi;
+}
+
+export const postBenchApi = (baseUrl: string): PostBenchApiInterface => {
+  const PostBenchFetch = getPostBenchFetch(fetch, baseUrl);
+
+  return {
+    postBench: makePostBenchApi(PostBenchFetch),
+  };
+};
+
+const getPostBenchFetch = (fetch: Fetch, baseUrl: string): Fetch => {
+  return async (input: RequestInfo, init?: RequestInit) => {
+    const routeUrl =
+      typeof input === "string"
+        ? input
+        : hasOwnProperty(input, "href")
+        ? input.href
+        : input.url;
+
+    const requestInit: RequestInit = {
+      ...init,
+      headers: {
+        ...init?.headers,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const url = `${baseUrl}/${routeUrl}`;
+    console.log("URL => ", url);
+    console.log("REQUEST INIT => ", requestInit);
 
     const res = await fetch(url, requestInit);
 

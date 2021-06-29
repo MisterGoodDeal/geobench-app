@@ -1,4 +1,9 @@
-import { fetchBancs, fetchPostComment } from "./benches";
+import {
+  fetchBancs,
+  fetchPostBench,
+  fetchPostComment,
+  fetchPostImage,
+} from "./benches";
 import { fetchTemplate } from "./template";
 import { fetchUserLogin } from "./user";
 
@@ -12,5 +17,7 @@ export const api = {
   benches: {
     get: fetchBancs,
     comment: fetchPostComment,
+    uploadImage: fetchPostImage,
+    post: fetchPostBench,
   },
 };
