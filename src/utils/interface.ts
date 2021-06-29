@@ -21,3 +21,27 @@ export interface Popup {
   notValidText?: string;
   notValid?: () => void;
 }
+
+export interface AddBench {
+  note: number;
+  lieu: number;
+  environnement: number;
+  commentaire: string;
+  base64Photo: string;
+  latitude: number;
+  longitude: number;
+  username: string;
+  date: Date;
+}
+
+export const defaultBenchDetails = {
+  note: 0,
+  lieu: -1,
+  environnement: -1,
+  commentaire: "",
+  base64Photo: "",
+  latitude: 0,
+  longitude: 0,
+  username: "",
+  date: new Date(),
+};
