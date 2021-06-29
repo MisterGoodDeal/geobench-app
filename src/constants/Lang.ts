@@ -3,6 +3,18 @@ import * as RNLocalize from "react-native-localize";
 const locales = {
   fr: {
     map: {
+      position: {
+        error: {
+          title: "Beep beep boop 🛰",
+          message:
+            "Nous ne pouvons pas déterminer votre position actuellement, essayez de sortir et redémarrez l'application",
+        },
+        bench_error: {
+          title: "Beep beep boop 🛰",
+          message:
+            "Nous ne pouvons pas déterminer votre position actuellement. Le banc ne peut pas être ajouté.",
+        },
+      },
       bench: "Banc",
       no_comment: "Aucun commentaire pour ce banc...",
       comment: "Commenter !",
@@ -37,6 +49,57 @@ const locales = {
           "environnement avec quelques nuisances sonores",
           "environnement bruyant",
         ],
+      },
+      add: {
+        title: "Ajout d'un banc",
+        rating: "Notez ce banc selon son état",
+        ph_location: "Choisissez le lieu...",
+        location: [
+          { label: "Rue", value: "1" },
+          { label: "Parc", value: "2" },
+          { label: "Forêt", value: "3" },
+          { label: "Place publique", value: "4" },
+          { label: "Aire de repos", value: "5" },
+          { label: "Bord de mer", value: "6" },
+          { label: "Parking", value: "7" },
+          { label: "Autre", value: "0" },
+        ],
+        ph_environment: "Sélectionnez l'envrionnement...",
+        environment: [
+          { label: "Environnement calme", value: "1" },
+          { label: "Environnement avec quelque nuisance sonores", value: "2" },
+          { label: "Environnement bruyant", value: "3" },
+        ],
+        comment: "Rédigez un commentaire... (optionnel)",
+        photo: "Prendre une photo !",
+        photoToast: {
+          error: {
+            title: "Oups !",
+            text: "Une erreur s'est produite lors de la prise de votre photo... Veuillez réessayer !",
+            textUpload:
+              "Une erreur s'est produite lors de la mise en ligne de votre photo... Elle ne sera pas ajoutée !",
+          },
+          success: {
+            title: "Cheese 📸",
+            text: "Votre photo a bien été enregistrée !",
+          },
+          close: {
+            title: "Photo annulée 😔",
+            text: "Vous avez annulé, votre photo ne sera pas prise en compte !",
+          },
+        },
+        upload: {
+          success: {
+            title: "Super 🥳",
+            message: "Le banc a été ajouté avec succès !",
+          },
+          error: {
+            title: "Oh non ☹️",
+            message:
+              "Il y a eu une erreur pendant l'ajout de votre banc, veuillez réessayer plus tard !",
+          },
+        },
+        button: "Ajouter !",
       },
     },
     navigation: {
@@ -111,6 +174,18 @@ const locales = {
   },
   en: {
     map: {
+      position: {
+        error: {
+          title: "Beep beep boop 🛰",
+          message:
+            "We can't determine your current position, try to go outside and restart the app",
+        },
+        bench_error: {
+          title: "Beep beep boop 🛰",
+          message:
+            "We can't determine your current position. The bench can't be added.",
+        },
+      },
       bench: "Bench",
       no_comment: "No comment for this bench...",
       comment: "Comment it!",
@@ -145,6 +220,57 @@ const locales = {
           "a low noise pollution",
           "a noisy environment",
         ],
+      },
+      add: {
+        title: "Add bench",
+        rating: "Rate this bench according to its condition",
+        ph_location: "Choose the location...",
+        location: [
+          { label: "Street", value: "1" },
+          { label: "Park", value: "2" },
+          { label: "Forest", value: "3" },
+          { label: "Public place", value: "4" },
+          { label: "Resting area", value: "5" },
+          { label: "Sea side", value: "6" },
+          { label: "Parking", value: "7" },
+          { label: "Other", value: "0" },
+        ],
+        ph_environment: "Choose the envrionment...",
+        environment: [
+          { label: "Calm environment", value: "1" },
+          { label: "Low noise pollution", value: "2" },
+          { label: "Noisy environment", value: "3" },
+        ],
+        comment: "Write a comment... (optional)",
+        photo: "Take a picture!",
+        photoToast: {
+          error: {
+            title: "Oops !",
+            text: "An error happened while taking your picture... Please try again!",
+            textUpload:
+              "An error happened while uploading your picture... It will not be added!",
+          },
+          success: {
+            title: "Cheese 📸",
+            text: "Your picture has been saved!",
+          },
+          close: {
+            title: "Picture cancelled 😔",
+            text: "You cancel your picture, It will not be saved!",
+          },
+        },
+        button: "Add!",
+        upload: {
+          success: {
+            title: "Yeay 🥳",
+            message: "Your bench has been added successfully!",
+          },
+          error: {
+            title: "Oh no ☹️",
+            message:
+              "There was an error while adding your bench! Please try again!",
+          },
+        },
       },
     },
     navigation: {
