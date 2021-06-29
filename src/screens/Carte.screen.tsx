@@ -24,7 +24,7 @@ import { Lang } from "../constants/Lang";
 import { GBAddBench } from "../components/GBAddBench";
 import { GBToast } from "../components/GBToast";
 
-const marker = require("../assets/images/map/pin.png");
+const marker = require("../assets/images/map/marker.png");
 
 export const CarteScreen: React.FunctionComponent<null> = () => {
   const dispatch = useDispatch();
