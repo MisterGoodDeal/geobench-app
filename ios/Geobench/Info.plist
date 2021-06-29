@@ -65,5 +65,7 @@
   <string>Your location is required for location benches around you</string>
   <key>NSLocationWhenInUseUsageDescription</key>
   <string>Your location is required for location benches around you</string>
+	<key>NSCameraUsageDescription</key>
+	<string>The access to your camera is required to take picture of a bench</string>
 </dict>
 </plist>
