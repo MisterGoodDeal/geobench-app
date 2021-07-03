@@ -80,6 +80,15 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           {Lang.forgotPassword.code_hint}
         </GBText>
         <GBSpacer visible={false} space={"1.5%"} />
+        <GBText
+          style={"regular"}
+          size={"1.1%"}
+          align={"justify"}
+          color={Colors.darkGrey}
+        >
+          {Lang.forgotPassword.popupMessages.password_weak}
+        </GBText>
+        <GBSpacer visible={false} space={"1.5%"} />
         <GBInput
           multiline={false}
           nbLines={1}

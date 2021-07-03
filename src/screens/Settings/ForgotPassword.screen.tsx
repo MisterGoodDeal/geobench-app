@@ -91,7 +91,6 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           "error"
         );
         setcheckAndChangeSended(false);
-        nav.navigate("Login");
       }
       dispatch(actions.user.clearState());
     }
