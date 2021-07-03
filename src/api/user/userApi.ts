@@ -22,3 +22,51 @@ export const makeUserLoginApi = (fetchFn: Fetch): UserLoginApi => ({
     return res;
   },
 });
+
+/* RESET PASSWORD */
+interface ReturnUserResetParams {
+  lang: string;
+  email: string;
+}
+export interface UserResetApi {
+  return: (returnParams: ReturnUserResetParams) => Promise<any>;
+}
+
+export const makeUserResetApi = (fetchFn: Fetch): UserResetApi => ({
+  return: async (returnParams) => {
+    const res = await fetchFn(`user/reset`, {
+      method: "POST",
+      body: JSON.stringify({
+        lang: returnParams.lang,
+        email: returnParams.email,
+      }),
+    });
+    return res;
+  },
+});
+
+/* CHECK OTP AND MODIFY PASSWORD */
+interface ReturnUserCheckAndChangeParams {
+  code: string;
+  email: string;
+  password: string;
+}
+export interface UserCheckAndChangeApi {
+  return: (returnParams: ReturnUserCheckAndChangeParams) => Promise<any>;
+}
+
+export const makeUserCheckAndChangeApi = (
+  fetchFn: Fetch
+): UserCheckAndChangeApi => ({
+  return: async (returnParams) => {
+    const res = await fetchFn(`user/updatePassword`, {
+      method: "PUT",
+      body: JSON.stringify({
+        code: returnParams.code,
+        email: returnParams.email,
+        password: returnParams.password,
+      }),
+    });
+    return res;
+  },
+});

@@ -45,6 +45,41 @@ export const userSlice = createSlice({
       state.isError = true;
       state.errorMessage = payload;
     });
+
+    /* Réinitialisation du mot de passe de l'utilisateur */
+    builder.addCase(api.user.reset.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.user.reset.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(api.user.reset.rejected, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload;
+    });
+
+    /* Check l'OTP et modifier le mot de passe */
+    builder.addCase(api.user.checkAndChange.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.user.checkAndChange.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(
+      api.user.checkAndChange.rejected,
+      (state, { payload }: any) => {
+        state.isFetching = false;
+        state.isError = true;
+        state.errorMessage = payload;
+      }
+    );
   },
 });
 

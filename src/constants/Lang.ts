@@ -134,9 +134,33 @@ const locales = {
     },
     forgotPassword: {
       title: "Mot de passe oublié ?",
+      titleAlt: "Besoin de changer de mot de passe ?",
       pickup: "Aucun soucis, il suffit de le réinitialiser !",
       ph_email: "Adresse email...",
       button: "Réinitialiser",
+      mail_title: "Email envoyé !",
+      mail_text:
+        "Un email vous a été envoyé ! Vous y trouverez un code à 6 chiffres vous permettant de réinitialiser votre mot de passe.",
+      email_disclaimer:
+        "Si vous ne trouvez pas le mail, vérifiez vos spam ou cherchez ❝geobench@turtletv.fr❞",
+      ph_code: "••••••",
+      code_hint: "Code OTP reçu par mail",
+      popupMessages: {
+        password_weak:
+          "Votre mot de passe doit contenir au moins une minuscule, majuscule, chiffre et un caractère spécial avec une longueur minimum de 8 caractères.",
+        password_missmatch: "Vos mots de passe ne se correcspondent pas.",
+      },
+      checkAndChange: {
+        success: {
+          title: "Super !",
+          message: "Ton mot de passe a été changé avec succès !",
+        },
+        error: {
+          title: "Oups !",
+          message:
+            "On dirait que le code à 6 chiffres saisi est incorrect, vérifiez et rééssayez!",
+        },
+      },
     },
     register: {
       title: "Inscrivez-vous dès maintenant",
@@ -304,9 +328,33 @@ const locales = {
     },
     forgotPassword: {
       title: "Forgot password?",
+      titleAlt: "Wanna change your password?",
       pickup: "No problem, just reset it!",
       ph_email: "Email address...",
       button: "Reset",
+      mail_title: "Email sent!",
+      mail_text:
+        "An email has been sent to your inbox! You'll recieve a 6-digits code that you will need to provide in odrder to reset your password.",
+      email_disclaimer:
+        "If you can't find the mail, please check in your spam or search for ❝geobench@turtletv.fr❞",
+      ph_code: "••••••",
+      code_hint: "OTP code recieved by email",
+      popupMessages: {
+        password_weak:
+          "Your password must contain at least one lower case, upper case, number and one special character with a minimum length of 8 characters.",
+        password_missmatch: "Password missmatch.",
+      },
+      checkAndChange: {
+        success: {
+          title: "Yeah!",
+          message: "You password has been changed successfully!",
+        },
+        error: {
+          title: "Oops!",
+          message:
+            "It seems that the 6-digits code you provided is incorrect, check it again!",
+        },
+      },
     },
     register: {
       title: "Register right now",

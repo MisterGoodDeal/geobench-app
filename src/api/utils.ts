@@ -13,3 +13,11 @@ export const getLoginErrorMsg = (error_code: string) => {
       return Lang.errors.internal_error;
   }
 };
+export const getPasswordResetErrorMsg = (error_code: string) => {
+  switch (error_code) {
+    case "wrong_otp":
+      return Lang.forgotPassword.checkAndChange.error;
+    default:
+      return Lang.errors.internal_error;
+  }
+};

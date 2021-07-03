@@ -5,7 +5,11 @@ import {
   fetchPostImage,
 } from "./benches";
 import { fetchTemplate } from "./template";
-import { fetchUserLogin } from "./user";
+import {
+  fetchUserCheckAndChange,
+  fetchUserLogin,
+  fetchUserReset,
+} from "./user";
 
 export const api = {
   template: {
@@ -13,6 +17,8 @@ export const api = {
   },
   user: {
     login: fetchUserLogin,
+    reset: fetchUserReset,
+    checkAndChange: fetchUserCheckAndChange,
   },
   benches: {
     get: fetchBancs,
