@@ -7,6 +7,7 @@ interface GBInputProps {
   multiline: boolean;
   nbLines: number;
   width?: number;
+  textAlign?: "left" | "right" | "center";
   spaceAround?: number;
   children?: string;
   placeholder?: string;
@@ -15,6 +16,7 @@ interface GBInputProps {
   maxLength?: number;
   hook: React.Dispatch<React.SetStateAction<string>>;
   disable?: boolean;
+  size?: string;
 }
 
 export const GBInput: React.FunctionComponent<GBInputProps> = ({
@@ -24,10 +26,12 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
   spaceAround,
   children,
   placeholder,
+  textAlign,
   type,
   maxLength,
   isPassword,
   disable,
+  size,
   hook,
 }) => (
   <TextInput
@@ -39,11 +43,12 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
       styles.input,
       { borderRadius: 8 },
       { textAlignVertical: multiline ? "top" : "center" },
-      { textAlign: multiline ? "left" : "left" },
+      { textAlign: textAlign === undefined ? "left" : textAlign },
       { height: multiline ? hp("20%") : undefined },
       { width: width ? width : wp("70%") },
       { marginLeft: spaceAround ? spaceAround : 0 },
       { marginRight: spaceAround ? spaceAround : 0 },
+      { fontSize: size === undefined ? hp("1.5%") : hp(size) },
     ]}
     secureTextEntry={
       isPassword ? isPassword : isPassword === null ? undefined : false
@@ -60,7 +65,6 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
 const styles = StyleSheet.create({
   input: {
     backgroundColor: Colors.inputColor,
-    fontSize: hp("1.5%"),
     fontWeight: "bold",
     textAlignVertical: "top",
     padding: 15,

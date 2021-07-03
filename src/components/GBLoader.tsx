@@ -21,7 +21,7 @@ export const GBLoader: React.FunctionComponent<GBLoaderProps> = ({
       zIndex: 999,
     }}
     isVisible={visible}
-    size={hp("3%")}
+    size={hp("4%")}
     type={"FadingCircleAlt"}
     color={color === "blanc" ? Colors.white : Colors.black}
   />
