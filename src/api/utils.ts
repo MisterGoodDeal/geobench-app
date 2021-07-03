@@ -21,3 +21,15 @@ export const getPasswordResetErrorMsg = (error_code: string) => {
       return Lang.errors.internal_error;
   }
 };
+export const getRegisterErrorMsg = (error_code: string) => {
+  switch (error_code) {
+    case "already_exists_both":
+      return Lang.register.messages.error.both;
+    case "already_exists_mail":
+      return Lang.register.messages.error.email;
+    case "already_exists_username":
+      return Lang.register.messages.error.user;
+    default:
+      return Lang.errors.internal_error;
+  }
+};

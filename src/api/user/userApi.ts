@@ -70,3 +70,31 @@ export const makeUserCheckAndChangeApi = (
     return res;
   },
 });
+
+/* REGISTER USER */
+interface ReturnUserRegisterParams {
+  prenom: string;
+  nom: string;
+  username: string;
+  email: string;
+  password: string;
+}
+export interface UserRegisterApi {
+  return: (returnParams: ReturnUserRegisterParams) => Promise<any>;
+}
+
+export const makeUserRegisterApi = (fetchFn: Fetch): UserRegisterApi => ({
+  return: async (returnParams) => {
+    const res = await fetchFn(`user/register`, {
+      method: "POST",
+      body: JSON.stringify({
+        prenom: returnParams.prenom,
+        nom: returnParams.nom,
+        username: returnParams.username,
+        email: returnParams.email,
+        password: returnParams.password,
+      }),
+    });
+    return res;
+  },
+});

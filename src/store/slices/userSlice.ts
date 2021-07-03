@@ -80,6 +80,22 @@ export const userSlice = createSlice({
         state.errorMessage = payload;
       }
     );
+
+    /* Créer un compte utilisateur */
+    builder.addCase(api.user.register.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.user.register.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(api.user.register.rejected, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload;
+    });
   },
 });
 

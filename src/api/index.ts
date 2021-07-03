@@ -8,6 +8,7 @@ import { fetchTemplate } from "./template";
 import {
   fetchUserCheckAndChange,
   fetchUserLogin,
+  fetchUserRegister,
   fetchUserReset,
 } from "./user";
 
@@ -19,6 +20,7 @@ export const api = {
     login: fetchUserLogin,
     reset: fetchUserReset,
     checkAndChange: fetchUserCheckAndChange,
+    register: fetchUserRegister,
   },
   benches: {
     get: fetchBancs,

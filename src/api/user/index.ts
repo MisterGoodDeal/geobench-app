@@ -5,6 +5,7 @@ import { env } from "../../utils/env";
 import {
   getUserCheckAndChangeApi,
   getUserLoginApi,
+  getUserRegisterApi,
   getUserResetApi,
 } from "./api";
 
@@ -84,6 +85,44 @@ export const fetchUserCheckAndChange = createAsyncThunk(
         code: code,
         email: email,
         password: password,
+      });
+
+      const userData = await res.json();
+      if (res.ok) {
+        return userData;
+      } else {
+        return thunkAPI.rejectWithValue(userData);
+      }
+    } catch (e) {
+      thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+/* REGISTER USER */
+const userRegisterApi = getUserRegisterApi(env.apiUrl);
+
+interface ParametersRegister {
+  prenom: string;
+  nom: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export const fetchUserRegister = createAsyncThunk(
+  "user/register",
+  async (
+    { prenom, nom, username, email, password }: ParametersRegister,
+    thunkAPI
+  ) => {
+    try {
+      const res = await userRegisterApi.register.return({
+        prenom: prenom,
+        nom: nom,
+        username: username,
+        email: email,
+        password,
       });
 
       const userData = await res.json();

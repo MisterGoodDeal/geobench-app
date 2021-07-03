@@ -175,6 +175,28 @@ const locales = {
         text: "Vous avez déjà un compte ? ",
         link: "Connectez-vous",
       },
+      messages: {
+        error: {
+          user: {
+            title: "Oh non 😕",
+            message: "Ce nom d'utilisateur est déjà pris !",
+          },
+          email: {
+            title: "Oh non 😕",
+            message: "Cette adresse email est déjà prise !",
+          },
+          both: {
+            title: "Oh non 😕",
+            message:
+              "Cette adresse email et ce nom d'utilisateur sont déjà pris !",
+          },
+        },
+        success: {
+          title: "Super ! 😀",
+          message:
+            "Votre compte a été créé avec succès, vous pouvez désormais vous connecter.",
+        },
+      },
     },
     errors: {
       unknown_user: {
@@ -368,6 +390,27 @@ const locales = {
       alreadyAccount: {
         text: "Already have an account? ",
         link: "Sign in",
+      },
+      messages: {
+        error: {
+          user: {
+            title: "Oh no 😕",
+            message: "This username is already used!",
+          },
+          email: {
+            title: "Oh no 😕",
+            message: "This email address is already used!",
+          },
+          both: {
+            title: "Oh no 😕",
+            message: "This email address and username are already used!",
+          },
+        },
+        success: {
+          title: "Super ! 😀",
+          message:
+            "Votre compte a été créé avec succès, vous pouvez désormais vous connecter.",
+        },
       },
     },
     errors: {
