@@ -30,6 +30,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(true);
   const [loader, setLoader] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const [popup, setPopup] = useState<Popup>();
 
@@ -40,27 +41,33 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
     }
     if (isSuccess) {
       setLoader(false);
-      setPopup({
-        visible: true,
-        title: Lang.login.success.title,
-        content: Lang.login.success.message,
-        image: "success",
-        validText: Lang.login.success.button,
-        valid: () => nav.navigate("Map"),
-      });
+      if (isLogin) {
+        setPopup({
+          visible: true,
+          title: Lang.login.success.title,
+          content: Lang.login.success.message,
+          image: "success",
+          validText: Lang.login.success.button,
+          valid: () => nav.navigate("Map"),
+        });
+      }
+      setIsLogin(false);
       dispatch(actions.user.clearState());
     }
     if (isError) {
       setLoader(false);
       const error = getLoginErrorMsg(errorMessage!.title);
-      setPopup({
-        visible: true,
-        title: error!.title,
-        content: error!.message,
-        image: "error",
-        validText: error!.button,
-        valid: hidePopup,
-      });
+      if (isLogin) {
+        setPopup({
+          visible: true,
+          title: error!.title,
+          content: error!.message,
+          image: "error",
+          validText: error!.button,
+          valid: hidePopup,
+        });
+      }
+      setIsLogin(false);
       dispatch(actions.user.clearState());
     }
   }, [isFetching, isSuccess, isSuccess, errorMessage]);
@@ -72,6 +79,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
   }, [login, password]);
 
   const handleSubmit = (login: string, password: string) => {
+    setIsLogin(true);
     dispatch(api.user.login({ login: login, password: password }));
   };
   const hidePopup = () => {
