@@ -20,12 +20,14 @@ import { userSelector } from "../../store/slices/userSlice";
 import { wp } from "../../utils/functions";
 import { UserLocal } from "../../utils/interface";
 import { localStorage } from "../../services/localStorage.service";
+import { useKeyboard } from "../../utils/keyboard";
 
 export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   const { userInfo } = useSelector(userSelector);
   const dispatch = useDispatch();
   const u: UserLocal = userInfo;
   const nav = useNavigation();
+  const [keyboardStatus, buttonContainerSize] = useKeyboard();
 
   const [loader, setLoader] = useState(false);
 
@@ -48,12 +50,15 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
     nav.navigate("Login");
   };
   return (
-    <GBContainer flex={1} color={Colors.main}>
+    <GBContainer
+      flex={1}
+      color={keyboardStatus ? Colors.background : Colors.main}
+    >
       <GBLoader visible={loader} color={"blanc"} />
       <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
       <GBContainer
         flex={1}
-        color={Colors.main}
+        color={keyboardStatus ? Colors.background : Colors.main}
         justifyContent={"center"}
         alignItems={"center"}
       >
@@ -68,17 +73,33 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           alignItems={"center"}
           justifyContent={"center"}
         >
-          <GBText color={Colors.white} size={"3%"} style={"regular"}>
+          <GBText
+            color={keyboardStatus ? Colors.darkGrey : Colors.white}
+            size={"3%"}
+            style={"regular"}
+          >
             {Lang.settings.hello}
           </GBText>
-          <GBText color={Colors.white} size={"3%"} style={"extra-bold"}>
+          <GBText
+            color={keyboardStatus ? Colors.darkGrey : Colors.white}
+            size={"3%"}
+            style={"extra-bold"}
+          >
             {u?.prenom}
           </GBText>
-          <GBText color={Colors.white} size={"3%"} style={"regular"}>
+          <GBText
+            color={keyboardStatus ? Colors.darkGrey : Colors.white}
+            size={"3%"}
+            style={"regular"}
+          >
             {Lang.settings.exclamation}
           </GBText>
         </GBContainer>
-        <GBText color={Colors.white} size={"1.5%"} style={"light"}>
+        <GBText
+          color={keyboardStatus ? Colors.darkGrey : Colors.white}
+          size={"1.5%"}
+          style={"light"}
+        >
           {Lang.settings.subtext}
         </GBText>
       </GBContainer>
@@ -153,7 +174,11 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           {u?.pseudo}
         </GBInput>
         <GBSpacer visible={false} space={"5%"} />
-        <GBButton onPress={() => console.log("")}>
+        <GBButton
+          onPress={() =>
+            nav.navigate("ForgotPassword", { changePassword: true })
+          }
+        >
           {Lang.settings.button_password}
         </GBButton>
         <GBSpacer visible={false} space={"10%"} />
