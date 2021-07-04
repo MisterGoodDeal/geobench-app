@@ -2,6 +2,30 @@ import * as RNLocalize from "react-native-localize";
 
 const locales = {
   fr: {
+    community: {
+      hello: "Salut ",
+      exclamation: "!",
+      subtext: "Bienvenue dans la communauté de Geobench !",
+      photo_by: "Photo par",
+      error: {
+        title: "Zut alors ! 😢",
+        message:
+          "Une erreur est survenue durant la récupération des informations de la communauté, veuillez réessayer plus tard.",
+      },
+      your_stat: "Vos statistiques",
+      community: "La communauté",
+      rating:
+        "Quand vous ajoutez un banc, vous lui attribuez en moyenne la note de",
+      bench: {
+        community: "Bancs",
+        user: "Bancs que vous avez ajouté",
+      },
+      photo: {
+        community: "Photos",
+        user: "Photos que vous avez prises",
+      },
+      user: "Utilisateurs",
+    },
     map: {
       position: {
         error: {
@@ -230,6 +254,29 @@ const locales = {
     },
   },
   en: {
+    community: {
+      hello: "Hello ",
+      exclamation: "!",
+      subtext: "Welcome to the Geobench's community!",
+      photo_by: "Picture by",
+      error: {
+        title: "Oh no! 😢",
+        message:
+          "An error occurred while fetching the community informations. Please try again later",
+      },
+      your_stat: "Your stats",
+      community: "The community",
+      rating: "When you add a bench, you give it an average rating of",
+      bench: {
+        community: "Benches",
+        user: "Benches you added",
+      },
+      photo: {
+        community: "Pictures",
+        user: "Picture you took",
+      },
+      user: "Users",
+    },
     map: {
       position: {
         error: {

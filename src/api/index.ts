@@ -4,6 +4,7 @@ import {
   fetchPostComment,
   fetchPostImage,
 } from "./benches";
+import { fetchCommunaute } from "./communaute";
 import {
   fetchUserCheckAndChange,
   fetchUserLogin,
@@ -27,5 +28,8 @@ export const api = {
     comment: fetchPostComment,
     uploadImage: fetchPostImage,
     post: fetchPostBench,
+  },
+  communaute: {
+    get: fetchCommunaute,
   },
 };

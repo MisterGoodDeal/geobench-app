@@ -5,6 +5,7 @@ import { RootState } from "../store";
 
 const initialState: User = {
   userInfo: "",
+  community: null,
   isFetching: false,
   isSuccess: false,
   isError: false,
@@ -18,6 +19,7 @@ export const userSlice = createSlice({
     clearState: (state) => {
       return {
         userInfo: state.userInfo,
+        community: state.community,
         isFetching: false,
         isSuccess: false,
         isError: false,
@@ -134,6 +136,23 @@ export const userSlice = createSlice({
         state.errorMessage = payload;
       }
     );
+
+    /* Récupérer les infos de la communauté */
+    builder.addCase(api.communaute.get.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.communaute.get.fulfilled, (state, { payload }) => {
+      state.community = payload;
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(api.communaute.get.rejected, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload;
+    });
   },
 });
 
