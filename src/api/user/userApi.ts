@@ -1,5 +1,6 @@
 import { Fetch } from "../utils";
 import { localStorage } from "../../services/localStorage.service";
+import { UserLocal } from "../../utils/interface";
 
 /* LOGIN USER */
 interface ReturnUserLoginParams {
@@ -93,6 +94,60 @@ export const makeUserRegisterApi = (fetchFn: Fetch): UserRegisterApi => ({
         username: returnParams.username,
         email: returnParams.email,
         password: returnParams.password,
+      }),
+    });
+    return res;
+  },
+});
+
+/* UPDATE FULLNAME */
+interface ReturnUserUpdateFullnameParams {
+  firstname: string;
+  lastname: string;
+}
+export interface UserUpdateFullnameApi {
+  return: (returnParams: ReturnUserUpdateFullnameParams) => Promise<any>;
+}
+
+export const makeUserUpdateFullnameApi = (
+  fetchFn: Fetch
+): UserUpdateFullnameApi => ({
+  return: async (returnParams) => {
+    const user = await localStorage.get("user");
+    const u: UserLocal = JSON.parse(user);
+    const res = await fetchFn(`user/fullname`, {
+      method: "PUT",
+      headers: {
+        "x-auth": `${u.id}`,
+      },
+      body: JSON.stringify({
+        firstname: returnParams.firstname,
+        lastname: returnParams.lastname,
+      }),
+    });
+    return res;
+  },
+});
+
+/* UPDATE EMAIL */
+interface ReturnUserUpdateEmailParams {
+  email: string;
+}
+export interface UserUpdateEmailApi {
+  return: (returnParams: ReturnUserUpdateEmailParams) => Promise<any>;
+}
+
+export const makeUserUpdateEmailApi = (fetchFn: Fetch): UserUpdateEmailApi => ({
+  return: async (returnParams) => {
+    const user = await localStorage.get("user");
+    const u: UserLocal = JSON.parse(user);
+    const res = await fetchFn(`user/email`, {
+      method: "PUT",
+      headers: {
+        "x-auth": `${u.id}`,
+      },
+      body: JSON.stringify({
+        email: returnParams.email,
       }),
     });
     return res;

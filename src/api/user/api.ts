@@ -5,10 +5,14 @@ import {
   makeUserLoginApi,
   makeUserRegisterApi,
   makeUserResetApi,
+  makeUserUpdateEmailApi,
+  makeUserUpdateFullnameApi,
   UserCheckAndChangeApi,
   UserLoginApi,
   UserRegisterApi,
   UserResetApi,
+  UserUpdateEmailApi,
+  UserUpdateFullnameApi,
 } from "./userApi";
 import { Fetch } from "../utils";
 
@@ -141,6 +145,84 @@ export const getUserRegisterApi = (
 };
 
 const getUserRegisterFetch = (fetch: Fetch, baseUrl: string): Fetch => {
+  return async (input: RequestInfo, init?: RequestInit) => {
+    const routeUrl =
+      typeof input === "string"
+        ? input
+        : hasOwnProperty(input, "href")
+        ? input.href
+        : input.url;
+
+    const requestInit: RequestInit = {
+      ...init,
+      headers: {
+        ...init?.headers,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const url = `${baseUrl}/${routeUrl}`;
+
+    const res = await fetch(url, requestInit);
+    return res;
+  };
+};
+
+/* UPDATE FULLNAME */
+interface UserUpdateFullnameApiInterface {
+  updateFullname: UserUpdateFullnameApi;
+}
+
+export const getUserUpdateFullnameApi = (
+  baseUrl: string
+): UserUpdateFullnameApiInterface => {
+  const UserUpdateFullnameFetch = getUserUpdateFullnameFetch(fetch, baseUrl);
+
+  return {
+    updateFullname: makeUserUpdateFullnameApi(UserUpdateFullnameFetch),
+  };
+};
+
+const getUserUpdateFullnameFetch = (fetch: Fetch, baseUrl: string): Fetch => {
+  return async (input: RequestInfo, init?: RequestInit) => {
+    const routeUrl =
+      typeof input === "string"
+        ? input
+        : hasOwnProperty(input, "href")
+        ? input.href
+        : input.url;
+
+    const requestInit: RequestInit = {
+      ...init,
+      headers: {
+        ...init?.headers,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const url = `${baseUrl}/${routeUrl}`;
+
+    const res = await fetch(url, requestInit);
+    return res;
+  };
+};
+
+/* UPDATE EMAIL */
+interface UserUpdateEmailApiInterface {
+  updateEmail: UserUpdateEmailApi;
+}
+
+export const getUserUpdateEmailApi = (
+  baseUrl: string
+): UserUpdateEmailApiInterface => {
+  const UserUpdateEmailFetch = getUserUpdateEmailFetch(fetch, baseUrl);
+
+  return {
+    updateEmail: makeUserUpdateEmailApi(UserUpdateEmailFetch),
+  };
+};
+
+const getUserUpdateEmailFetch = (fetch: Fetch, baseUrl: string): Fetch => {
   return async (input: RequestInfo, init?: RequestInit) => {
     const routeUrl =
       typeof input === "string"

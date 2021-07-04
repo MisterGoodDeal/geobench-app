@@ -4,23 +4,23 @@ import {
   fetchPostComment,
   fetchPostImage,
 } from "./benches";
-import { fetchTemplate } from "./template";
 import {
   fetchUserCheckAndChange,
   fetchUserLogin,
   fetchUserRegister,
   fetchUserReset,
+  fetchUserUpdateEmail,
+  fetchUserUpdateFullname,
 } from "./user";
 
 export const api = {
-  template: {
-    fetch: fetchTemplate,
-  },
   user: {
     login: fetchUserLogin,
     reset: fetchUserReset,
     checkAndChange: fetchUserCheckAndChange,
     register: fetchUserRegister,
+    updateFullname: fetchUserUpdateFullname,
+    updateEmail: fetchUserUpdateEmail,
   },
   benches: {
     get: fetchBancs,

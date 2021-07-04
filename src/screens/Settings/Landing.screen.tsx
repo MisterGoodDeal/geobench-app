@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
 import { Platform } from "react-native";
@@ -21,13 +21,17 @@ import { wp } from "../../utils/functions";
 import { UserLocal } from "../../utils/interface";
 import { localStorage } from "../../services/localStorage.service";
 import { useKeyboard } from "../../utils/keyboard";
+import { api } from "../../api";
+import { GBToast } from "../../components/GBToast";
+const validator = require("email-validator");
 
 export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
-  const { userInfo } = useSelector(userSelector);
+  const { userInfo, isFetching, isSuccess, isError, errorMessage } =
+    useSelector(userSelector);
   const dispatch = useDispatch();
   const u: UserLocal = userInfo;
   const nav = useNavigation();
-  const [keyboardStatus, buttonContainerSize] = useKeyboard();
+  const [keyboardStatus] = useKeyboard();
 
   const [loader, setLoader] = useState(false);
 
@@ -36,25 +40,148 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   const [email, setEmail] = useState(`${u?.mail}`);
   const [emailDisable, setEmailDisable] = useState(false);
   const [username, setUsername] = useState("");
+  const [emailSubmit, setEmailSubmit] = useState(false);
+  const [fullnameSubmit, setFullnameSubmit] = useState(false);
 
   React.useEffect(() => {
     fullname.length === 0
       ? setFullnameDisable(true)
+      : fullname === `${u?.prenom} ${u?.nom}`
+      ? setFullnameDisable(true)
       : setFullnameDisable(false);
-    email.length === 0 ? setEmailDisable(true) : setEmailDisable(false);
+    email.length === 0
+      ? setEmailDisable(true)
+      : email === `${u?.mail}`
+      ? setEmailDisable(true)
+      : !validator.validate(email)
+      ? setEmailDisable(true)
+      : setEmailDisable(false);
   }, [fullname, email]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      //Quand le composant est affiché
+      const usr: UserLocal = userInfo;
+      setFullname(`${usr?.prenom} ${usr?.nom}`);
+      setEmail(`${usr?.mail}`);
+
+      return () => {
+        // Quand le composant est déaffiché
+      };
+    }, [])
+  );
 
   const handleLogout = () => {
     localStorage.clear();
     dispatch(actions.user.setUser(null));
     nav.navigate("Login");
   };
+
+  React.useEffect(() => {
+    if (isFetching) {
+      setLoader(true);
+    }
+    if (isSuccess) {
+      if (fullnameSubmit) {
+        setFullnameSubmit(false);
+        (async () => {
+          const sliced = fullname.split(" ");
+          const firstname = sliced[0];
+          const lastname = sliced[1] !== undefined ? sliced[1] : "";
+          const newUser: UserLocal = {
+            id: u.id,
+            is_ads: u.is_ads,
+            is_banned: u.is_banned,
+            is_deleted: u.is_deleted,
+            prenom: firstname,
+            nom: lastname,
+            mail: u.mail,
+            pseudo: u.pseudo,
+            favoris: u.favoris,
+            reset_key: u.reset_key,
+          };
+          setFullname(`${firstname} ${lastname}`);
+          await localStorage.store("user", JSON.stringify(newUser));
+          dispatch(actions.user.setUser(newUser));
+        })();
+        GBToast(
+          Lang.settings.toastMessages.success.title,
+          Lang.settings.toastMessages.success.message,
+          "success"
+        );
+      }
+
+      if (emailSubmit) {
+        setEmailSubmit(false);
+        (async () => {
+          const newUser: UserLocal = {
+            id: u.id,
+            is_ads: u.is_ads,
+            is_banned: u.is_banned,
+            is_deleted: u.is_deleted,
+            prenom: u.prenom,
+            nom: u.nom,
+            mail: email,
+            pseudo: u.pseudo,
+            favoris: u.favoris,
+            reset_key: u.reset_key,
+          };
+          setEmail(`${email}`);
+          await localStorage.store("user", JSON.stringify(newUser));
+          dispatch(actions.user.setUser(newUser));
+        })();
+        GBToast(
+          Lang.settings.toastMessages.success.title,
+          Lang.settings.toastMessages.success.message,
+          "success"
+        );
+      }
+      setLoader(false);
+      dispatch(actions.user.clearState());
+    }
+    if (isError) {
+      if (fullnameSubmit) {
+        setFullnameSubmit(false);
+        GBToast(
+          Lang.settings.toastMessages.error.title,
+          Lang.settings.toastMessages.error.message,
+          "error"
+        );
+      }
+
+      if (emailSubmit) {
+        setFullnameSubmit(false);
+        GBToast(
+          Lang.settings.toastMessages.error.title,
+          Lang.settings.toastMessages.error.message,
+          "error"
+        );
+      }
+      setLoader(false);
+      dispatch(actions.user.clearState());
+    }
+  }, [isFetching, isSuccess, isError]);
+
+  const handleFullnameSubmit = () => {
+    setFullnameSubmit(true);
+    const sliced = fullname.split(" ");
+    const firstname = sliced[0];
+    const lastname = sliced[1] !== undefined ? sliced[1] : "";
+    dispatch(
+      api.user.updateFullname({ firstname: firstname, lastname: lastname })
+    );
+  };
+  const handleEmailSubmit = () => {
+    setEmailSubmit(true);
+    dispatch(api.user.updateEmail({ email: email }));
+  };
+
   return (
     <GBContainer
       flex={1}
       color={keyboardStatus ? Colors.background : Colors.main}
     >
-      <GBLoader visible={loader} color={"blanc"} />
+      <GBLoader visible={loader} color={keyboardStatus ? "noir" : "blanc"} />
       <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
       <GBContainer
         flex={1}
@@ -131,7 +258,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             color={Colors.main}
             tint={Colors.white}
             icon={require("../../assets/images/edit.png")}
-            onPress={() => console.log("")}
+            onPress={() => handleFullnameSubmit()}
             disable={fullnameDisable}
           />
         </GBContainer>
@@ -157,7 +284,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             color={Colors.main}
             tint={Colors.white}
             icon={require("../../assets/images/edit.png")}
-            onPress={() => console.log("")}
+            onPress={() => handleEmailSubmit()}
             disable={emailDisable}
           />
         </GBContainer>
@@ -168,7 +295,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           hook={setUsername}
           type={"default"}
           width={wp("90%")}
-          placeholder={Lang.settings.ph_fullname}
+          placeholder={"Easter egg discovered 🐣"}
           disable={true}
         >
           {u?.pseudo}

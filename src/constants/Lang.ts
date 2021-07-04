@@ -113,6 +113,17 @@ const locales = {
       ph_email: "Votre adresse mail...",
       button_password: "Modifier mon mot de passe",
       button_logout: "Se deconnecter",
+      toastMessages: {
+        success: {
+          title: "Tout est ok 👌",
+          message: "Vos informations ont été mise à jour avec succès !",
+        },
+        error: {
+          title: "Mince ! ☹️",
+          message:
+            "Un problème est survenu durant la modification de vos informations, veuillez réessayer !",
+        },
+      },
     },
     login: {
       title: "Bienvenue sur Geobench !",
@@ -330,6 +341,16 @@ const locales = {
       ph_email: "Your email address...",
       button_password: "Change my password",
       button_logout: "Logout",
+      toastMessages: {
+        success: {
+          title: "Everything is okay 👌",
+          message: "Your informations has been changed successfully!",
+        },
+        error: {
+          title: "Oh no! ☹️",
+          message: "An error occurred during the process, please try again!",
+        },
+      },
     },
     login: {
       title: "Welcome to Geobench!",

@@ -96,6 +96,44 @@ export const userSlice = createSlice({
       state.isError = true;
       state.errorMessage = payload;
     });
+
+    /* Changer le nom complet de l'utilisateur */
+    builder.addCase(api.user.updateFullname.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.user.updateFullname.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(
+      api.user.updateFullname.rejected,
+      (state, { payload }: any) => {
+        state.isFetching = false;
+        state.isError = true;
+        state.errorMessage = payload;
+      }
+    );
+
+    /* Changer le nom complet de l'utilisateur */
+    builder.addCase(api.user.updateEmail.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.user.updateEmail.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(
+      api.user.updateEmail.rejected,
+      (state, { payload }: any) => {
+        state.isFetching = false;
+        state.isError = true;
+        state.errorMessage = payload;
+      }
+    );
   },
 });
 
