@@ -77,6 +77,15 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
+        <Image
+          source={require("../assets/images/stock.jpg")}
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: hp("40%"),
+            top: -hp("10%"),
+          }}
+        />
         {community !== null && (
           <Image
             source={{
@@ -117,6 +126,7 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
           direction={"row"}
           alignItems={"center"}
           justifyContent={"center"}
+          extraStyle={{ zIndex: 2 }}
         >
           <GBText color={Colors.white} size={"3%"} style={"regular"}>
             {Lang.community.hello}
