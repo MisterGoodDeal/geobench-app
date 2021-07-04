@@ -243,7 +243,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         GBToast(
           Lang.map.position.error.title,
           Lang.map.position.error.message,
-          "error"
+          "info"
         ),
       {
         enableHighAccuracy: true,
