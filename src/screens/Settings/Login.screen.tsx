@@ -29,6 +29,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
     useSelector(userSelector);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(true);
   const [disable, setDisable] = useState(true);
   const [loader, setLoader] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
@@ -142,6 +143,8 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           isPassword={true}
           placeholder={Lang.login.ph_password}
           hook={setPassword}
+          passwordShow={passwordVisible}
+          setPasswordShow={setPasswordVisible}
         >
           {password}
         </GBInput>

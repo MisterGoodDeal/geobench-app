@@ -15,6 +15,10 @@ interface GBPopupResetProps {
   code: React.Dispatch<React.SetStateAction<string>>;
   pwd1: React.Dispatch<React.SetStateAction<string>>;
   pwd2: React.Dispatch<React.SetStateAction<string>>;
+  pwd1SetVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  pwd2SetVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  pwd1Visible: boolean;
+  pwd2Visible: boolean;
   valid: () => void;
   onClose: () => void;
   canSend: boolean;
@@ -27,6 +31,10 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
   code,
   pwd1,
   pwd2,
+  pwd1SetVisible,
+  pwd2SetVisible,
+  pwd1Visible,
+  pwd2Visible,
   valid,
   canSend,
   message,
@@ -89,6 +97,8 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           width={wp("60%")}
           placeholder={Lang.register.ph_pwd1}
           isPassword={true}
+          passwordShow={pwd1Visible}
+          setPasswordShow={pwd1SetVisible}
         />
         <GBSpacer visible={false} space={"1.5%"} />
         <GBInput
@@ -98,6 +108,8 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           width={wp("60%")}
           placeholder={Lang.register.ph_pwd2}
           isPassword={true}
+          passwordShow={pwd2Visible}
+          setPasswordShow={pwd2SetVisible}
         />
         {message !== "" && (
           <>

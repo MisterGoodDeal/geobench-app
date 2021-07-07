@@ -47,6 +47,9 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
   const [pwd1, setPwd1] = useState("");
   const [pwd2, setPwd2] = useState("");
 
+  const [passwordVisible1, setPasswordVisible1] = useState(true);
+  const [passwordVisible2, setPasswordVisible2] = useState(true);
+
   React.useEffect(() => {
     nav.setOptions({ tabBarVisible: false });
     if (route.params?.changePassword === true) {
@@ -176,6 +179,10 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           canSend={canSend}
           message={message}
           message2={message2}
+          pwd1Visible={passwordVisible1}
+          pwd1SetVisible={setPasswordVisible1}
+          pwd2Visible={passwordVisible2}
+          pwd2SetVisible={setPasswordVisible2}
         />
         <GBBack onPress={() => nav.goBack()} />
         <GBImage
@@ -197,6 +204,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           nbLines={1}
           placeholder={Lang.forgotPassword.ph_email}
           hook={setEmail}
+          type={"email-address"}
         >
           {email}
         </GBInput>

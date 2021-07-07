@@ -37,6 +37,8 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
   const [canRegister, setCanRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
+  const [passwordVisible1, setPasswordVisible1] = useState(true);
+  const [passwordVisible2, setPasswordVisible2] = useState(true);
 
   React.useEffect(() => {
     const check = passwordStrength(pwd1);
@@ -168,6 +170,8 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           nbLines={1}
           placeholder={Lang.register.ph_pwd1}
           isPassword={true}
+          passwordShow={passwordVisible1}
+          setPasswordShow={setPasswordVisible1}
           hook={setPdw1}
         >
           {pwd1}
@@ -178,6 +182,8 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           nbLines={1}
           placeholder={Lang.register.ph_pwd2}
           hook={setPdw2}
+          passwordShow={passwordVisible2}
+          setPasswordShow={setPasswordVisible2}
           isPassword={true}
         >
           {pwd2}
