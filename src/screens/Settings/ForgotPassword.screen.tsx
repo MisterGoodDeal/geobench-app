@@ -21,6 +21,7 @@ import { actions } from "../../store/action";
 import { getLoginErrorMsg, getPasswordResetErrorMsg } from "../../api/utils";
 import { GBToast } from "../../components/GBToast";
 import { GBPopupReset } from "../../components/GBPopupReset";
+import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
 const { passwordStrength } = require("check-password-strength");
 
 export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
@@ -41,6 +42,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [canSend, setCanSend] = useState(false);
   const [message, setMessage] = useState("");
+  const [message2, setMessage2] = useState("");
   const [code, setCode] = useState("");
   const [pwd1, setPwd1] = useState("");
   const [pwd2, setPwd2] = useState("");
@@ -136,14 +138,15 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
       check.contains.length === 4
     ) {
       setMessage("");
+      setMessage2("");
       setCanSend(true);
     }
 
     if ((check.length < 8 || check.contains.length !== 4) && pwd1 !== "") {
       setCanSend(false);
-      setMessage(Lang.forgotPassword.popupMessages.password_weak);
+      setMessage2(Lang.forgotPassword.popupMessages.password_weak);
     } else {
-      setMessage("");
+      setMessage2("");
     }
 
     if (pwd1 !== pwd2) {
@@ -154,53 +157,58 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
     }
   }, [code, pwd1, pwd2]);
   return (
-    <GBContainer
-      flex={1}
-      alignItems={"center"}
-      justifyContent={"center"}
-      color={Colors.background}
-    >
-      <GBStatusBar color={Colors.background} textColor={"dark-content"} />
-      <GBLoader visible={isLoading} color={"noir"} />
-      <GBPopupReset
-        visible={popupVisible}
-        valid={() => handleCheckAndChange()}
-        onClose={() => resetAll()}
-        code={setCode}
-        pwd1={setPwd1}
-        pwd2={setPwd2}
-        canSend={canSend}
-        message={message}
-      />
-      <GBBack onPress={() => nav.goBack()} />
-      <GBImage
-        source={require("../../assets/images/password.png")}
-        size={"12%"}
-      />
-      <GBSpacer space={"8%"} visible={false} />
-      <GBText size={"2.2%"} style={"bold"} color={Colors.darkGrey}>
-        {changePass ? Lang.forgotPassword.titleAlt : Lang.forgotPassword.title}
-      </GBText>
-      <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
-        {Lang.forgotPassword.pickup}
-      </GBText>
-      <GBSpacer space={"8%"} visible={false} />
-      <GBInput
-        multiline={false}
-        nbLines={1}
-        placeholder={Lang.forgotPassword.ph_email}
-        hook={setEmail}
+    <GBKeyboardDismiss>
+      <GBContainer
+        flex={1}
+        alignItems={"center"}
+        justifyContent={"center"}
+        color={Colors.background}
       >
-        {email}
-      </GBInput>
+        <GBStatusBar color={Colors.background} textColor={"dark-content"} />
+        <GBLoader visible={isLoading} color={"noir"} />
+        <GBPopupReset
+          visible={popupVisible}
+          valid={() => handleCheckAndChange()}
+          onClose={() => resetAll()}
+          code={setCode}
+          pwd1={setPwd1}
+          pwd2={setPwd2}
+          canSend={canSend}
+          message={message}
+          message2={message2}
+        />
+        <GBBack onPress={() => nav.goBack()} />
+        <GBImage
+          source={require("../../assets/images/password.png")}
+          size={"12%"}
+        />
+        <GBSpacer space={"8%"} visible={false} />
+        <GBText size={"2.2%"} style={"bold"} color={Colors.darkGrey}>
+          {changePass
+            ? Lang.forgotPassword.titleAlt
+            : Lang.forgotPassword.title}
+        </GBText>
+        <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
+          {Lang.forgotPassword.pickup}
+        </GBText>
+        <GBSpacer space={"8%"} visible={false} />
+        <GBInput
+          multiline={false}
+          nbLines={1}
+          placeholder={Lang.forgotPassword.ph_email}
+          hook={setEmail}
+        >
+          {email}
+        </GBInput>
 
-      <GBSpacer space={"5%"} visible={false} />
-      <GBButton
-        onPress={() => handleSubmit()}
-        disable={!validator.validate(email)}
-      >
-        {Lang.forgotPassword.button}
-      </GBButton>
-    </GBContainer>
+        <GBSpacer space={"5%"} visible={false} />
+        <GBButton
+          onPress={() => handleSubmit()}
+          disable={!validator.validate(email)}
+        >
+          {Lang.forgotPassword.button}
+        </GBButton>
+      </GBContainer>
+    </GBKeyboardDismiss>
   );
 };

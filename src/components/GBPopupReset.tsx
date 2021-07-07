@@ -19,6 +19,7 @@ interface GBPopupResetProps {
   onClose: () => void;
   canSend: boolean;
   message: string;
+  message2: string;
 }
 
 export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
@@ -29,6 +30,7 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
   valid,
   canSend,
   message,
+  message2,
   onClose,
 }) => (
   <Modal animationType="fade" transparent={true} visible={visible}>
@@ -80,15 +82,6 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           {Lang.forgotPassword.code_hint}
         </GBText>
         <GBSpacer visible={false} space={"1.5%"} />
-        <GBText
-          style={"regular"}
-          size={"1.1%"}
-          align={"justify"}
-          color={Colors.darkGrey}
-        >
-          {Lang.forgotPassword.popupMessages.password_weak}
-        </GBText>
-        <GBSpacer visible={false} space={"1.5%"} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -116,6 +109,19 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
               color={Colors.lightRed}
             >
               {message}
+            </GBText>
+          </>
+        )}
+        {message2 !== "" && (
+          <>
+            <GBSpacer visible={false} space={"1%"} />
+            <GBText
+              style={"regular"}
+              size={"1.2%"}
+              align={"justify"}
+              color={Colors.lightRed}
+            >
+              {message2}
             </GBText>
           </>
         )}

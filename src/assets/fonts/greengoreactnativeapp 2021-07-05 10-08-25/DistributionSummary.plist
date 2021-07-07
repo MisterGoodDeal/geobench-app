@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>greengo.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>441BC371A28541EBCED5AE780B7BC6F1C35AE531</string>
+				<key>dateExpires</key>
+				<string>21/06/2022</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>C8CR6BA988.fr.lcg.reactnative.greengo</string>
+				<key>aps-environment</key>
+				<string>development</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>C8CR6BA988</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>greengo.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>f7bec93c-4299-4e25-992e-d5e87cb26d2b</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: fr.lcg.reactnative.greengo</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>C8CR6BA988</string>
+				<key>name</key>
+				<string>MyGreenGo</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

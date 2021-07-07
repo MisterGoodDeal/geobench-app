@@ -23,6 +23,7 @@ import { localStorage } from "../../services/localStorage.service";
 import { useKeyboard } from "../../utils/keyboard";
 import { api } from "../../api";
 import { GBToast } from "../../components/GBToast";
+import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
 const validator = require("email-validator");
 
 export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
@@ -177,146 +178,150 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   };
 
   return (
-    <GBContainer
-      flex={1}
-      color={keyboardStatus ? Colors.background : Colors.main}
-    >
-      <GBLoader visible={loader} color={keyboardStatus ? "noir" : "blanc"} />
-      <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
+    <GBKeyboardDismiss>
       <GBContainer
         flex={1}
         color={keyboardStatus ? Colors.background : Colors.main}
-        justifyContent={"center"}
-        alignItems={"center"}
       >
-        {Platform.OS === "android" && <GBSpacer visible={false} space={"6%"} />}
-        <GBImage
-          source={require("../../assets/images/bench.png")}
-          size={"5%"}
-        />
-        <GBSpacer visible={false} space={"2%"} />
+        <GBLoader visible={loader} color={keyboardStatus ? "noir" : "blanc"} />
+        <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
         <GBContainer
-          direction={"row"}
-          alignItems={"center"}
+          flex={1}
+          color={keyboardStatus ? Colors.background : Colors.main}
           justifyContent={"center"}
+          alignItems={"center"}
         >
+          {Platform.OS === "android" && (
+            <GBSpacer visible={false} space={"6%"} />
+          )}
+          <GBImage
+            source={require("../../assets/images/bench.png")}
+            size={"5%"}
+          />
+          <GBSpacer visible={false} space={"2%"} />
+          <GBContainer
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <GBText
+              color={keyboardStatus ? Colors.darkGrey : Colors.white}
+              size={"3%"}
+              style={"regular"}
+            >
+              {Lang.settings.hello}
+            </GBText>
+            <GBText
+              color={keyboardStatus ? Colors.darkGrey : Colors.white}
+              size={"3%"}
+              style={"extra-bold"}
+            >
+              {u?.prenom}
+            </GBText>
+            <GBText
+              color={keyboardStatus ? Colors.darkGrey : Colors.white}
+              size={"3%"}
+              style={"regular"}
+            >
+              {Lang.settings.exclamation}
+            </GBText>
+          </GBContainer>
           <GBText
             color={keyboardStatus ? Colors.darkGrey : Colors.white}
-            size={"3%"}
-            style={"regular"}
+            size={"1.5%"}
+            style={"light"}
           >
-            {Lang.settings.hello}
-          </GBText>
-          <GBText
-            color={keyboardStatus ? Colors.darkGrey : Colors.white}
-            size={"3%"}
-            style={"extra-bold"}
-          >
-            {u?.prenom}
-          </GBText>
-          <GBText
-            color={keyboardStatus ? Colors.darkGrey : Colors.white}
-            size={"3%"}
-            style={"regular"}
-          >
-            {Lang.settings.exclamation}
+            {Lang.settings.subtext}
           </GBText>
         </GBContainer>
-        <GBText
-          color={keyboardStatus ? Colors.darkGrey : Colors.white}
-          size={"1.5%"}
-          style={"light"}
-        >
-          {Lang.settings.subtext}
-        </GBText>
-      </GBContainer>
-      <GBContainer
-        flex={3}
-        justifyContent={"center"}
-        alignItems={"center"}
-        color={Colors.background}
-        extraStyle={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
-      >
         <GBContainer
-          direction={"row"}
-          justifyContent={"space-between"}
+          flex={3}
+          justifyContent={"center"}
           alignItems={"center"}
-          extraStyle={{ width: "90%" }}
+          color={Colors.background}
+          extraStyle={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
         >
+          <GBContainer
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            extraStyle={{ width: "90%" }}
+          >
+            <GBInput
+              multiline={false}
+              nbLines={1}
+              hook={setFullname}
+              type={"default"}
+              width={wp("70%")}
+              placeholder={Lang.settings.ph_fullname}
+            >
+              {fullname}
+            </GBInput>
+            <GBRoundButton
+              width={"2%"}
+              color={Colors.main}
+              tint={Colors.white}
+              icon={require("../../assets/images/edit.png")}
+              onPress={() => handleFullnameSubmit()}
+              disable={fullnameDisable}
+            />
+          </GBContainer>
+          <GBSpacer visible={false} space={"2%"} />
+          <GBContainer
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            extraStyle={{ width: "90%" }}
+          >
+            <GBInput
+              multiline={false}
+              nbLines={1}
+              hook={setEmail}
+              type={"default"}
+              width={wp("70%")}
+              placeholder={Lang.settings.ph_email}
+            >
+              {email}
+            </GBInput>
+            <GBRoundButton
+              width={"2%"}
+              color={Colors.main}
+              tint={Colors.white}
+              icon={require("../../assets/images/edit.png")}
+              onPress={() => handleEmailSubmit()}
+              disable={emailDisable}
+            />
+          </GBContainer>
+          <GBSpacer visible={false} space={"2%"} />
           <GBInput
             multiline={false}
             nbLines={1}
-            hook={setFullname}
+            hook={setUsername}
             type={"default"}
-            width={wp("70%")}
-            placeholder={Lang.settings.ph_fullname}
+            width={wp("90%")}
+            placeholder={"Easter egg discovered 🐣"}
+            disable={true}
           >
-            {fullname}
+            {u?.pseudo}
           </GBInput>
-          <GBRoundButton
-            width={"2%"}
-            color={Colors.main}
-            tint={Colors.white}
-            icon={require("../../assets/images/edit.png")}
-            onPress={() => handleFullnameSubmit()}
-            disable={fullnameDisable}
-          />
-        </GBContainer>
-        <GBSpacer visible={false} space={"2%"} />
-        <GBContainer
-          direction={"row"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          extraStyle={{ width: "90%" }}
-        >
-          <GBInput
-            multiline={false}
-            nbLines={1}
-            hook={setEmail}
-            type={"default"}
-            width={wp("70%")}
-            placeholder={Lang.settings.ph_email}
+          <GBSpacer visible={false} space={"5%"} />
+          <GBButton
+            onPress={() =>
+              nav.navigate("ForgotPassword", { changePassword: true })
+            }
           >
-            {email}
-          </GBInput>
-          <GBRoundButton
-            width={"2%"}
-            color={Colors.main}
-            tint={Colors.white}
-            icon={require("../../assets/images/edit.png")}
-            onPress={() => handleEmailSubmit()}
-            disable={emailDisable}
-          />
+            {Lang.settings.button_password}
+          </GBButton>
+          <GBSpacer visible={false} space={"10%"} />
+          <GBButton
+            onPress={handleLogout}
+            color={Colors.lightRed}
+            width={wp("50%")}
+          >
+            {Lang.settings.button_logout}
+          </GBButton>
         </GBContainer>
-        <GBSpacer visible={false} space={"2%"} />
-        <GBInput
-          multiline={false}
-          nbLines={1}
-          hook={setUsername}
-          type={"default"}
-          width={wp("90%")}
-          placeholder={"Easter egg discovered 🐣"}
-          disable={true}
-        >
-          {u?.pseudo}
-        </GBInput>
-        <GBSpacer visible={false} space={"5%"} />
-        <GBButton
-          onPress={() =>
-            nav.navigate("ForgotPassword", { changePassword: true })
-          }
-        >
-          {Lang.settings.button_password}
-        </GBButton>
-        <GBSpacer visible={false} space={"10%"} />
-        <GBButton
-          onPress={handleLogout}
-          color={Colors.lightRed}
-          width={wp("50%")}
-        >
-          {Lang.settings.button_logout}
-        </GBButton>
       </GBContainer>
-    </GBContainer>
+    </GBKeyboardDismiss>
   );
 };

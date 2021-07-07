@@ -20,6 +20,7 @@ import { actions } from "../../store/action";
 import { getLoginErrorMsg } from "../../api/utils";
 import { Popup } from "../../utils/interface";
 import { GBLoader } from "../../components/GBLoader";
+import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
 
 export const LoginScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -93,70 +94,78 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
     });
   };
   return (
-    <GBContainer
-      flex={1}
-      alignItems={"center"}
-      justifyContent={"center"}
-      color={Colors.background}
-    >
-      <GBLoader visible={loader} color={"noir"} />
-      <GBStatusBar color={Colors.background} textColor={"dark-content"} />
-      {popup?.visible && (
-        <GBPopup
-          visible={popup.visible}
-          title={popup.title}
-          content={popup.content}
-          image={popup.image}
-          valid={popup.valid}
-          validText={popup.validText}
-          notValidText={popup.notValidText}
-          notValid={popup.notValid}
+    <GBKeyboardDismiss>
+      <GBContainer
+        flex={1}
+        alignItems={"center"}
+        justifyContent={"center"}
+        color={Colors.background}
+      >
+        <GBLoader visible={loader} color={"noir"} />
+        <GBStatusBar color={Colors.background} textColor={"dark-content"} />
+        {popup?.visible && (
+          <GBPopup
+            visible={popup.visible}
+            title={popup.title}
+            content={popup.content}
+            image={popup.image}
+            valid={popup.valid}
+            validText={popup.validText}
+            notValidText={popup.notValidText}
+            notValid={popup.notValid}
+          />
+        )}
+        <GBImage
+          source={require("../../assets/images/bench.png")}
+          size={"12%"}
         />
-      )}
-      <GBImage source={require("../../assets/images/bench.png")} size={"12%"} />
-      <GBSpacer space={"8%"} visible={false} />
-      <GBText size={"2.2%"} style={"bold"} color={Colors.darkGrey}>
-        {Lang.login.title}
-      </GBText>
-      <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
-        {Lang.login.connect}
-      </GBText>
-      <GBSpacer space={"8%"} visible={false} />
-      <GBInput
-        multiline={false}
-        nbLines={1}
-        placeholder={Lang.login.ph_login}
-        hook={setLogin}
-      >
-        {login}
-      </GBInput>
-      <GBSpacer space={"2%"} visible={false} />
-      <GBInput
-        multiline={false}
-        nbLines={1}
-        isPassword={true}
-        placeholder={Lang.login.ph_password}
-        hook={setPassword}
-      >
-        {password}
-      </GBInput>
-      <GBSpacer space={"5%"} visible={false} />
-      <GBButton onPress={() => handleSubmit(login, password)} disable={disable}>
-        {Lang.login.button}
-      </GBButton>
-      <GBSpacer space={"1.5%"} visible={false} />
-      <GBLink onPress={() => nav.navigate("ForgotPassword")} size={"1.5%"}>
-        {Lang.login.forgot_password}
-      </GBLink>
-      <GBSpacer space={"5%"} visible={false} />
-      <GBContainer direction={"row"} color={Colors.background}>
-        <GBText size={"1.5%"} color={Colors.darkGrey} style={"regular"}>
-          {Lang.login.no_account.text}
+        <GBSpacer space={"8%"} visible={false} />
+        <GBText size={"2.2%"} style={"bold"} color={Colors.darkGrey}>
+          {Lang.login.title}
         </GBText>
-        <GBLink size={"1.5%"} onPress={() => nav.navigate("Register")}>
-          {Lang.login.no_account.link}
+        <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
+          {Lang.login.connect}
+        </GBText>
+        <GBSpacer space={"8%"} visible={false} />
+        <GBInput
+          multiline={false}
+          nbLines={1}
+          placeholder={Lang.login.ph_login}
+          hook={setLogin}
+        >
+          {login}
+        </GBInput>
+        <GBSpacer space={"2%"} visible={false} />
+        <GBInput
+          multiline={false}
+          nbLines={1}
+          isPassword={true}
+          placeholder={Lang.login.ph_password}
+          hook={setPassword}
+        >
+          {password}
+        </GBInput>
+        <GBSpacer space={"5%"} visible={false} />
+        <GBButton
+          onPress={() => handleSubmit(login, password)}
+          disable={disable}
+        >
+          {Lang.login.button}
+        </GBButton>
+        <GBSpacer space={"1.5%"} visible={false} />
+        <GBLink onPress={() => nav.navigate("ForgotPassword")} size={"1.5%"}>
+          {Lang.login.forgot_password}
         </GBLink>
+        <GBSpacer space={"5%"} visible={false} />
+        <GBContainer direction={"row"} color={Colors.background}>
+          <GBText size={"1.5%"} color={Colors.darkGrey} style={"regular"}>
+            {Lang.login.no_account.text}
+          </GBText>
+          <GBLink size={"1.5%"} onPress={() => nav.navigate("Register")}>
+            {Lang.login.no_account.link}
+          </GBLink>
+        </GBContainer>
       </GBContainer>
-    </GBContainer>
+    </GBKeyboardDismiss>
   );
 };

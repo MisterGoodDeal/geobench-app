@@ -317,7 +317,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
             "error"
           ),
         {
-          enableHighAccuracy: true,
+          enableHighAccuracy: false,
           timeout: 5000,
           maximumAge: 1000,
         }
