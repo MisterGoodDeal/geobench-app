@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, Vibration } from "react-native";
 import { GBContainer } from "../components/GBContainer";
 import { Colors } from "../constants/Colors";
 import { localStorage } from "../services/localStorage.service";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { actions } from "../store/action";
 import { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps"; // remove PROVIDER_GOOGLE import if not using Google Maps
 import MapView from "react-native-map-clustering";
@@ -76,6 +76,8 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
 
   const fakeFav = JSON.parse("[397, 0]");
   const [favoris, setFavoris] = useState([]);
+
+  const route = useRoute();
 
   const {
     isFetching,
@@ -263,8 +265,10 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
   }
 
   React.useEffect(() => {
-    if (userInfo.favoris !== undefined) {
-      setFavoris(JSON.parse(userInfo.favoris));
+    if (userInfo !== undefined) {
+      if (userInfo?.favoris !== undefined) {
+        setFavoris(JSON.parse(userInfo.favoris));
+      }
     }
   }, [userInfo]);
 
@@ -278,6 +282,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
 
           dispatch(api.benches.get({}));
           getCurrentLocation();
+          console.log("Route param => ", route);
         } else {
           nav.navigate("Login");
         }
