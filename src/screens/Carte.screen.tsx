@@ -453,30 +453,6 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         clusterFontFamily={"Poppins-Black"}
       >
         {bancs.map((b, index) => {
-          // return (
-          //   <Marker
-          //     key={b.id}
-          //     coordinate={{ latitude: b.latitude, longitude: b.longitude }}
-          //     image={
-          //       favoris.some((i: number) => i === b.id)
-          //         ? favmarker
-          //         : userInfo?.pseudo === b.user
-          //         ? mymarker
-          //         : marker
-          //     }
-          //     onPress={(e) => {
-          //       setBenchDetails({
-          //         visible: true,
-          //         bench: b,
-          //         index: index,
-          //       });
-          //     }}
-          //   >
-          //     <Callout tooltip={true}>
-          //       <Text></Text>
-          //     </Callout>
-          //   </Marker>
-          // );
           // J'ai aucun filtre
           if (photoFiltre === -1 && lieuFiltre === -1) {
             return displayMaker(b, favoris, userInfo, setBenchDetails, index);
