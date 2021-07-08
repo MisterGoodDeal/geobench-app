@@ -153,3 +153,30 @@ export const makeUserUpdateEmailApi = (fetchFn: Fetch): UserUpdateEmailApi => ({
     return res;
   },
 });
+
+/* UPDATE FAVORITES */
+interface ReturnUserUpdateFavoritesParams {
+  favoris: string;
+}
+export interface UserUpdateFavoritesApi {
+  return: (returnParams: ReturnUserUpdateFavoritesParams) => Promise<any>;
+}
+
+export const makeUserUpdateFavoritesApi = (
+  fetchFn: Fetch
+): UserUpdateFavoritesApi => ({
+  return: async (returnParams) => {
+    const user = await localStorage.get("user");
+    const u: UserLocal = JSON.parse(user);
+    const res = await fetchFn(`user/favoris`, {
+      method: "PUT",
+      headers: {
+        "x-auth": `${u.id}`,
+      },
+      body: JSON.stringify({
+        favoris: returnParams.favoris,
+      }),
+    });
+    return res;
+  },
+});

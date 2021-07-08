@@ -28,6 +28,8 @@ const marker = require("../assets/images/map/marker.png");
 const mymarker = require("../assets/images/map/my_marker.png");
 const favmarker = require("../assets/images/map/fav_marker.png");
 
+const fakeFavoris = [297, 0, 19];
+
 export const CarteScreen: React.FunctionComponent<null> = () => {
   const dispatch = useDispatch();
   const nav = useNavigation();
@@ -47,10 +49,12 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
   interface BenchDetail {
     visible: boolean;
     bench: Banc | null;
+    index: number;
   }
   const [benchDetails, setBenchDetails] = useState<BenchDetail>({
     visible: false,
     bench: null,
+    index: -1,
   });
   const [userCoordinates, setUserCoordinates] = useState<any>();
   const [mv, setMv] = useState<any>();
@@ -69,6 +73,9 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
   const [photoUploaded, setPhotoUploaded] = useState(false);
   const [benchUploaded, setBenchUploaded] = useState(false);
   const [uploaded, setUploaded] = useState(false);
+
+  const fakeFav = JSON.parse("[397, 0]");
+  const [favoris, setFavoris] = useState([]);
 
   const {
     isFetching,
@@ -255,6 +262,12 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     );
   }
 
+  React.useEffect(() => {
+    if (userInfo.favoris !== undefined) {
+      setFavoris(JSON.parse(userInfo.favoris));
+    }
+  }, [userInfo]);
+
   useFocusEffect(
     React.useCallback(() => {
       //Quand le composant est affiché
@@ -262,8 +275,8 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         const user = await localStorage.get("user");
         if (user !== "") {
           dispatch(actions.user.setUser(JSON.parse(user)));
+
           dispatch(api.benches.get({}));
-          console.log("success after useFocus");
           getCurrentLocation();
         } else {
           nav.navigate("Login");
@@ -327,6 +340,52 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     }
   };
 
+  const handleFavoris = (id: number) => {
+    if (favoris.some((i: number) => i === id)) {
+      let tempFav = favoris;
+      tempFav.splice(favoris.indexOf(id), 1);
+      setFavoris(tempFav);
+      let tempUser = {
+        id: userInfo.id,
+        is_ads: userInfo.is_ads,
+        is_banned: userInfo.is_banned,
+        is_deleted: userInfo.is_deleted,
+        prenom: userInfo.prenom,
+        nom: userInfo.nom,
+        mail: userInfo.mail,
+        pseudo: userInfo.pseudo,
+        favoris: JSON.stringify(tempFav),
+        reset_key: "0",
+      };
+      dispatch(actions.user.setUser(tempUser));
+      (async () => {
+        await localStorage.store("user", JSON.stringify(tempUser));
+      })();
+    } else {
+      let tempFav = favoris;
+      tempFav.push(id);
+      console.log(tempFav);
+      setFavoris(tempFav);
+      let tempUser = {
+        id: userInfo.id,
+        is_ads: userInfo.is_ads,
+        is_banned: userInfo.is_banned,
+        is_deleted: userInfo.is_deleted,
+        prenom: userInfo.prenom,
+        nom: userInfo.nom,
+        mail: userInfo.mail,
+        pseudo: userInfo.pseudo,
+        favoris: JSON.stringify(tempFav),
+        reset_key: "0",
+      };
+      dispatch(actions.user.setUser(tempUser));
+      (async () => {
+        await localStorage.store("user", JSON.stringify(tempUser));
+      })();
+    }
+    dispatch(api.user.updateFavorites({ favoris: JSON.stringify(favoris) }));
+  };
+
   return (
     <GBContainer
       flex={1}
@@ -354,13 +413,18 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
           <Marker
             key={b.id}
             coordinate={{ latitude: b.latitude, longitude: b.longitude }}
-            title={`Banc`}
-            description={`Banc n°${index}`}
-            image={userInfo.pseudo === b.user ? mymarker : marker}
+            image={
+              favoris.some((i: number) => i === b.id)
+                ? favmarker
+                : userInfo?.pseudo === b.user
+                ? mymarker
+                : marker
+            }
             onPress={(e) => {
               setBenchDetails({
                 visible: true,
                 bench: b,
+                index: index,
               });
             }}
           >
@@ -375,6 +439,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         visible={benchDetails.visible}
         buttonUsable={usable}
         hook={setComment}
+        index={benchDetails.index + 1}
         sendComment={() =>
           dispatch(
             api.benches.comment({
@@ -388,9 +453,12 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
           setBenchDetails({
             visible: false,
             bench: null,
+            index: -1,
           });
           setComment("");
         }}
+        isFav={favoris.some((i: number) => i === benchDetails.bench?.id)}
+        updateFav={() => handleFavoris(benchDetails.bench!.id)}
       />
 
       <GBAddBench

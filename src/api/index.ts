@@ -11,6 +11,7 @@ import {
   fetchUserRegister,
   fetchUserReset,
   fetchUserUpdateEmail,
+  fetchUserUpdateFavorites,
   fetchUserUpdateFullname,
 } from "./user";
 
@@ -22,6 +23,7 @@ export const api = {
     register: fetchUserRegister,
     updateFullname: fetchUserUpdateFullname,
     updateEmail: fetchUserUpdateEmail,
+    updateFavorites: fetchUserUpdateFavorites,
   },
   benches: {
     get: fetchBancs,

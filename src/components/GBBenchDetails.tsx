@@ -28,16 +28,22 @@ interface GBBenchDetailsProps {
   onClose: () => void;
   hook: React.Dispatch<React.SetStateAction<string>>;
   sendComment: () => void;
+  index: number;
   buttonUsable: boolean;
+  updateFav: () => void;
+  isFav: boolean;
 }
 
 export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
   visible,
   banc,
+  index,
   onClose,
   hook,
   sendComment,
   buttonUsable,
+  isFav,
+  updateFav,
 }) => (
   <Modal animationType="slide" transparent={true} visible={visible}>
     {banc !== null && (
@@ -62,7 +68,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
               openMap(
                 banc.latitude,
                 banc.longitude,
-                `${Lang.map.bench} ${banc?.id}`
+                `${Lang.map.bench} ${index}`
               )
             }
             style={{
@@ -82,7 +88,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
             showsVerticalScrollIndicator={false}
           >
             <GBText size={"3.5%"} style={"black"} align={"center"}>
-              {`${Lang.map.bench} ${banc?.id}`}
+              {`${Lang.map.bench} ${banc.id}`}
             </GBText>
             <GBText
               size={"1.5%"}
@@ -212,6 +218,32 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
           >
             {`${Lang.map.added_by} ${banc.user}`}
           </GBText>
+          <GBSpacer visible={false} space={"2%"} />
+          <TouchableOpacity
+            onPress={updateFav}
+            style={{
+              backgroundColor: isFav ? Colors.lightRed : Colors.white,
+              height: hp("7%"),
+              width: hp("7%"),
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 50,
+              position: "absolute",
+              alignSelf: "center",
+              bottom: -hp("7%") / 2,
+              borderColor: !isFav ? Colors.lightRed : undefined,
+              borderWidth: !isFav ? 3 : undefined,
+            }}
+          >
+            <Image
+              source={require("../assets/images/heart.png")}
+              style={{
+                height: hp("3%"),
+                width: hp("3%"),
+                tintColor: isFav ? Colors.white : Colors.lightRed,
+              }}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     )}
@@ -226,7 +258,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "80%",
-    height: "70%",
+    height: "75%",
     backgroundColor: Colors.white,
     borderRadius: 15,
     padding: hp("3%"),

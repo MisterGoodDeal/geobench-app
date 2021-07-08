@@ -8,6 +8,7 @@ import {
   getUserRegisterApi,
   getUserResetApi,
   getUserUpdateEmailApi,
+  getUserUpdateFavoritesApi,
   getUserUpdateFullnameApi,
 } from "./api";
 
@@ -181,6 +182,33 @@ export const fetchUserUpdateEmail = createAsyncThunk(
     try {
       const res = await userUpdateEmailApi.updateEmail.return({
         email: email,
+      });
+
+      const userData = await res.json();
+      if (res.ok) {
+        return userData;
+      } else {
+        return thunkAPI.rejectWithValue(userData);
+      }
+    } catch (e) {
+      thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+/* UPDATE FAVORIS */
+const userUpdateFavoritesApi = getUserUpdateFavoritesApi(env.apiUrl);
+
+interface ParametersUpdateFavorites {
+  favoris: string;
+}
+
+export const fetchUserUpdateFavorites = createAsyncThunk(
+  "user/updateFavorites",
+  async ({ favoris }: ParametersUpdateFavorites, thunkAPI) => {
+    try {
+      const res = await userUpdateFavoritesApi.updateFavorites.return({
+        favoris: favoris,
       });
 
       const userData = await res.json();

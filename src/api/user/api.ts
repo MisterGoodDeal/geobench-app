@@ -6,12 +6,14 @@ import {
   makeUserRegisterApi,
   makeUserResetApi,
   makeUserUpdateEmailApi,
+  makeUserUpdateFavoritesApi,
   makeUserUpdateFullnameApi,
   UserCheckAndChangeApi,
   UserLoginApi,
   UserRegisterApi,
   UserResetApi,
   UserUpdateEmailApi,
+  UserUpdateFavoritesApi,
   UserUpdateFullnameApi,
 } from "./userApi";
 import { Fetch } from "../utils";
@@ -223,6 +225,45 @@ export const getUserUpdateEmailApi = (
 };
 
 const getUserUpdateEmailFetch = (fetch: Fetch, baseUrl: string): Fetch => {
+  return async (input: RequestInfo, init?: RequestInit) => {
+    const routeUrl =
+      typeof input === "string"
+        ? input
+        : hasOwnProperty(input, "href")
+        ? input.href
+        : input.url;
+
+    const requestInit: RequestInit = {
+      ...init,
+      headers: {
+        ...init?.headers,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const url = `${baseUrl}/${routeUrl}`;
+
+    const res = await fetch(url, requestInit);
+    return res;
+  };
+};
+
+/* UPDATE FAVORITES */
+interface UserUpdateFavoritesApiInterface {
+  updateFavorites: UserUpdateFavoritesApi;
+}
+
+export const getUserUpdateFavoritesApi = (
+  baseUrl: string
+): UserUpdateFavoritesApiInterface => {
+  const UserUpdateFavoritesFetch = getUserUpdateFavoritesFetch(fetch, baseUrl);
+
+  return {
+    updateFavorites: makeUserUpdateFavoritesApi(UserUpdateFavoritesFetch),
+  };
+};
+
+const getUserUpdateFavoritesFetch = (fetch: Fetch, baseUrl: string): Fetch => {
   return async (input: RequestInfo, init?: RequestInit) => {
     const routeUrl =
       typeof input === "string"
