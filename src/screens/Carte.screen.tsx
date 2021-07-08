@@ -1,6 +1,12 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, Text, TouchableOpacity, Vibration } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Vibration,
+  View,
+} from "react-native";
 import { GBContainer } from "../components/GBContainer";
 import { Colors } from "../constants/Colors";
 import { localStorage } from "../services/localStorage.service";
@@ -23,12 +29,15 @@ import { userSelector } from "../store/slices/userSlice";
 import { Lang } from "../constants/Lang";
 import { GBAddBench } from "../components/GBAddBench";
 import { GBToast } from "../components/GBToast";
+import { GBText } from "../components/GBText";
+import { hp, wp } from "../utils/functions";
+import { GBModal } from "../components/GBModal";
+import { GBPicker } from "../components/GBPicker";
+import { GBSpacer } from "../components/GBSpacer";
 
 const marker = require("../assets/images/map/marker.png");
 const mymarker = require("../assets/images/map/my_marker.png");
 const favmarker = require("../assets/images/map/fav_marker.png");
-
-const fakeFavoris = [297, 0, 19];
 
 export const CarteScreen: React.FunctionComponent<null> = () => {
   const dispatch = useDispatch();
@@ -74,8 +83,14 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
   const [benchUploaded, setBenchUploaded] = useState(false);
   const [uploaded, setUploaded] = useState(false);
 
+  // Gestion des favoris
   const fakeFav = JSON.parse("[397, 0]");
   const [favoris, setFavoris] = useState([]);
+
+  // Gesrtion des filtres
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [lieuFiltre, setLieuFiltre] = useState(-1);
+  const [photoFiltre, setPhotoFiltre] = useState(-1);
 
   const route = useRoute();
 
@@ -400,6 +415,29 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     >
       <GBLoader visible={loading} color={"noir"} />
       <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
+      <GBModal
+        visible={filterVisible}
+        onClose={() => setFilterVisible(false)}
+        animation={"fade"}
+      >
+        <GBText style={"black"} size={"3%"}>
+          {Lang.map.filters.title}
+        </GBText>
+        <GBSpacer visible={false} space={"2%"} />
+        <GBPicker
+          items={Lang.map.add.location}
+          setPickedItem={setLieuFiltre}
+          value={lieuFiltre.toString()}
+          placeholder={Lang.map.filters.ph_lieu}
+        />
+        <GBSpacer visible={false} space={"1%"} />
+        <GBPicker
+          items={Lang.map.filters.filtre_photo}
+          setPickedItem={setPhotoFiltre}
+          value={photoFiltre.toString()}
+          placeholder={Lang.map.filters.ph_photo}
+        />
+      </GBModal>
       <MapView
         showsMyLocationButton={false}
         showsScale={false}
@@ -414,30 +452,65 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         clusterColor={Colors.main}
         clusterFontFamily={"Poppins-Black"}
       >
-        {bancs.map((b, index) => (
-          <Marker
-            key={b.id}
-            coordinate={{ latitude: b.latitude, longitude: b.longitude }}
-            image={
-              favoris.some((i: number) => i === b.id)
-                ? favmarker
-                : userInfo?.pseudo === b.user
-                ? mymarker
-                : marker
+        {bancs.map((b, index) => {
+          // return (
+          //   <Marker
+          //     key={b.id}
+          //     coordinate={{ latitude: b.latitude, longitude: b.longitude }}
+          //     image={
+          //       favoris.some((i: number) => i === b.id)
+          //         ? favmarker
+          //         : userInfo?.pseudo === b.user
+          //         ? mymarker
+          //         : marker
+          //     }
+          //     onPress={(e) => {
+          //       setBenchDetails({
+          //         visible: true,
+          //         bench: b,
+          //         index: index,
+          //       });
+          //     }}
+          //   >
+          //     <Callout tooltip={true}>
+          //       <Text></Text>
+          //     </Callout>
+          //   </Marker>
+          // );
+          // J'ai aucun filtre
+          if (photoFiltre === -1 && lieuFiltre === -1) {
+            return displayMaker(b, favoris, userInfo, setBenchDetails, index);
+          } else {
+            // On ne gère pas le filtre des photos
+            if (
+              photoFiltre === -1 &&
+              lieuFiltre !== -1 &&
+              lieuFiltre.toString() === b.lieu
+            ) {
+              return displayMaker(b, favoris, userInfo, setBenchDetails, index);
+            } else {
+              // On gère le filtre des photos
+              // Je veux les photos
+              if (photoFiltre === 1 && b.nom_photo !== "") {
+                return displayMaker(
+                  b,
+                  favoris,
+                  userInfo,
+                  setBenchDetails,
+                  index
+                );
+              } else if (photoFiltre === 2 && b.nom_photo === "") {
+                return displayMaker(
+                  b,
+                  favoris,
+                  userInfo,
+                  setBenchDetails,
+                  index
+                );
+              }
             }
-            onPress={(e) => {
-              setBenchDetails({
-                visible: true,
-                bench: b,
-                index: index,
-              });
-            }}
-          >
-            <Callout tooltip={true}>
-              <Text></Text>
-            </Callout>
-          </Marker>
-        ))}
+          }
+        })}
       </MapView>
       <GBBenchDetails
         banc={benchDetails.bench}
@@ -482,6 +555,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         mv={mapRef}
         userCoordinates={userCoordinates}
         hookAddBench={setAddBench}
+        filter={() => setFilterVisible(true)}
       />
     </GBContainer>
   );
@@ -491,3 +565,36 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
 });
+
+const displayMaker = (
+  b: Banc,
+  favoris: any,
+  userInfo: any,
+  setBenchDetails: any,
+  index: number
+) => {
+  return (
+    <Marker
+      key={b.id}
+      coordinate={{ latitude: b.latitude, longitude: b.longitude }}
+      image={
+        favoris.some((i: number) => i === b.id)
+          ? favmarker
+          : userInfo?.pseudo === b.user
+          ? mymarker
+          : marker
+      }
+      onPress={(e) => {
+        setBenchDetails({
+          visible: true,
+          bench: b,
+          index: index,
+        });
+      }}
+    >
+      <Callout tooltip={true}>
+        <Text></Text>
+      </Callout>
+    </Marker>
+  );
+};

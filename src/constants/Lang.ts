@@ -125,6 +125,15 @@ const locales = {
         },
         button: "Ajouter !",
       },
+      filters: {
+        title: "Filtres",
+        ph_lieu: "Filtrer par lieux...",
+        ph_photo: "Filtrer par photos...",
+        filtre_photo: [
+          { label: "Bancs avec photos", value: "1" },
+          { label: "Bancs sans photos", value: "2" },
+        ],
+      },
     },
     navigation: {
       home: "Accueil",
@@ -375,6 +384,15 @@ const locales = {
               "There was an error while adding your bench! Please try again!",
           },
         },
+      },
+      filters: {
+        title: "Filters",
+        ph_lieu: "Filter by locations...",
+        ph_photo: "Filter by pictures...",
+        filtre_photo: [
+          { label: "Benches with pictures", value: "1" },
+          { label: "Benches without pictures", value: "2" },
+        ],
       },
     },
     navigation: {

@@ -16,6 +16,7 @@ export interface PickerItem {
 interface GBPickerProps {
   items: PickerItem[];
   placeholder: string;
+  value?: string;
   setPickedItem: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -23,6 +24,7 @@ export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
   items,
   placeholder,
   setPickedItem,
+  value,
 }) => (
   <RNPickerSelect
     onValueChange={(value) => setPickedItem!(parseInt(value))}
@@ -30,6 +32,7 @@ export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
       label: placeholder,
       value: "-1",
     }}
+    value={value === undefined ? undefined : value}
     items={items}
     style={pickerSelectStyles}
     useNativeAndroidPickerStyle={false}

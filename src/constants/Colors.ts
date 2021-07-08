@@ -1,5 +1,6 @@
 export const Colors = {
   main: "#ffb300",
+  mainDark: "#ffa200",
   orangeGradient: {
     start: "#ffd000",
     middle: "#ffb300",
