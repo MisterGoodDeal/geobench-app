@@ -45,21 +45,31 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
   size,
   hook,
 }) => (
-  <View>
+  <View
+    style={[
+      styles.input,
+      { borderRadius: 8 },
+      { height: multiline ? hp("20%") : undefined },
+      { width: width ? width : wp("70%") },
+      { marginLeft: spaceAround ? spaceAround : 0 },
+      { marginRight: spaceAround ? spaceAround : 0 },
+    ]}
+  >
     <TextInput
       editable={!disable}
       numberOfLines={nbLines}
       multiline={multiline}
       maxLength={maxLength !== undefined ? maxLength : undefined}
       style={[
-        styles.input,
-        { borderRadius: 8 },
+        {
+          width: "90%",
+          fontWeight: "bold",
+          color: disable ? Colors.placeholder : Colors.black,
+          fontFamily: "Poppins-Regular",
+          padding: 0,
+        },
         { textAlignVertical: multiline ? "top" : "center" },
         { textAlign: textAlign === undefined ? "left" : textAlign },
-        { height: multiline ? hp("20%") : undefined },
-        { width: width ? width : wp("70%") },
-        { marginLeft: spaceAround ? spaceAround : 0 },
-        { marginRight: spaceAround ? spaceAround : 0 },
         { fontSize: size === undefined ? hp("1.5%") : hp(size) },
       ]}
       secureTextEntry={passwordShow === undefined ? false : passwordShow}
@@ -72,11 +82,7 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
     </TextInput>
     {isPassword && (
       <TouchableOpacity
-        style={{
-          position: "absolute",
-          right: 10,
-          top: 20,
-        }}
+        style={{}}
         onPress={() => setPasswordShow!(!passwordShow)}
       >
         <Image
@@ -98,11 +104,11 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
 
 const styles = StyleSheet.create({
   input: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: Colors.inputColor,
-    fontWeight: "bold",
     textAlignVertical: "top",
-    padding: 15,
-    color: Colors.black,
-    fontFamily: "Poppins-Regular",
+    padding: hp("1.5%"),
   },
 });
