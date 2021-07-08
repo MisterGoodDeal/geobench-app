@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, Vibration } from "react-native";
 import { GBContainer } from "../components/GBContainer";
 import { Colors } from "../constants/Colors";
 import { localStorage } from "../services/localStorage.service";
@@ -25,6 +25,8 @@ import { GBAddBench } from "../components/GBAddBench";
 import { GBToast } from "../components/GBToast";
 
 const marker = require("../assets/images/map/marker.png");
+const mymarker = require("../assets/images/map/my_marker.png");
+const favmarker = require("../assets/images/map/fav_marker.png");
 
 export const CarteScreen: React.FunctionComponent<null> = () => {
   const dispatch = useDispatch();
@@ -353,8 +355,8 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
             key={b.id}
             coordinate={{ latitude: b.latitude, longitude: b.longitude }}
             title={`Banc`}
-            description={`Banc n°${b.id}`}
-            image={marker}
+            description={`Banc n°${index}`}
+            image={userInfo.pseudo === b.user ? mymarker : marker}
             onPress={(e) => {
               setBenchDetails({
                 visible: true,
