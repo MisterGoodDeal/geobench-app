@@ -15,13 +15,15 @@ import { RegisterScreen } from "./src/screens/Settings/Register.screen";
 
 import Toast from "react-native-toast-message";
 
+import linking from "./src/linking";
+
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
   const Stack = createStackNavigator();
   return (
     <>
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
           <Stack.Navigator
             initialRouteName={"Index"}
             screenOptions={{ headerShown: false }}
