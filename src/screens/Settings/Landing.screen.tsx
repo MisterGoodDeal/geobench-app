@@ -24,6 +24,7 @@ import { useKeyboard } from "../../utils/keyboard";
 import { api } from "../../api";
 import { GBToast } from "../../components/GBToast";
 import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
+import { GBPopup } from "../../components/GBPopup";
 const validator = require("email-validator");
 
 export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
@@ -35,6 +36,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   const [keyboardStatus] = useKeyboard();
 
   const [loader, setLoader] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   const [fullname, setFullname] = useState(`${u?.prenom} ${u?.nom}`);
   const [fullnameDisable, setFullnameDisable] = useState(false);
@@ -73,6 +75,14 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   );
 
   const handleLogout = () => {
+    localStorage.clear();
+    dispatch(actions.user.setUser(null));
+    nav.navigate("Login");
+  };
+
+  const handleDelete = () => {
+    dispatch(api.user.delete({}));
+    setPopup(false);
     localStorage.clear();
     dispatch(actions.user.setUser(null));
     nav.navigate("Login");
@@ -183,6 +193,16 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
         flex={1}
         color={keyboardStatus ? Colors.background : Colors.main}
       >
+        <GBPopup
+          visible={popup}
+          image={"bin"}
+          title={Lang.settings.popup_delete.title}
+          content={Lang.settings.popup_delete.content}
+          validText={Lang.settings.popup_delete.yes}
+          valid={() => handleDelete()}
+          notValidText={Lang.settings.popup_delete.no}
+          notValid={() => setPopup(false)}
+        />
         <GBLoader visible={loader} color={keyboardStatus ? "noir" : "blanc"} />
         <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
         <GBContainer
@@ -313,13 +333,26 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             {Lang.settings.button_password}
           </GBButton>
           <GBSpacer visible={false} space={"10%"} />
-          <GBButton
-            onPress={handleLogout}
-            color={Colors.lightRed}
-            width={wp("50%")}
+          <GBContainer
+            direction={"row"}
+            extraStyle={{ width: "90%" }}
+            justifyContent={"space-between"}
           >
-            {Lang.settings.button_logout}
-          </GBButton>
+            <GBButton
+              onPress={handleLogout}
+              color={Colors.lightRed}
+              width={wp("40%")}
+            >
+              {Lang.settings.button_logout}
+            </GBButton>
+            <GBButton
+              onPress={() => setPopup(true)}
+              color={Colors.lightRed}
+              width={wp("40%")}
+            >
+              {Lang.settings.button_delete}
+            </GBButton>
+          </GBContainer>
         </GBContainer>
       </GBContainer>
     </GBKeyboardDismiss>

@@ -7,6 +7,7 @@ import {
 import { fetchCommunaute } from "./communaute";
 import {
   fetchUserCheckAndChange,
+  fetchUserDelete,
   fetchUserLogin,
   fetchUserRegister,
   fetchUserReset,
@@ -24,6 +25,7 @@ export const api = {
     updateFullname: fetchUserUpdateFullname,
     updateEmail: fetchUserUpdateEmail,
     updateFavorites: fetchUserUpdateFavorites,
+    delete: fetchUserDelete,
   },
   benches: {
     get: fetchBancs,

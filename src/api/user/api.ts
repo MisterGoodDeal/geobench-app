@@ -2,6 +2,7 @@ import fetch, { RequestInfo, RequestInit } from "node-fetch";
 import { hasOwnProperty } from "../asserts";
 import {
   makeUserCheckAndChangeApi,
+  makeUserDeleteApi,
   makeUserLoginApi,
   makeUserRegisterApi,
   makeUserResetApi,
@@ -9,6 +10,7 @@ import {
   makeUserUpdateFavoritesApi,
   makeUserUpdateFullnameApi,
   UserCheckAndChangeApi,
+  UserDeleteApi,
   UserLoginApi,
   UserRegisterApi,
   UserResetApi,
@@ -264,6 +266,43 @@ export const getUserUpdateFavoritesApi = (
 };
 
 const getUserUpdateFavoritesFetch = (fetch: Fetch, baseUrl: string): Fetch => {
+  return async (input: RequestInfo, init?: RequestInit) => {
+    const routeUrl =
+      typeof input === "string"
+        ? input
+        : hasOwnProperty(input, "href")
+        ? input.href
+        : input.url;
+
+    const requestInit: RequestInit = {
+      ...init,
+      headers: {
+        ...init?.headers,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const url = `${baseUrl}/${routeUrl}`;
+
+    const res = await fetch(url, requestInit);
+    return res;
+  };
+};
+
+/* DELETE ACCOUNT */
+interface UserDeleteApiInterface {
+  delete: UserDeleteApi;
+}
+
+export const getUserDeleteApi = (baseUrl: string): UserDeleteApiInterface => {
+  const UserDeleteFetch = getUserDeleteFetch(fetch, baseUrl);
+
+  return {
+    delete: makeUserDeleteApi(UserDeleteFetch),
+  };
+};
+
+const getUserDeleteFetch = (fetch: Fetch, baseUrl: string): Fetch => {
   return async (input: RequestInfo, init?: RequestInit) => {
     const routeUrl =
       typeof input === "string"

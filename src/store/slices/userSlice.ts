@@ -153,6 +153,22 @@ export const userSlice = createSlice({
       state.isError = true;
       state.errorMessage = payload;
     });
+
+    /* Supprimer un compte */
+    builder.addCase(api.user.delete.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.user.delete.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(api.user.delete.rejected, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload;
+    });
   },
 });
 

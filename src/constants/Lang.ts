@@ -146,6 +146,14 @@ const locales = {
       ph_email: "Votre adresse mail...",
       button_password: "Modifier mon mot de passe",
       button_logout: "Se deconnecter",
+      button_delete: "Supprimer mon compte",
+      popup_delete: {
+        title: "Supprimer mon compte",
+        content:
+          "Voulez vous vraiment supprimer votre compte?\nLes bancs que vous avez ajouté ne seront pas supprimés, mais votre pseudo sera modifié.",
+        yes: "Oui",
+        no: "Non",
+      },
       toastMessages: {
         success: {
           title: "Tout est ok 👌",
@@ -405,6 +413,14 @@ const locales = {
       ph_fullname: "Your fullname...",
       ph_email: "Your email address...",
       button_password: "Change my password",
+      button_delete: "Delete account",
+      popup_delete: {
+        title: "Delete account",
+        content:
+          "Do you want to delete your account?\nBenches you added won't be deleted, but your username will be obfuscated.",
+        yes: "Yes",
+        no: "No",
+      },
       button_logout: "Logout",
       toastMessages: {
         success: {

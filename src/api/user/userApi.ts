@@ -180,3 +180,22 @@ export const makeUserUpdateFavoritesApi = (
     return res;
   },
 });
+
+/* DELETE ACCOUNT */
+export interface UserDeleteApi {
+  return: () => Promise<any>;
+}
+
+export const makeUserDeleteApi = (fetchFn: Fetch): UserDeleteApi => ({
+  return: async () => {
+    const user = await localStorage.get("user");
+    const u: UserLocal = JSON.parse(user);
+    const res = await fetchFn(`user/delete`, {
+      method: "POST",
+      headers: {
+        "x-auth": `${u.id}`,
+      },
+    });
+    return res;
+  },
+});

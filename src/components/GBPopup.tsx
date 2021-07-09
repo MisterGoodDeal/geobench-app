@@ -12,7 +12,7 @@ interface GBPopupProps {
   visible: boolean;
   title: string;
   content: string;
-  image?: "success" | "error";
+  image?: "success" | "error" | "bin";
   validText: string;
   valid: () => void;
   notValidText?: string;
@@ -38,6 +38,8 @@ export const GBPopup: React.FunctionComponent<GBPopupProps> = ({
               ? require("../assets/images/popup/success.png")
               : image === "error"
               ? require("../assets/images/popup/error.png")
+              : image === "bin"
+              ? require("../assets/images/recycling-bin.png")
               : undefined
           }
           size={"5%"}
@@ -47,7 +49,7 @@ export const GBPopup: React.FunctionComponent<GBPopupProps> = ({
           {title}
         </GBText>
         <GBSpacer visible={false} space={"2%"} />
-        <GBText style={"regular"} size={"2%"}>
+        <GBText style={"regular"} size={"2%"} align={"justify"}>
           {content}
         </GBText>
         <GBSpacer visible={false} space={"2%"} />

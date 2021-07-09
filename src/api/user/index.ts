@@ -4,6 +4,7 @@ import { localStorage } from "../../services/localStorage.service";
 import { env } from "../../utils/env";
 import {
   getUserCheckAndChangeApi,
+  getUserDeleteApi,
   getUserLoginApi,
   getUserRegisterApi,
   getUserResetApi,
@@ -210,6 +211,29 @@ export const fetchUserUpdateFavorites = createAsyncThunk(
       const res = await userUpdateFavoritesApi.updateFavorites.return({
         favoris: favoris,
       });
+
+      const userData = await res.json();
+      if (res.ok) {
+        return userData;
+      } else {
+        return thunkAPI.rejectWithValue(userData);
+      }
+    } catch (e) {
+      thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+/* DELETE ACCOUNT */
+const userDeleteApi = getUserDeleteApi(env.apiUrl);
+
+interface ParametersDelete {}
+
+export const fetchUserDelete = createAsyncThunk(
+  "user/Delete",
+  async ({}: ParametersDelete, thunkAPI) => {
+    try {
+      const res = await userDeleteApi.delete.return();
 
       const userData = await res.json();
       if (res.ok) {
