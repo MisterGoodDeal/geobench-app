@@ -10,6 +10,7 @@ import { IndexScreens } from "./src/screens/Screens.index";
 import { LoginScreen } from "./src/screens/Settings/Login.screen";
 import { ForgotPasswordScreen } from "./src/screens/Settings/ForgotPassword.screen";
 import { RegisterScreen } from "./src/screens/Settings/Register.screen";
+import { localStorage } from "./src/services/localStorage.service";
 
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
@@ -20,9 +21,17 @@ import linking from "./src/linking";
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
   React.useEffect(() => {
+    (async () => {
+      const darkMode = await localStorage.get("darkMode");
+      if (darkMode === "") {
+        localStorage.store("darkMode", "false");
+      }
+    })();
+
     console.log(isDarkMode);
   }, [isDarkMode]);
   const Stack = createStackNavigator();
+
   return (
     <Provider store={store}>
       <NavigationContainer linking={linking}>

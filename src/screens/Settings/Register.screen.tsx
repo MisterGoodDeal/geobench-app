@@ -1,6 +1,6 @@
 import * as React from "react";
 import { GBContainer } from "../../components/GBContainer";
-import { Colors } from "../../constants/Colors";
+import { Colors, ColorsDark } from "../../constants/Colors";
 import { Lang } from "../../constants/Lang";
 import { useNavigation } from "@react-navigation/native";
 import { GBText } from "../../components/GBText";
@@ -25,7 +25,7 @@ import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
 export const RegisterScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
   const dispatch = useDispatch();
-  const { isFetching, isSuccess, isError, errorMessage } =
+  const { isFetching, isSuccess, isError, errorMessage, darkMode } =
     useSelector(userSelector);
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
@@ -119,16 +119,23 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
         flex={1}
         alignItems={"center"}
         justifyContent={"center"}
-        color={Colors.background}
+        color={darkMode ? ColorsDark.background : Colors.background}
       >
-        <GBStatusBar color={Colors.background} textColor={"dark-content"} />
+        <GBStatusBar
+          color={darkMode ? ColorsDark.background : Colors.background}
+          textColor={darkMode ? "light-content" : "dark-content"}
+        />
         <GBLoader color={"noir"} visible={isLoading} />
         <GBImage
           source={require("../../assets/images/bench.png")}
           size={"12%"}
         />
         <GBSpacer space={"4%"} visible={false} />
-        <GBText size={"2.2%"} style={"bold"} color={Colors.darkGrey}>
+        <GBText
+          size={"2.2%"}
+          style={"bold"}
+          color={darkMode ? ColorsDark.white : Colors.darkGrey}
+        >
           {Lang.register.title}
         </GBText>
         <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
@@ -140,6 +147,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           nbLines={1}
           placeholder={Lang.register.ph_fullname}
           hook={setFullname}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {fullname}
         </GBInput>
@@ -150,6 +158,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           placeholder={Lang.register.ph_email}
           hook={setEmail}
           type={"email-address"}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {email}
         </GBInput>
@@ -160,6 +169,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           placeholder={Lang.register.ph_username}
           hook={setUsername}
           maxLength={15}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {username}
         </GBInput>
@@ -173,6 +183,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           passwordShow={passwordVisible1}
           setPasswordShow={setPasswordVisible1}
           hook={setPdw1}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {pwd1}
         </GBInput>
@@ -185,6 +196,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           passwordShow={passwordVisible2}
           setPasswordShow={setPasswordVisible2}
           isPassword={true}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {pwd2}
         </GBInput>
@@ -222,7 +234,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           {Lang.register.button}
         </GBButton>
         <GBSpacer space={"3%"} visible={false} />
-        <GBContainer direction={"row"} color={Colors.background}>
+        <GBContainer direction={"row"}>
           <GBText size={"1.5%"} color={Colors.darkGrey} style={"regular"}>
             {Lang.register.alreadyAccount.text}
           </GBText>

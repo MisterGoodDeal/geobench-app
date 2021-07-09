@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, Modal, View } from "react-native";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { hp, wp } from "../utils/functions";
 import { GBButton } from "./GBButton";
 import { GBContainer } from "./GBContainer";
@@ -17,6 +17,7 @@ interface GBPopupProps {
   valid: () => void;
   notValidText?: string;
   notValid?: () => void;
+  color?: string;
 }
 
 export const GBPopup: React.FunctionComponent<GBPopupProps> = ({
@@ -28,10 +29,16 @@ export const GBPopup: React.FunctionComponent<GBPopupProps> = ({
   valid,
   notValidText,
   notValid,
+  color,
 }) => (
   <Modal animationType="fade" transparent={true} visible={visible}>
     <View style={styles.centeredView}>
-      <View style={styles.modalView}>
+      <View
+        style={[
+          styles.modalView,
+          { backgroundColor: color === undefined ? Colors.white : color },
+        ]}
+      >
         <GBImage
           source={
             image === "success"
@@ -45,11 +52,20 @@ export const GBPopup: React.FunctionComponent<GBPopupProps> = ({
           size={"5%"}
         />
         <GBSpacer visible={false} space={"1%"} />
-        <GBText style={"bold"} size={"3%"}>
+        <GBText
+          style={"bold"}
+          size={"3%"}
+          color={color === undefined ? undefined : ColorsDark.white}
+        >
           {title}
         </GBText>
         <GBSpacer visible={false} space={"2%"} />
-        <GBText style={"regular"} size={"2%"} align={"justify"}>
+        <GBText
+          style={"regular"}
+          size={"2%"}
+          align={"justify"}
+          color={color === undefined ? undefined : ColorsDark.white}
+        >
           {content}
         </GBText>
         <GBSpacer visible={false} space={"2%"} />
@@ -97,7 +113,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "70%",
-    backgroundColor: Colors.white,
     borderRadius: 15,
     padding: hp("3%"),
     alignItems: "center",

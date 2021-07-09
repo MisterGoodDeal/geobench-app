@@ -154,6 +154,10 @@ const locales = {
         yes: "Oui",
         no: "Non",
       },
+      darkMode: {
+        on: "Mode sombre activé",
+        off: "Mode clair activé",
+      },
       toastMessages: {
         success: {
           title: "Tout est ok 👌",
@@ -420,6 +424,10 @@ const locales = {
           "Do you want to delete your account?\nBenches you added won't be deleted, but your username will be obfuscated.",
         yes: "Yes",
         no: "No",
+      },
+      darkMode: {
+        on: "Dark mode activated",
+        off: "Light mode activated",
       },
       button_logout: "Logout",
       toastMessages: {

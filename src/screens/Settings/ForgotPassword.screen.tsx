@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GBContainer } from "../../components/GBContainer";
-import { Colors } from "../../constants/Colors";
+import { Colors, ColorsDark } from "../../constants/Colors";
 import { Lang } from "../../constants/Lang";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { GBText } from "../../components/GBText";
@@ -32,7 +32,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
 
   // Gestion pour l'API
   const dispatch = useDispatch();
-  const { isFetching, isSuccess, isError, errorMessage } =
+  const { isFetching, isSuccess, isError, errorMessage, darkMode } =
     useSelector(userSelector);
   const [isLoading, setIsLoading] = useState(false);
   const [resetSended, setResetSended] = useState(false);
@@ -165,9 +165,12 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
         flex={1}
         alignItems={"center"}
         justifyContent={"center"}
-        color={Colors.background}
+        color={darkMode ? ColorsDark.background : Colors.background}
       >
-        <GBStatusBar color={Colors.background} textColor={"dark-content"} />
+        <GBStatusBar
+          color={darkMode ? ColorsDark.background : Colors.background}
+          textColor={darkMode ? "light-content" : "dark-content"}
+        />
         <GBLoader visible={isLoading} color={"noir"} />
         <GBPopupReset
           visible={popupVisible}
@@ -183,6 +186,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           pwd1SetVisible={setPasswordVisible1}
           pwd2Visible={passwordVisible2}
           pwd2SetVisible={setPasswordVisible2}
+          darkMode={darkMode}
         />
         <GBBack onPress={() => nav.goBack()} />
         <GBImage
@@ -190,7 +194,11 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           size={"12%"}
         />
         <GBSpacer space={"8%"} visible={false} />
-        <GBText size={"2.2%"} style={"bold"} color={Colors.darkGrey}>
+        <GBText
+          size={"2.2%"}
+          style={"bold"}
+          color={darkMode ? ColorsDark.white : Colors.darkGrey}
+        >
           {changePass
             ? Lang.forgotPassword.titleAlt
             : Lang.forgotPassword.title}
@@ -205,6 +213,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           placeholder={Lang.forgotPassword.ph_email}
           hook={setEmail}
           type={"email-address"}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {email}
         </GBInput>

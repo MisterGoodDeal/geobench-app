@@ -1,19 +1,27 @@
 import * as React from "react";
 import { Image } from "react-native";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { hp } from "../utils/functions";
 import { CarteScreen } from "./Carte.screen";
 import { CommunauteScreen } from "./Communaute.screen";
 import { SettingsStack } from "./Settings/Settings.index";
+import { useSelector } from "react-redux";
+import { userSelector } from "../store/slices/userSlice";
 
 export const IndexScreens: React.FunctionComponent<null> = () => {
   const Tab = createBottomTabNavigator();
+  const { darkMode } = useSelector(userSelector);
 
   return (
     <Tab.Navigator
-      tabBarOptions={{ showLabel: false }}
+      tabBarOptions={{
+        showLabel: false,
+        style: {
+          backgroundColor: darkMode ? ColorsDark.background : "white",
+        },
+      }}
       initialRouteName={"Map"}
     >
       <Tab.Screen
@@ -28,6 +36,8 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
                 height: hp("4%"),
                 tintColor: focused
                   ? Colors.navigation.focus
+                  : darkMode
+                  ? Colors.darkGrey
                   : Colors.navigation.unfocus,
               }}
               source={require("../assets/images/navigation/community.png")}
@@ -47,6 +57,8 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
                 height: hp("4%"),
                 tintColor: focused
                   ? Colors.navigation.focus
+                  : darkMode
+                  ? Colors.darkGrey
                   : Colors.navigation.unfocus,
               }}
               source={require("../assets/images/navigation/map.png")}
@@ -66,6 +78,8 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
                 height: hp("4%"),
                 tintColor: focused
                   ? Colors.navigation.focus
+                  : darkMode
+                  ? Colors.darkGrey
                   : Colors.navigation.unfocus,
               }}
               source={require("../assets/images/navigation/settings.png")}

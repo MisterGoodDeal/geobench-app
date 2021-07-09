@@ -10,6 +10,7 @@ const initialState: User = {
   isSuccess: false,
   isError: false,
   errorMessage: null,
+  darkMode: false,
 };
 
 export const userSlice = createSlice({
@@ -24,10 +25,14 @@ export const userSlice = createSlice({
         isSuccess: false,
         isError: false,
         errorMessage: null,
+        darkMode: state.darkMode,
       };
     },
     setUser: (state, action: PayloadAction<any>) => {
       state.userInfo = action.payload;
+    },
+    setDarkMode: (state, action: PayloadAction<boolean>) => {
+      state.darkMode = action.payload;
     },
   },
   extraReducers: (builder) => {

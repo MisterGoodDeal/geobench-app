@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GBContainer } from "../../components/GBContainer";
-import { Colors } from "../../constants/Colors";
+import { Colors, ColorsDark } from "../../constants/Colors";
 import { Lang } from "../../constants/Lang";
 import { useNavigation } from "@react-navigation/native";
 import { GBCard } from "../../components/GBCard";
@@ -25,7 +25,7 @@ import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
 export const LoginScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
   const dispatch = useDispatch();
-  const { isFetching, isSuccess, isError, errorMessage } =
+  const { isFetching, isSuccess, isError, errorMessage, darkMode } =
     useSelector(userSelector);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -100,10 +100,13 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         flex={1}
         alignItems={"center"}
         justifyContent={"center"}
-        color={Colors.background}
+        color={darkMode ? ColorsDark.background : Colors.background}
       >
         <GBLoader visible={loader} color={"noir"} />
-        <GBStatusBar color={Colors.background} textColor={"dark-content"} />
+        <GBStatusBar
+          color={darkMode ? ColorsDark.background : Colors.background}
+          textColor={darkMode ? "light-content" : "dark-content"}
+        />
         {popup?.visible && (
           <GBPopup
             visible={popup.visible}
@@ -114,6 +117,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
             validText={popup.validText}
             notValidText={popup.notValidText}
             notValid={popup.notValid}
+            color={darkMode ? ColorsDark.inputColor : undefined}
           />
         )}
         <GBImage
@@ -121,7 +125,11 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           size={"12%"}
         />
         <GBSpacer space={"8%"} visible={false} />
-        <GBText size={"2.2%"} style={"bold"} color={Colors.darkGrey}>
+        <GBText
+          size={"2.2%"}
+          style={"bold"}
+          color={darkMode ? ColorsDark.white : Colors.darkGrey}
+        >
           {Lang.login.title}
         </GBText>
         <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
@@ -133,6 +141,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           nbLines={1}
           placeholder={Lang.login.ph_login}
           hook={setLogin}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {login}
         </GBInput>
@@ -145,6 +154,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           hook={setPassword}
           passwordShow={passwordVisible}
           setPasswordShow={setPasswordVisible}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         >
           {password}
         </GBInput>
@@ -160,7 +170,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           {Lang.login.forgot_password}
         </GBLink>
         <GBSpacer space={"5%"} visible={false} />
-        <GBContainer direction={"row"} color={Colors.background}>
+        <GBContainer direction={"row"}>
           <GBText size={"1.5%"} color={Colors.darkGrey} style={"regular"}>
             {Lang.login.no_account.text}
           </GBText>

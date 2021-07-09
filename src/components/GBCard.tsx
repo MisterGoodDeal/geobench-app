@@ -8,6 +8,7 @@ interface GBCardProps {
   width?: string;
   padding?: string;
   elevated?: boolean;
+  color?: string;
 }
 
 export const GBCard: React.FunctionComponent<GBCardProps> = ({
@@ -15,11 +16,12 @@ export const GBCard: React.FunctionComponent<GBCardProps> = ({
   width,
   padding,
   elevated,
+  color,
 }) => (
   <View
     style={[
       { padding: padding !== undefined ? hp(padding) : hp("1.5%") },
-      { backgroundColor: Colors.white },
+      { backgroundColor: color === undefined ? Colors.white : color },
       { width: width !== undefined ? wp(width) : wp("90%") },
       {
         borderRadius: 15,

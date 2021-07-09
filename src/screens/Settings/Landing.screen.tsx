@@ -13,7 +13,7 @@ import { GBRoundButton } from "../../components/GBRoundButton";
 import { GBSpacer } from "../../components/GBSpacer";
 import { GBStatusBar } from "../../components/GBStatusBar";
 import { GBText } from "../../components/GBText";
-import { Colors } from "../../constants/Colors";
+import { Colors, ColorsDark } from "../../constants/Colors";
 import { Lang } from "../../constants/Lang";
 import { actions } from "../../store/action";
 import { userSelector } from "../../store/slices/userSlice";
@@ -25,10 +25,12 @@ import { api } from "../../api";
 import { GBToast } from "../../components/GBToast";
 import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
 import { GBPopup } from "../../components/GBPopup";
+import ToggleSwitch from "toggle-switch-react-native";
+
 const validator = require("email-validator");
 
 export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
-  const { userInfo, isFetching, isSuccess, isError, errorMessage } =
+  const { userInfo, isFetching, isSuccess, isError, errorMessage, darkMode } =
     useSelector(userSelector);
   const dispatch = useDispatch();
   const u: UserLocal = userInfo;
@@ -45,6 +47,8 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   const [username, setUsername] = useState("");
   const [emailSubmit, setEmailSubmit] = useState(false);
   const [fullnameSubmit, setFullnameSubmit] = useState(false);
+
+  const [isDarkMode, setisDarkMode] = useState(false);
 
   React.useEffect(() => {
     fullname.length === 0
@@ -187,11 +191,25 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
     dispatch(api.user.updateEmail({ email: email }));
   };
 
+  const handleDarkMode = (status: boolean) => {
+    setisDarkMode(status);
+    dispatch(actions.user.setDarkMode(status));
+    localStorage.store("darkMode", `${status}`);
+  };
+
   return (
     <GBKeyboardDismiss>
       <GBContainer
         flex={1}
-        color={keyboardStatus ? Colors.background : Colors.main}
+        color={
+          keyboardStatus && darkMode
+            ? ColorsDark.background
+            : keyboardStatus && !darkMode
+            ? Colors.background
+            : darkMode
+            ? ColorsDark.main
+            : Colors.main
+        }
       >
         <GBPopup
           visible={popup}
@@ -204,10 +222,21 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           notValid={() => setPopup(false)}
         />
         <GBLoader visible={loader} color={keyboardStatus ? "noir" : "blanc"} />
-        <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
+        <GBStatusBar
+          color={Colors.transparent}
+          textColor={darkMode ? "light-content" : "dark-content"}
+        />
         <GBContainer
           flex={1}
-          color={keyboardStatus ? Colors.background : Colors.main}
+          color={
+            keyboardStatus && darkMode
+              ? ColorsDark.background
+              : keyboardStatus && !darkMode
+              ? Colors.background
+              : darkMode
+              ? ColorsDark.main
+              : Colors.main
+          }
           justifyContent={"center"}
           alignItems={"center"}
         >
@@ -258,7 +287,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           flex={3}
           justifyContent={"center"}
           alignItems={"center"}
-          color={Colors.background}
+          color={darkMode ? ColorsDark.background : Colors.background}
           extraStyle={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
         >
           <GBContainer
@@ -274,6 +303,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
               type={"default"}
               width={wp("70%")}
               placeholder={Lang.settings.ph_fullname}
+              color={darkMode ? ColorsDark.inputColor : undefined}
             >
               {fullname}
             </GBInput>
@@ -300,6 +330,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
               type={"default"}
               width={wp("70%")}
               placeholder={Lang.settings.ph_email}
+              color={darkMode ? ColorsDark.inputColor : undefined}
             >
               {email}
             </GBInput>
@@ -321,18 +352,41 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             width={wp("90%")}
             placeholder={"Easter egg discovered 🐣"}
             disable={true}
+            color={darkMode ? ColorsDark.inputColor : undefined}
           >
             {u?.pseudo}
           </GBInput>
-          <GBSpacer visible={false} space={"5%"} />
+          <GBSpacer visible={false} space={"2%"} />
+          <GBContainer
+            direction={"row"}
+            extraStyle={{ width: "90%" }}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <GBText color={Colors.darkGrey} size={"1.5%"} style={"regular"}>
+              {darkMode
+                ? Lang.settings.darkMode.on
+                : Lang.settings.darkMode.off}
+            </GBText>
+            <ToggleSwitch
+              isOn={darkMode}
+              onColor={Colors.darkGrey}
+              offColor={Colors.main}
+              size="large"
+              onToggle={(isOn: boolean) => handleDarkMode(isOn)}
+            />
+          </GBContainer>
+          <GBSpacer visible={false} space={"10%"} />
+
           <GBButton
             onPress={() =>
               nav.navigate("ForgotPassword", { changePassword: true })
             }
+            width={wp("90%")}
           >
             {Lang.settings.button_password}
           </GBButton>
-          <GBSpacer visible={false} space={"10%"} />
+          <GBSpacer visible={false} space={"2%"} />
           <GBContainer
             direction={"row"}
             extraStyle={{ width: "90%" }}

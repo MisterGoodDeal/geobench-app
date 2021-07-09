@@ -10,7 +10,7 @@ import { GBLoader } from "../components/GBLoader";
 import { GBSpacer } from "../components/GBSpacer";
 import { GBStatusBar } from "../components/GBStatusBar";
 import { GBText } from "../components/GBText";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
 import { actions } from "../store/action";
 import { userSelector } from "../store/slices/userSlice";
@@ -23,8 +23,15 @@ import { GBCard } from "../components/GBCard";
 import { Rating } from "react-native-ratings";
 
 export const CommunauteScreen: React.FunctionComponent<null> = () => {
-  const { userInfo, community, isFetching, isSuccess, isError, errorMessage } =
-    useSelector(userSelector);
+  const {
+    userInfo,
+    community,
+    isFetching,
+    isSuccess,
+    isError,
+    errorMessage,
+    darkMode,
+  } = useSelector(userSelector);
   const dispatch = useDispatch();
   const u: UserLocal = userInfo;
   const nav = useNavigation();
@@ -146,10 +153,15 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
         flex={3}
         justifyContent={"center"}
         alignItems={"center"}
-        color={Colors.background}
+        color={darkMode ? ColorsDark.background : Colors.background}
         extraStyle={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
       >
-        <GBText style={"black"} size={"3.5%"} align={"center"}>
+        <GBText
+          style={"black"}
+          size={"3.5%"}
+          align={"center"}
+          color={darkMode ? ColorsDark.white : undefined}
+        >
           {Lang.community.your_stat}
         </GBText>
         <GBContainer
@@ -157,9 +169,17 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
           justifyContent={"space-evenly"}
           extraStyle={{ width: "100%" }}
         >
-          <GBCard width={"40%"}>
+          <GBCard
+            width={"40%"}
+            color={darkMode ? ColorsDark.inputColor : undefined}
+          >
             <GBContainer alignItems={"center"} justifyContent={"center"}>
-              <GBText style={"black"} size={"3%"} align={"center"}>
+              <GBText
+                style={"black"}
+                size={"3%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {community !== null
                   ? community?.user.benchCount.toString()
                   : "-"}
@@ -168,14 +188,27 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
                 source={require("../assets/images/bench.png")}
                 size={"5%"}
               />
-              <GBText style={"regular"} size={"1.5%"} align={"center"}>
+              <GBText
+                style={"regular"}
+                size={"1.5%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {Lang.community.bench.user}
               </GBText>
             </GBContainer>
           </GBCard>
-          <GBCard width={"40%"}>
+          <GBCard
+            width={"40%"}
+            color={darkMode ? ColorsDark.inputColor : undefined}
+          >
             <GBContainer alignItems={"center"} justifyContent={"center"}>
-              <GBText style={"black"} size={"3%"} align={"center"}>
+              <GBText
+                style={"black"}
+                size={"3%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {community !== null
                   ? community?.user.photosCount.toString()
                   : "-"}
@@ -184,15 +217,28 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
                 source={require("../assets/images/camera.png")}
                 size={"5%"}
               />
-              <GBText style={"regular"} size={"1.5%"} align={"center"}>
+              <GBText
+                style={"regular"}
+                size={"1.5%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {Lang.community.photo.user}
               </GBText>
             </GBContainer>
           </GBCard>
         </GBContainer>
         <GBSpacer visible={false} space={"2%"} />
-        <GBCard width={"85%"}>
-          <GBText style={"regular"} size={"1.5%"} align={"center"}>
+        <GBCard
+          width={"85%"}
+          color={darkMode ? ColorsDark.inputColor : undefined}
+        >
+          <GBText
+            style={"regular"}
+            size={"1.5%"}
+            align={"center"}
+            color={darkMode ? ColorsDark.white : undefined}
+          >
             {`${Lang.community.rating} ${community?.user.avgBench.text}`}
           </GBText>
           <GBSpacer visible={false} space={".5%"} />
@@ -202,11 +248,16 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
             fractions={5}
             imageSize={hp("4%")}
             readonly={true}
-            ratingBackgroundColor={Colors.background}
+            tintColor={darkMode ? ColorsDark.inputColor : Colors.white}
           />
         </GBCard>
         <GBSpacer visible={false} space={"5%"} />
-        <GBText style={"black"} size={"3.5%"} align={"center"}>
+        <GBText
+          style={"black"}
+          size={"3.5%"}
+          align={"center"}
+          color={darkMode ? ColorsDark.white : undefined}
+        >
           {Lang.community.community}
         </GBText>
         <GBContainer
@@ -214,9 +265,17 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
           justifyContent={"space-evenly"}
           extraStyle={{ width: "100%" }}
         >
-          <GBCard width={"30%"}>
+          <GBCard
+            width={"30%"}
+            color={darkMode ? ColorsDark.inputColor : undefined}
+          >
             <GBContainer alignItems={"center"} justifyContent={"center"}>
-              <GBText style={"black"} size={"3%"} align={"center"}>
+              <GBText
+                style={"black"}
+                size={"3%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {community !== null
                   ? community?.global.benchCount.toString()
                   : "-"}
@@ -225,14 +284,27 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
                 source={require("../assets/images/bench.png")}
                 size={"5%"}
               />
-              <GBText style={"regular"} size={"1.5%"} align={"center"}>
+              <GBText
+                style={"regular"}
+                size={"1.5%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {Lang.community.bench.community}
               </GBText>
             </GBContainer>
           </GBCard>
-          <GBCard width={"30%"}>
+          <GBCard
+            width={"30%"}
+            color={darkMode ? ColorsDark.inputColor : undefined}
+          >
             <GBContainer alignItems={"center"} justifyContent={"center"}>
-              <GBText style={"black"} size={"3%"} align={"center"}>
+              <GBText
+                style={"black"}
+                size={"3%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {community !== null
                   ? community.global.photosCount.toString()
                   : "-"}
@@ -241,14 +313,27 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
                 source={require("../assets/images/camera.png")}
                 size={"5%"}
               />
-              <GBText style={"regular"} size={"1.5%"} align={"center"}>
+              <GBText
+                style={"regular"}
+                size={"1.5%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {Lang.community.photo.community}
               </GBText>
             </GBContainer>
           </GBCard>
-          <GBCard width={"30%"}>
+          <GBCard
+            width={"30%"}
+            color={darkMode ? ColorsDark.inputColor : undefined}
+          >
             <GBContainer alignItems={"center"} justifyContent={"center"}>
-              <GBText style={"black"} size={"3%"} align={"center"}>
+              <GBText
+                style={"black"}
+                size={"3%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {community !== null
                   ? community.global.usersCount.toString()
                   : "-"}
@@ -257,7 +342,12 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
                 source={require("../assets/images/users.png")}
                 size={"5%"}
               />
-              <GBText style={"regular"} size={"1.5%"} align={"center"}>
+              <GBText
+                style={"regular"}
+                size={"1.5%"}
+                align={"center"}
+                color={darkMode ? ColorsDark.white : undefined}
+              >
                 {Lang.community.user}
               </GBText>
             </GBContainer>

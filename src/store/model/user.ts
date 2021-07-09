@@ -29,4 +29,5 @@ export interface User {
     title: string;
     message: string;
   } | null;
+  darkMode: boolean;
 }

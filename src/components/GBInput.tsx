@@ -7,10 +7,11 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { hp, wp } from "../utils/functions";
 
 interface GBInputProps {
+  color?: string;
   multiline: boolean;
   nbLines: number;
   width?: number;
@@ -29,6 +30,7 @@ interface GBInputProps {
 }
 
 export const GBInput: React.FunctionComponent<GBInputProps> = ({
+  color,
   multiline,
   nbLines,
   width,
@@ -48,7 +50,10 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
   <View
     style={[
       styles.input,
-      { borderRadius: 8 },
+      {
+        borderRadius: 8,
+        backgroundColor: color === undefined ? Colors.inputColor : color,
+      },
       { height: multiline ? hp("20%") : undefined },
       { width: width ? width : wp("70%") },
       { marginLeft: spaceAround ? spaceAround : 0 },
@@ -64,7 +69,11 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
         {
           width: "90%",
           fontWeight: "bold",
-          color: disable ? Colors.placeholder : Colors.black,
+          color: disable
+            ? Colors.placeholder
+            : color === undefined
+            ? Colors.black
+            : ColorsDark.white,
           fontFamily: "Poppins-Regular",
           padding: 0,
         },
@@ -107,7 +116,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: Colors.inputColor,
     textAlignVertical: "top",
     padding: hp("1.5%"),
   },

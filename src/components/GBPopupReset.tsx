@@ -1,6 +1,7 @@
 import * as React from "react";
 import { StyleSheet, Modal, View, TouchableOpacity } from "react-native";
-import { Colors } from "../constants/Colors";
+import { color } from "react-native-reanimated";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
 import { hp, wp } from "../utils/functions";
 import { GBButton } from "./GBButton";
@@ -24,6 +25,7 @@ interface GBPopupResetProps {
   canSend: boolean;
   message: string;
   message2: string;
+  darkMode: boolean;
 }
 
 export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
@@ -40,10 +42,16 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
   message,
   message2,
   onClose,
+  darkMode,
 }) => (
   <Modal animationType="fade" transparent={true} visible={visible}>
     <View style={styles.centeredView}>
-      <View style={styles.modalView}>
+      <View
+        style={[
+          styles.modalView,
+          { backgroundColor: darkMode ? ColorsDark.background : Colors.white },
+        ]}
+      >
         <TouchableOpacity
           onPress={onClose}
           style={{
@@ -63,11 +71,20 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           size={"5%"}
         />
         <GBSpacer visible={false} space={"1%"} />
-        <GBText style={"bold"} size={"3%"}>
+        <GBText
+          style={"bold"}
+          size={"3%"}
+          color={darkMode ? ColorsDark.white : Colors.black}
+        >
           {Lang.forgotPassword.mail_title}
         </GBText>
         <GBSpacer visible={false} space={"1%"} />
-        <GBText style={"regular"} size={"1.5%"} align={"justify"}>
+        <GBText
+          style={"regular"}
+          size={"1.5%"}
+          align={"justify"}
+          color={darkMode ? ColorsDark.white : Colors.darkGrey}
+        >
           {Lang.forgotPassword.mail_text}
         </GBText>
         <GBSpacer visible={false} space={"1.5%"} />
@@ -80,12 +97,13 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           maxLength={6}
           textAlign={"center"}
           placeholder={Lang.forgotPassword.ph_code}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         />
         <GBText
           style={"regular"}
           size={"1.2%"}
           align={"justify"}
-          color={Colors.darkGrey}
+          color={darkMode ? ColorsDark.border : Colors.darkGrey}
         >
           {Lang.forgotPassword.code_hint}
         </GBText>
@@ -99,6 +117,7 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           isPassword={true}
           passwordShow={pwd1Visible}
           setPasswordShow={pwd1SetVisible}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         />
         <GBSpacer visible={false} space={"1.5%"} />
         <GBInput
@@ -110,6 +129,7 @@ export const GBPopupReset: React.FunctionComponent<GBPopupResetProps> = ({
           isPassword={true}
           passwordShow={pwd2Visible}
           setPasswordShow={pwd2SetVisible}
+          color={darkMode ? ColorsDark.inputColor : undefined}
         />
         {message !== "" && (
           <>
@@ -155,7 +175,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "70%",
-    backgroundColor: Colors.white,
     borderRadius: 15,
     padding: hp("3%"),
     alignItems: "center",

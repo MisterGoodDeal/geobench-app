@@ -34,6 +34,7 @@ import { hp, wp } from "../utils/functions";
 import { GBModal } from "../components/GBModal";
 import { GBPicker } from "../components/GBPicker";
 import { GBSpacer } from "../components/GBSpacer";
+import { darkMap, lightMap } from "../utils/mapStyle";
 
 const marker = require("../assets/images/map/marker.png");
 const mymarker = require("../assets/images/map/my_marker.png");
@@ -103,7 +104,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     imageURL,
     isUploaded,
   } = useSelector(mapSelector);
-  const { userInfo } = useSelector(userSelector);
+  const { userInfo, darkMode } = useSelector(userSelector);
   React.useEffect(() => {
     if (isFetching) {
       // Handle fetching
@@ -164,6 +165,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     }
   }, [isFetching, isSuccess, isError, errorMessage]);
 
+  // GET Position actuelle
   React.useEffect(() => {
     getCurrentLocation();
   }, []);
@@ -292,6 +294,10 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
       //Quand le composant est affiché
       (async () => {
         const user = await localStorage.get("user");
+        const darkMode = await localStorage.get("darkMode");
+        console.log("DARKMODE LOCAL => ", darkMode);
+        dispatch(actions.user.setDarkMode(darkMode === "false" ? false : true));
+
         if (user !== "") {
           dispatch(actions.user.setUser(JSON.parse(user)));
 
@@ -451,6 +457,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         style={styles.map}
         clusterColor={Colors.main}
         clusterFontFamily={"Poppins-Black"}
+        customMapStyle={darkMode ? darkMap : lightMap}
       >
         {bancs.map((b, index) => {
           // J'ai aucun filtre
