@@ -1,8 +1,8 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
-import { Platform, View, Text } from "react-native";
-import { ScrollView, Image } from "react-native";
+import { View, Text } from "react-native";
+import { Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { GBContainer } from "../components/GBContainer";
 import { GBImage } from "../components/GBImage";

@@ -4,7 +4,6 @@ import { GBContainer } from "../../components/GBContainer";
 import { Colors, ColorsDark } from "../../constants/Colors";
 import { Lang } from "../../constants/Lang";
 import { useNavigation } from "@react-navigation/native";
-import { GBCard } from "../../components/GBCard";
 import { GBText } from "../../components/GBText";
 import { GBImage } from "../../components/GBImage";
 import { GBSpacer } from "../../components/GBSpacer";

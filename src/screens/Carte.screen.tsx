@@ -1,12 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Vibration,
-  View,
-} from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { GBContainer } from "../components/GBContainer";
 import { Colors, ColorsDark } from "../constants/Colors";
 import { localStorage } from "../services/localStorage.service";
@@ -30,7 +24,6 @@ import { Lang } from "../constants/Lang";
 import { GBAddBench } from "../components/GBAddBench";
 import { GBToast } from "../components/GBToast";
 import { GBText } from "../components/GBText";
-import { hp, wp } from "../utils/functions";
 import { GBModal } from "../components/GBModal";
 import { GBPicker } from "../components/GBPicker";
 import { GBSpacer } from "../components/GBSpacer";
@@ -51,12 +44,6 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     latitudeDelta: 0.2,
     longitudeDelta: 0.0,
   });
-  const parisRegion = {
-    latitude: 48.856614,
-    longitude: 2.3522219,
-    latitudeDelta: 0.2,
-    longitudeDelta: 0.0,
-  };
   interface BenchDetail {
     visible: boolean;
     bench: Banc | null;
@@ -68,7 +55,6 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     index: -1,
   });
   const [userCoordinates, setUserCoordinates] = useState<any>();
-  const [mv, setMv] = useState<any>();
   const [loading, setLoading] = useState(false);
   const [usable, setUsable] = useState(false);
   const [comment, setComment] = useState("");
@@ -86,7 +72,6 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
   const [uploaded, setUploaded] = useState(false);
 
   // Gestion des favoris
-  const fakeFav = JSON.parse("[397, 0]");
   const [favoris, setFavoris] = useState([]);
 
   // Gesrtion des filtres

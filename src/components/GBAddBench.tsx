@@ -1,25 +1,15 @@
 import * as React from "react";
-import {
-  StyleSheet,
-  Modal,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, Modal, View, TouchableOpacity } from "react-native";
 import { Colors, ColorsDark } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
 import { Banc } from "../store/model/map";
-import { hp, openMap, wp } from "../utils/functions";
+import { hp, wp } from "../utils/functions";
 import { GBButton } from "./GBButton";
-import { GBContainer } from "./GBContainer";
 import { GBImage } from "./GBImage";
 import { GBSpacer } from "./GBSpacer";
 import { GBText } from "./GBText";
 import { Rating } from "react-native-ratings";
 import { GBInput } from "./GBInput";
-import { GBRoundButton } from "./GBRoundButton";
-import { AddBench } from "../utils/interface";
 import { GBPicker } from "./GBPicker";
 import { launchCamera } from "react-native-image-picker";
 
