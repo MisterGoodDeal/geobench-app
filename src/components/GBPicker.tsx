@@ -5,7 +5,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from "react-native-responsive-screen";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { AddBench } from "../utils/interface";
 
 export interface PickerItem {
@@ -18,6 +18,7 @@ interface GBPickerProps {
   placeholder: string;
   value?: string;
   setPickedItem: React.Dispatch<React.SetStateAction<number>>;
+  darkMode: boolean;
 }
 
 export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
@@ -25,6 +26,7 @@ export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
   placeholder,
   setPickedItem,
   value,
+  darkMode,
 }) => (
   <RNPickerSelect
     onValueChange={(value) => setPickedItem!(parseInt(value))}
@@ -34,30 +36,29 @@ export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
     }}
     value={value === undefined ? undefined : value}
     items={items}
-    style={pickerSelectStyles}
+    style={{
+      inputIOS: {
+        fontSize: heightPercentageToDP("1.5%"),
+        backgroundColor: darkMode ? ColorsDark.inputColor : Colors.inputColor,
+        fontWeight: "bold",
+        padding: 15,
+        color: darkMode ? ColorsDark.white : Colors.darkGrey,
+        fontFamily: "Poppins-Regular",
+        borderRadius: 8,
+        textAlign: "center",
+      },
+      inputAndroid: {
+        fontSize: heightPercentageToDP("1.5%"),
+        backgroundColor: darkMode ? ColorsDark.inputColor : Colors.inputColor,
+        fontWeight: "bold",
+        padding: 15,
+        color: darkMode ? ColorsDark.white : Colors.darkGrey,
+        fontFamily: "Poppins-Regular",
+        borderRadius: 8,
+        textAlign: "center",
+        width: widthPercentageToDP("70%"),
+      },
+    }}
     useNativeAndroidPickerStyle={false}
   />
 );
-export const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: heightPercentageToDP("1.5%"),
-    backgroundColor: Colors.inputColor,
-    fontWeight: "bold",
-    padding: 15,
-    color: Colors.darkGrey,
-    fontFamily: "Poppins-Regular",
-    borderRadius: 8,
-    textAlign: "center",
-  },
-  inputAndroid: {
-    fontSize: heightPercentageToDP("1.5%"),
-    backgroundColor: Colors.inputColor,
-    fontWeight: "bold",
-    padding: 15,
-    color: Colors.darkGrey,
-    fontFamily: "Poppins-Regular",
-    borderRadius: 8,
-    textAlign: "center",
-    width: widthPercentageToDP("70%"),
-  },
-});

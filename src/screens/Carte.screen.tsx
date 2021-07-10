@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { GBContainer } from "../components/GBContainer";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { localStorage } from "../services/localStorage.service";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { actions } from "../store/action";
@@ -35,6 +35,7 @@ import { GBModal } from "../components/GBModal";
 import { GBPicker } from "../components/GBPicker";
 import { GBSpacer } from "../components/GBSpacer";
 import { darkMap, lightMap } from "../utils/mapStyle";
+import { GBButton } from "../components/GBButton";
 
 const marker = require("../assets/images/map/marker.png");
 const mymarker = require("../assets/images/map/my_marker.png");
@@ -425,8 +426,13 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         visible={filterVisible}
         onClose={() => setFilterVisible(false)}
         animation={"fade"}
+        darkMode={darkMode}
       >
-        <GBText style={"black"} size={"3%"}>
+        <GBText
+          style={"black"}
+          size={"3%"}
+          color={darkMode ? ColorsDark.white : Colors.black}
+        >
           {Lang.map.filters.title}
         </GBText>
         <GBSpacer visible={false} space={"2%"} />
@@ -435,6 +441,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
           setPickedItem={setLieuFiltre}
           value={lieuFiltre.toString()}
           placeholder={Lang.map.filters.ph_lieu}
+          darkMode={darkMode}
         />
         <GBSpacer visible={false} space={"1%"} />
         <GBPicker
@@ -442,7 +449,18 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
           setPickedItem={setPhotoFiltre}
           value={photoFiltre.toString()}
           placeholder={Lang.map.filters.ph_photo}
+          darkMode={darkMode}
         />
+        <GBSpacer visible={false} space={"2%"} />
+        <GBButton
+          color={Colors.main}
+          onPress={() => {
+            setLieuFiltre(-1);
+            setPhotoFiltre(-1);
+          }}
+        >
+          {Lang.map.reset_filters}
+        </GBButton>
       </GBModal>
       <MapView
         showsMyLocationButton={false}
@@ -496,6 +514,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         })}
       </MapView>
       <GBBenchDetails
+        darkMode={darkMode}
         banc={benchDetails.bench}
         visible={benchDetails.visible}
         buttonUsable={usable}
@@ -532,6 +551,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         setEnvironnement={setEnvironnement}
         setCommentaire={setCommentaire}
         setPhoto={setPhoto}
+        darkMode={darkMode}
       />
 
       <GBMapButton

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, Modal, View, TouchableOpacity } from "react-native";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { hp } from "../utils/functions";
 import { GBImage } from "./GBImage";
 
@@ -11,6 +11,7 @@ interface GBModalProps {
   animation: "slide" | "fade" | "none";
   children: any;
   onClose: () => void;
+  darkMode: boolean;
 }
 
 export const GBModal: React.FunctionComponent<GBModalProps> = ({
@@ -18,10 +19,20 @@ export const GBModal: React.FunctionComponent<GBModalProps> = ({
   animation,
   children,
   onClose,
+  darkMode,
 }) => (
   <Modal animationType={animation} transparent={true} visible={visible}>
     <View style={styles.centeredView}>
-      <View style={styles.modalView}>
+      <View
+        style={[
+          styles.modalView,
+          {
+            backgroundColor: darkMode
+              ? ColorsDark.background
+              : Colors.background,
+          },
+        ]}
+      >
         <TouchableOpacity
           onPress={onClose}
           style={{

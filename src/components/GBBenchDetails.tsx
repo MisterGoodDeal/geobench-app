@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
 import { Banc } from "../store/model/map";
 import { hp, openMap, wp } from "../utils/functions";
@@ -23,6 +23,7 @@ import { GBRoundButton } from "./GBRoundButton";
 const BENCH_RATING = require("../assets/images/bench.png");
 
 interface GBBenchDetailsProps {
+  darkMode: boolean;
   visible: boolean;
   banc: Banc | null;
   onClose: () => void;
@@ -35,6 +36,7 @@ interface GBBenchDetailsProps {
 }
 
 export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
+  darkMode,
   visible,
   banc,
   index,
@@ -48,7 +50,16 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
   <Modal animationType="slide" transparent={true} visible={visible}>
     {banc !== null && (
       <View style={styles.centeredView}>
-        <View style={styles.modalView}>
+        <View
+          style={[
+            styles.modalView,
+            {
+              backgroundColor: darkMode
+                ? ColorsDark.background
+                : Colors.background,
+            },
+          ]}
+        >
           <TouchableOpacity
             onPress={onClose}
             style={{
@@ -87,14 +98,19 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
           >
-            <GBText size={"3.5%"} style={"black"} align={"center"}>
-              {`${Lang.map.bench} ${banc.id}`}
+            <GBText
+              size={"3.5%"}
+              style={"black"}
+              align={"center"}
+              color={darkMode ? ColorsDark.white : Colors.black}
+            >
+              {`${Lang.map.bench} ${index}`}
             </GBText>
             <GBText
               size={"1.5%"}
               style={"regular"}
-              color={Colors.darkGrey}
               align={"center"}
+              color={darkMode ? ColorsDark.white : Colors.darkGrey}
             >
               {JSON.parse(banc!.commetaire).utilisateur === ""
                 ? Lang.map.no_comment
@@ -107,12 +123,13 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
               fractions={5}
               imageSize={hp("4%")}
               readonly={true}
+              tintColor={darkMode ? ColorsDark.background : undefined}
             />
             <GBSpacer visible={false} space={"2%"} />
             <GBText
               size={"1.8%"}
               style={"regular"}
-              color={Colors.darkGrey}
+              color={darkMode ? ColorsDark.white : Colors.darkGrey}
               align={"justify"}
             >
               {`${Lang.map.location.text} ${
@@ -141,7 +158,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
             <GBText
               size={"1.8%"}
               style={"bold"}
-              color={Colors.darkGrey}
+              color={darkMode ? ColorsDark.white : Colors.darkGrey}
               align={"justify"}
             >
               {Lang.map.community_comments}
@@ -150,7 +167,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
               <GBText
                 size={"1.7%"}
                 style={"regular"}
-                color={Colors.darkGrey}
+                color={darkMode ? ColorsDark.white : Colors.darkGrey}
                 align={"justify"}
               >
                 {Lang.map.no_comment}
@@ -170,7 +187,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
                       <GBText
                         size={"1.7%"}
                         style={"regular"}
-                        color={Colors.darkGrey}
+                        color={darkMode ? ColorsDark.white : Colors.darkGrey}
                         align={"justify"}
                       >
                         {c.comment}
@@ -178,7 +195,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
                       <GBText
                         size={"1.5%"}
                         style={"bold"}
-                        color={Colors.darkGrey}
+                        color={darkMode ? ColorsDark.white : Colors.darkGrey}
                         align={"right"}
                       >
                         {c.user}
@@ -204,6 +221,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
             width={wp("69%")}
             maxLength={250}
             placeholder={Lang.map.ph_comment}
+            color={darkMode ? ColorsDark.inputColor : undefined}
           />
           <GBSpacer visible={false} space={"1%"} />
           <GBButton onPress={sendComment} disable={!buttonUsable}>
@@ -213,7 +231,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
           <GBText
             size={"1.2%"}
             style={"regular"}
-            color={Colors.darkGrey}
+            color={darkMode ? ColorsDark.white : Colors.white}
             align={"center"}
           >
             {`${Lang.map.added_by} ${banc.user}`}
@@ -222,7 +240,11 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
           <TouchableOpacity
             onPress={updateFav}
             style={{
-              backgroundColor: isFav ? Colors.lightRed : Colors.white,
+              backgroundColor: isFav
+                ? Colors.lightRed
+                : darkMode
+                ? ColorsDark.inputColor
+                : Colors.white,
               height: hp("7%"),
               width: hp("7%"),
               justifyContent: "center",

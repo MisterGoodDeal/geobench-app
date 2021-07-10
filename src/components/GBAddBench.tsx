@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { Colors } from "../constants/Colors";
+import { Colors, ColorsDark } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
 import { Banc } from "../store/model/map";
 import { hp, openMap, wp } from "../utils/functions";
@@ -35,6 +35,7 @@ interface GBAddBenchProps {
   setEnvironnement: React.Dispatch<React.SetStateAction<number>>;
   setCommentaire: React.Dispatch<React.SetStateAction<string>>;
   setPhoto: any;
+  darkMode: boolean;
 }
 
 export const GBAddBench: React.FunctionComponent<GBAddBenchProps> = ({
@@ -47,10 +48,20 @@ export const GBAddBench: React.FunctionComponent<GBAddBenchProps> = ({
   setEnvironnement,
   setCommentaire,
   setPhoto,
+  darkMode,
 }) => (
   <Modal animationType="slide" transparent={true} visible={visible}>
     <View style={styles.centeredView}>
-      <View style={styles.modalView}>
+      <View
+        style={[
+          styles.modalView,
+          {
+            backgroundColor: darkMode
+              ? ColorsDark.background
+              : Colors.background,
+          },
+        ]}
+      >
         <TouchableOpacity
           onPress={onClose}
           style={{
@@ -66,7 +77,12 @@ export const GBAddBench: React.FunctionComponent<GBAddBenchProps> = ({
           />
         </TouchableOpacity>
 
-        <GBText size={"4%"} style={"extra-bold"} align={"center"}>
+        <GBText
+          size={"4%"}
+          style={"extra-bold"}
+          align={"center"}
+          color={darkMode ? ColorsDark.white : Colors.black}
+        >
           {Lang.map.add.title}
         </GBText>
         <GBSpacer visible={false} space={"2%"} />
@@ -77,8 +93,14 @@ export const GBAddBench: React.FunctionComponent<GBAddBenchProps> = ({
           imageSize={hp("4%")}
           readonly={false}
           onFinishRating={(rating: number) => setNote(rating)}
+          tintColor={darkMode ? ColorsDark.background : undefined}
         />
-        <GBText size={"1.4%"} style={"regular"} align={"center"}>
+        <GBText
+          size={"1.4%"}
+          style={"regular"}
+          align={"center"}
+          color={darkMode ? ColorsDark.white : Colors.black}
+        >
           {Lang.map.add.rating}
         </GBText>
         <GBSpacer visible={false} space={"2%"} />
@@ -86,12 +108,14 @@ export const GBAddBench: React.FunctionComponent<GBAddBenchProps> = ({
           placeholder={Lang.map.add.ph_location}
           items={Lang.map.add.location}
           setPickedItem={setLieu}
+          darkMode={darkMode}
         />
         <GBSpacer visible={false} space={"2%"} />
         <GBPicker
           placeholder={Lang.map.add.ph_environment}
           items={Lang.map.add.environment}
           setPickedItem={setEnvironnement}
+          darkMode={darkMode}
         />
         <GBSpacer visible={false} space={"2%"} />
         <GBInput
@@ -102,6 +126,7 @@ export const GBAddBench: React.FunctionComponent<GBAddBenchProps> = ({
           width={wp("69%")}
           maxLength={250}
           placeholder={Lang.map.add.comment}
+          color={darkMode ? ColorsDark.inputColor : Colors.inputColor}
         />
         <GBSpacer visible={false} space={"2%"} />
         <GBButton
