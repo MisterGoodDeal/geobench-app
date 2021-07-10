@@ -20,7 +20,7 @@ import { Rating } from "react-native-ratings";
 import { GBInput } from "./GBInput";
 import { GBRoundButton } from "./GBRoundButton";
 import { AddBench } from "../utils/interface";
-import { GBPicker, pickerSelectStyles } from "./GBPicker";
+import { GBPicker } from "./GBPicker";
 import { launchCamera } from "react-native-image-picker";
 
 const BENCH_RATING = require("../assets/images/bench.png");
