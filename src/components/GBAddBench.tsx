@@ -56,9 +56,7 @@ export const GBAddBench: React.FunctionComponent<GBAddBenchProps> = ({
         style={[
           styles.modalView,
           {
-            backgroundColor: darkMode
-              ? ColorsDark.background
-              : Colors.background,
+            backgroundColor: darkMode ? ColorsDark.background : Colors.white,
           },
         ]}
       >
