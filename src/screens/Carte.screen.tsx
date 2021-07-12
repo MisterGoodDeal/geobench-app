@@ -29,6 +29,7 @@ import { GBPicker } from "../components/GBPicker";
 import { GBSpacer } from "../components/GBSpacer";
 import { darkMap, lightMap } from "../utils/mapStyle";
 import { GBButton } from "../components/GBButton";
+import GestureRecognizer from "react-native-swipe-gestures";
 
 const marker = require("../assets/images/map/marker.png");
 const mymarker = require("../assets/images/map/my_marker.png");
@@ -398,6 +399,11 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     dispatch(api.user.updateFavorites({ favoris: JSON.stringify(favoris) }));
   };
 
+  const configSwipe = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80,
+  };
+
   return (
     <GBContainer
       flex={1}
@@ -407,46 +413,53 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
     >
       <GBLoader visible={loading} color={"noir"} />
       <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
-      <GBModal
-        visible={filterVisible}
-        onClose={() => setFilterVisible(false)}
-        animation={"fade"}
-        darkMode={darkMode}
+      {/* Modale pour les filtres */}
+
+      <GestureRecognizer
+        config={configSwipe}
+        onSwipeDown={() => setFilterVisible(false)}
       >
-        <GBText
-          style={"black"}
-          size={"3%"}
-          color={darkMode ? ColorsDark.white : Colors.black}
-        >
-          {Lang.map.filters.title}
-        </GBText>
-        <GBSpacer visible={false} space={"2%"} />
-        <GBPicker
-          items={Lang.map.add.location}
-          setPickedItem={setLieuFiltre}
-          value={lieuFiltre.toString()}
-          placeholder={Lang.map.filters.ph_lieu}
+        <GBModal
+          visible={filterVisible}
+          onClose={() => setFilterVisible(false)}
+          animation={"slide"}
           darkMode={darkMode}
-        />
-        <GBSpacer visible={false} space={"1%"} />
-        <GBPicker
-          items={Lang.map.filters.filtre_photo}
-          setPickedItem={setPhotoFiltre}
-          value={photoFiltre.toString()}
-          placeholder={Lang.map.filters.ph_photo}
-          darkMode={darkMode}
-        />
-        <GBSpacer visible={false} space={"2%"} />
-        <GBButton
-          color={Colors.main}
-          onPress={() => {
-            setLieuFiltre(-1);
-            setPhotoFiltre(-1);
-          }}
         >
-          {Lang.map.reset_filters}
-        </GBButton>
-      </GBModal>
+          <GBText
+            style={"black"}
+            size={"3%"}
+            color={darkMode ? ColorsDark.white : Colors.black}
+          >
+            {Lang.map.filters.title}
+          </GBText>
+          <GBSpacer visible={false} space={"2%"} />
+          <GBPicker
+            items={Lang.map.add.location}
+            setPickedItem={setLieuFiltre}
+            value={lieuFiltre.toString()}
+            placeholder={Lang.map.filters.ph_lieu}
+            darkMode={darkMode}
+          />
+          <GBSpacer visible={false} space={"1%"} />
+          <GBPicker
+            items={Lang.map.filters.filtre_photo}
+            setPickedItem={setPhotoFiltre}
+            value={photoFiltre.toString()}
+            placeholder={Lang.map.filters.ph_photo}
+            darkMode={darkMode}
+          />
+          <GBSpacer visible={false} space={"2%"} />
+          <GBButton
+            color={Colors.main}
+            onPress={() => {
+              setLieuFiltre(-1);
+              setPhotoFiltre(-1);
+            }}
+          >
+            {Lang.map.reset_filters}
+          </GBButton>
+        </GBModal>
+      </GestureRecognizer>
       <MapView
         showsMyLocationButton={false}
         showsScale={false}
@@ -498,46 +511,62 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
           }
         })}
       </MapView>
-      <GBBenchDetails
-        darkMode={darkMode}
-        banc={benchDetails.bench}
-        visible={benchDetails.visible}
-        buttonUsable={usable}
-        hook={setComment}
-        index={benchDetails.index + 1}
-        sendComment={() =>
-          dispatch(
-            api.benches.comment({
-              username: userInfo.pseudo,
-              commentaire: comment,
-              banc: benchDetails.bench!.id,
-            })
-          )
-        }
-        onClose={() => {
+      <GestureRecognizer
+        config={configSwipe}
+        onSwipeDown={() =>
           setBenchDetails({
             visible: false,
             bench: null,
             index: -1,
-          });
-          setComment("");
-        }}
-        isFav={favoris.some((i: number) => i === benchDetails.bench?.id)}
-        updateFav={() => handleFavoris(benchDetails.bench!.id)}
-      />
+          })
+        }
+      >
+        <GBBenchDetails
+          darkMode={darkMode}
+          banc={benchDetails.bench}
+          visible={benchDetails.visible}
+          buttonUsable={usable}
+          hook={setComment}
+          index={benchDetails.index + 1}
+          sendComment={() =>
+            dispatch(
+              api.benches.comment({
+                username: userInfo.pseudo,
+                commentaire: comment,
+                banc: benchDetails.bench!.id,
+              })
+            )
+          }
+          onClose={() => {
+            setBenchDetails({
+              visible: false,
+              bench: null,
+              index: -1,
+            });
+            setComment("");
+          }}
+          isFav={favoris.some((i: number) => i === benchDetails.bench?.id)}
+          updateFav={() => handleFavoris(benchDetails.bench!.id)}
+        />
+      </GestureRecognizer>
 
-      <GBAddBench
-        visible={addBench}
-        onClose={() => resetAddBanc()}
-        addBench={() => handleBenchSubmit()}
-        buttonUsable={sendButton}
-        setNote={setNote}
-        setLieu={setLieu}
-        setEnvironnement={setEnvironnement}
-        setCommentaire={setCommentaire}
-        setPhoto={setPhoto}
-        darkMode={darkMode}
-      />
+      <GestureRecognizer
+        config={configSwipe}
+        onSwipeDown={() => setAddBench(false)}
+      >
+        <GBAddBench
+          visible={addBench}
+          onClose={() => resetAddBanc()}
+          addBench={() => handleBenchSubmit()}
+          buttonUsable={sendButton}
+          setNote={setNote}
+          setLieu={setLieu}
+          setEnvironnement={setEnvironnement}
+          setCommentaire={setCommentaire}
+          setPhoto={setPhoto}
+          darkMode={darkMode}
+        />
+      </GestureRecognizer>
 
       <GBMapButton
         mv={mapRef}
