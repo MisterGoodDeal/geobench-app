@@ -9,6 +9,7 @@
     "ios": "npx react-native run-ios --simulator='iPhone 11'",
     "start": "npx react-native start",
     "open-link": "npx uri-scheme open geobench://app/register --android",
+    "clear-ressources": "rm -rf ./android/app/src/main/res/drawable-* && rm -rf ./android/app/src/main/res/raw",
     "android-bundle": "react-native bundle --platform android --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --dev false --reset-cache --assets-dest android/app/src/main/res/",
     "test": "jest",
     "mobile": "npm run ios && npm run android",
