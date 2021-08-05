@@ -412,7 +412,10 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
       color={Colors.background}
     >
       <GBLoader visible={loading} color={"noir"} />
-      <GBStatusBar color={Colors.transparent} textColor={"dark-content"} />
+      <GBStatusBar
+        color={Colors.transparent}
+        textColor={darkMode ? "light-content" : "dark-content"}
+      />
       {/* Modale pour les filtres */}
 
       <GestureRecognizer
