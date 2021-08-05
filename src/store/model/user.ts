@@ -3,10 +3,12 @@ interface Community {
     usersCount: number;
     benchCount: number;
     photosCount: number;
+    pictures: { photo: string }[];
   };
   user: {
     benchCount: number;
     photosCount: number;
+    pictures: { photo: string }[];
     avgBench: {
       full: number;
       floor: number;

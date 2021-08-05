@@ -1,7 +1,7 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { GBContainer } from "../components/GBContainer";
@@ -21,6 +21,7 @@ import { hp } from "../utils/functions";
 import { GBToast } from "../components/GBToast";
 import { GBCard } from "../components/GBCard";
 import { Rating } from "react-native-ratings";
+import ImageView from "react-native-image-viewing";
 
 export const CommunauteScreen: React.FunctionComponent<null> = () => {
   const {
@@ -38,6 +39,10 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
   const [keyboardStatus] = useKeyboard();
 
   const [loader, setLoader] = useState(false);
+  const [userPhotosVisible, setUserPhotosVisible] = useState(false);
+  const [communityPhotoVisible, setCommunityPhotoVisible] = useState(false);
+  const [communityPhoto, setCommunityPhoto] = useState<any>([]);
+  const [userPhoto, setUserPhoto] = useState<any>([]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -55,7 +60,18 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
       setLoader(true);
     }
     if (isSuccess) {
-      console.log(community);
+      let tempUserPhoto: any = [];
+      let tempCommunityPhoto: any = [];
+      community?.global.pictures.map((p) => {
+        tempCommunityPhoto.push({ uri: p.photo });
+      });
+      community?.user.pictures.map((p) => {
+        tempUserPhoto.push({ uri: p.photo });
+      });
+      setCommunityPhoto(tempCommunityPhoto);
+      setUserPhoto(tempUserPhoto);
+
+      console.log(userPhoto);
 
       setLoader(false);
       dispatch(actions.user.clearState());
@@ -76,6 +92,23 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
       flex={1}
       color={keyboardStatus ? Colors.background : Colors.main}
     >
+      {/* Photos de l'utilisateur */}
+      <ImageView
+        images={userPhoto}
+        imageIndex={0}
+        visible={userPhotosVisible}
+        onRequestClose={() => setUserPhotosVisible(false)}
+        presentationStyle={"overFullScreen"}
+      />
+
+      {/* Photos de la communauté */}
+      <ImageView
+        images={communityPhoto}
+        imageIndex={0}
+        visible={communityPhotoVisible}
+        onRequestClose={() => setCommunityPhotoVisible(false)}
+        presentationStyle={"overFullScreen"}
+      />
       <GBLoader visible={loader} color={"blanc"} />
       <GBStatusBar color={Colors.transparent} textColor={"light-content"} />
       <GBContainer
@@ -198,35 +231,37 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
               </GBText>
             </GBContainer>
           </GBCard>
-          <GBCard
-            width={"40%"}
-            color={darkMode ? ColorsDark.inputColor : undefined}
-          >
-            <GBContainer alignItems={"center"} justifyContent={"center"}>
-              <GBText
-                style={"black"}
-                size={"3%"}
-                align={"center"}
-                color={darkMode ? ColorsDark.white : undefined}
-              >
-                {community !== null
-                  ? community?.user.photosCount.toString()
-                  : "-"}
-              </GBText>
-              <GBImage
-                source={require("../assets/images/camera.png")}
-                size={"5%"}
-              />
-              <GBText
-                style={"regular"}
-                size={"1.5%"}
-                align={"center"}
-                color={darkMode ? ColorsDark.white : undefined}
-              >
-                {Lang.community.photo.user}
-              </GBText>
-            </GBContainer>
-          </GBCard>
+          <TouchableOpacity onPress={() => setUserPhotosVisible(true)}>
+            <GBCard
+              width={"40%"}
+              color={darkMode ? ColorsDark.inputColor : undefined}
+            >
+              <GBContainer alignItems={"center"} justifyContent={"center"}>
+                <GBText
+                  style={"black"}
+                  size={"3%"}
+                  align={"center"}
+                  color={darkMode ? ColorsDark.white : undefined}
+                >
+                  {community !== null
+                    ? community?.user.photosCount.toString()
+                    : "-"}
+                </GBText>
+                <GBImage
+                  source={require("../assets/images/camera.png")}
+                  size={"5%"}
+                />
+                <GBText
+                  style={"regular"}
+                  size={"1.5%"}
+                  align={"center"}
+                  color={darkMode ? ColorsDark.white : undefined}
+                >
+                  {Lang.community.photo.user}
+                </GBText>
+              </GBContainer>
+            </GBCard>
+          </TouchableOpacity>
         </GBContainer>
         <GBSpacer visible={false} space={"2%"} />
         <GBCard
@@ -294,35 +329,37 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
               </GBText>
             </GBContainer>
           </GBCard>
-          <GBCard
-            width={"30%"}
-            color={darkMode ? ColorsDark.inputColor : undefined}
-          >
-            <GBContainer alignItems={"center"} justifyContent={"center"}>
-              <GBText
-                style={"black"}
-                size={"3%"}
-                align={"center"}
-                color={darkMode ? ColorsDark.white : undefined}
-              >
-                {community !== null
-                  ? community.global.photosCount.toString()
-                  : "-"}
-              </GBText>
-              <GBImage
-                source={require("../assets/images/camera.png")}
-                size={"5%"}
-              />
-              <GBText
-                style={"regular"}
-                size={"1.5%"}
-                align={"center"}
-                color={darkMode ? ColorsDark.white : undefined}
-              >
-                {Lang.community.photo.community}
-              </GBText>
-            </GBContainer>
-          </GBCard>
+          <TouchableOpacity onPress={() => setCommunityPhotoVisible(true)}>
+            <GBCard
+              width={"30%"}
+              color={darkMode ? ColorsDark.inputColor : undefined}
+            >
+              <GBContainer alignItems={"center"} justifyContent={"center"}>
+                <GBText
+                  style={"black"}
+                  size={"3%"}
+                  align={"center"}
+                  color={darkMode ? ColorsDark.white : undefined}
+                >
+                  {community !== null
+                    ? community.global.photosCount.toString()
+                    : "-"}
+                </GBText>
+                <GBImage
+                  source={require("../assets/images/camera.png")}
+                  size={"5%"}
+                />
+                <GBText
+                  style={"regular"}
+                  size={"1.5%"}
+                  align={"center"}
+                  color={darkMode ? ColorsDark.white : undefined}
+                >
+                  {Lang.community.photo.community}
+                </GBText>
+              </GBContainer>
+            </GBCard>
+          </TouchableOpacity>
           <GBCard
             width={"30%"}
             color={darkMode ? ColorsDark.inputColor : undefined}
