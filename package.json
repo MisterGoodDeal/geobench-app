@@ -7,6 +7,7 @@
     "android": "npx react-native run-android",
     "build": "cd android && ./gradlew bundleRelease && cd ..",
     "ios": "npx react-native run-ios --simulator='iPhone 11'",
+    "real-ios": "npx react-native run-ios --device='iPhone de Milan'",
     "start": "npx react-native start",
     "open-link": "npx uri-scheme open geobench://app/register --android",
     "clear-ressources": "rm -rf ./android/app/src/main/res/drawable-* && rm -rf ./android/app/src/main/res/raw",
