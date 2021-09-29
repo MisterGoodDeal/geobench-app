@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="19162" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch38"/>
+    <device id="watch40"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="19044"/>
@@ -9,9 +9,89 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GeobenchWatchApp" customModuleProvider="target"/>
+                <controller contentMode="top" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Geobench" customModuleProvider="target">
+                    <items>
+                        <map width="1" height="1" alignment="center" verticalAlignment="center" id="itf-HW-hZk"/>
+                    </items>
+                    <connections>
+                        <outlet property="mapView" destination="itf-HW-hZk" id="FpO-CC-d8T"/>
+                        <segue destination="Xr4-uC-cec" kind="relationship" relationship="nextPage" id="bmZ-b1-L7H"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="-16" y="-6"/>
+            <point key="canvasLocation" x="-16.790123456790123" y="-6.472081218274111"/>
+        </scene>
+        <!--Add Bench Controller-->
+        <scene sceneID="oBj-3S-1SZ">
+            <objects>
+                <controller id="Xr4-uC-cec" customClass="AddBenchController" customModule="GeobenchWatchApp_WatchKit_Extension">
+                    <items>
+                        <imageView width="30" height="30" alignment="center" image="plus.circle" catalog="system" id="vSi-jx-kM7">
+                            <color key="tintColor" red="1" green="0.70196078429999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </imageView>
+                        <label alignment="center" text="Add bench" id="QaP-wY-Vse">
+                            <fontDescription key="font" type="system" pointSize="20"/>
+                        </label>
+                        <separator alignment="left" id="KB8-x6-7Ra">
+                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </separator>
+                        <label alignment="left" text="Rating" id="S7Q-vC-poC"/>
+                        <slider width="1" alignment="left" value="1" minimum="1" maximum="5" steps="5" minimumImage="star" catalog="system" maximumImage="star.fill" id="ss0-99-XUu">
+                            <color key="color" red="1" green="0.70196078429999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="getRatingValue:" destination="Xr4-uC-cec" id="aSo-dm-KCs"/>
+                            </connections>
+                        </slider>
+                        <separator alignment="left" id="wHK-Ao-QbC">
+                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </separator>
+                        <label alignment="left" text="Location" id="FgG-mh-6fZ"/>
+                        <picker height="100" alignment="left" id="UWv-Df-3G4">
+                            <connections>
+                                <action selector="getLocation:" destination="Xr4-uC-cec" id="64I-XD-fz9"/>
+                            </connections>
+                        </picker>
+                        <separator alignment="left" id="iJb-W1-nWa">
+                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </separator>
+                        <label alignment="left" text="Environment" id="61c-q0-Xak"/>
+                        <picker height="100" alignment="left" id="1Ye-5T-XVC">
+                            <connections>
+                                <action selector="getEnvironment:" destination="Xr4-uC-cec" id="xd7-h6-FWz"/>
+                            </connections>
+                        </picker>
+                        <separator alignment="left" id="bAy-nJ-hi4">
+                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </separator>
+                        <label alignment="left" text="Comment" id="cg0-G8-zu5"/>
+                        <textField width="1" alignment="left" placeholder="Write comment..." id="Axb-Kl-UpC">
+                            <connections>
+                                <action selector="getCommentValue:" destination="Xr4-uC-cec" id="GBd-Z6-w5Z"/>
+                            </connections>
+                        </textField>
+                        <separator alignment="left" id="Rl2-5a-SmF">
+                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </separator>
+                        <button width="1" alignment="left" title="Add bench" id="C5d-lv-kqT">
+                            <color key="titleColor" red="1" green="0.70196078429999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="addBench" destination="Xr4-uC-cec" id="3Zd-b5-kZs"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="environmentPicker" destination="1Ye-5T-XVC" id="LM2-YD-DBd"/>
+                        <outlet property="locationPicker" destination="UWv-Df-3G4" id="G1y-Ih-Pdy"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="239.25925925925927" y="-6.472081218274111"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="1" green="0.70196078429999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+    <resources>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="star" catalog="system" width="128" height="115"/>
+        <image name="star.fill" catalog="system" width="128" height="115"/>
+    </resources>
 </document>

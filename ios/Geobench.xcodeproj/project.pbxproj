@@ -33,7 +33,8 @@
 		F1C81C4727033DA200EC06FB /* GeobenchWatchAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C81C4627033DA200EC06FB /* GeobenchWatchAppTests.swift */; };
 		F1C81C5127033DA200EC06FB /* GeobenchWatchAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C81C5027033DA200EC06FB /* GeobenchWatchAppUITests.swift */; };
 		F1C81C5327033DA200EC06FB /* GeobenchWatchAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C81C5227033DA200EC06FB /* GeobenchWatchAppUITestsLaunchTests.swift */; };
-		F1C81C5627033DA200EC06FB /* GeobenchWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F1C81C2527033D9E00EC06FB /* GeobenchWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F1C81C5627033DA200EC06FB /* Geobench.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F1C81C2527033D9E00EC06FB /* Geobench.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F1E3507027046E11001BEB2D /* AddBenchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E3506F27046E11001BEB2D /* AddBenchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +93,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				F1C81C5627033DA200EC06FB /* GeobenchWatchApp.app in Embed Watch Content */,
+				F1C81C5627033DA200EC06FB /* Geobench.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,7 +127,7 @@
 		F1A037472686A275008DEF03 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		F1A037482686A275008DEF03 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		F1A037492686A275008DEF03 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		F1C81C2527033D9E00EC06FB /* GeobenchWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeobenchWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C81C2527033D9E00EC06FB /* Geobench.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geobench.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1C81C2827033D9E00EC06FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		F1C81C2A27033DA000EC06FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1C81C3027033DA100EC06FB /* GeobenchWatchApp WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GeobenchWatchApp WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +141,9 @@
 		F1C81C4C27033DA200EC06FB /* GeobenchWatchAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeobenchWatchAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1C81C5027033DA200EC06FB /* GeobenchWatchAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeobenchWatchAppUITests.swift; sourceTree = "<group>"; };
 		F1C81C5227033DA200EC06FB /* GeobenchWatchAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeobenchWatchAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F1E3506B270349B0001BEB2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
+		F1E3506E27045AED001BEB2D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Interface.strings; sourceTree = "<group>"; };
+		F1E3506F27046E11001BEB2D /* AddBenchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBenchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,7 +278,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Geobench.app */,
 				00E356EE1AD99517003FC87E /* GeobenchTests.xctest */,
-				F1C81C2527033D9E00EC06FB /* GeobenchWatchApp.app */,
+				F1C81C2527033D9E00EC06FB /* Geobench.app */,
 				F1C81C3027033DA100EC06FB /* GeobenchWatchApp WatchKit Extension.appex */,
 				F1C81C4227033DA200EC06FB /* GeobenchWatchAppTests.xctest */,
 				F1C81C4C27033DA200EC06FB /* GeobenchWatchAppUITests.xctest */,
@@ -295,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				F1C81C3527033DA100EC06FB /* InterfaceController.swift */,
+				F1E3506F27046E11001BEB2D /* AddBenchController.swift */,
 				F1C81C3727033DA100EC06FB /* ExtensionDelegate.swift */,
 				F1C81C3927033DA100EC06FB /* ComplicationController.swift */,
 				F1C81C3B27033DA200EC06FB /* Assets.xcassets */,
@@ -382,7 +387,7 @@
 			);
 			name = GeobenchWatchApp;
 			productName = GeobenchWatchApp;
-			productReference = F1C81C2527033D9E00EC06FB /* GeobenchWatchApp.app */;
+			productReference = F1C81C2527033D9E00EC06FB /* Geobench.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
 		F1C81C2F27033DA100EC06FB /* GeobenchWatchApp WatchKit Extension */ = {
@@ -477,6 +482,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -722,6 +728,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E3507027046E11001BEB2D /* AddBenchController.swift in Sources */,
 				F1C81C3827033DA100EC06FB /* ExtensionDelegate.swift in Sources */,
 				F1C81C3627033DA100EC06FB /* InterfaceController.swift in Sources */,
 				F1C81C3A27033DA100EC06FB /* ComplicationController.swift in Sources */,
@@ -780,6 +787,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F1C81C2827033D9E00EC06FB /* Base */,
+				F1E3506B270349B0001BEB2D /* en */,
+				F1E3506E27045AED001BEB2D /* fr */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -844,7 +853,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GC4RN35B82;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Geobench/Info.plist;
@@ -872,7 +881,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = GC4RN35B82;
 				INFOPLIST_FILE = Geobench/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -948,7 +957,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.2/$(PLATFORM_NAME)\"",
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1105,6 +1114,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1112,20 +1122,19 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = GC4RN35B82;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = GeobenchWatchApp_WatchKit_Extension;
-				INFOPLIST_KEY_CFBundleDisplayName = GeobenchWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = fr.turtlecorp.geobench;
 				MARKETING_VERSION = 1.5.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.turtlecorp.geobench.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Geobench;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1143,6 +1152,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1151,19 +1161,18 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = GC4RN35B82;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = GeobenchWatchApp_WatchKit_Extension;
-				INFOPLIST_KEY_CFBundleDisplayName = GeobenchWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = fr.turtlecorp.geobench;
 				MARKETING_VERSION = 1.5.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.turtlecorp.geobench.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Geobench;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
