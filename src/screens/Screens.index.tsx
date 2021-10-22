@@ -1,14 +1,16 @@
 import * as React from "react";
-import { Image } from "react-native";
+import { Image, Platform, View } from "react-native";
 import { Colors, ColorsDark } from "../constants/Colors";
 import { Lang } from "../constants/Lang";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { hp } from "../utils/functions";
+import { hp, wp } from "../utils/functions";
 import { CarteScreen } from "./Carte.screen";
 import { CommunauteScreen } from "./Communaute.screen";
 import { SettingsStack } from "./Settings/Settings.index";
 import { useSelector } from "react-redux";
 import { userSelector } from "../store/slices/userSlice";
+import { GBContainer } from "../components/GBContainer";
+import { ifIphoneX } from "react-native-iphone-x-helper";
 
 export const IndexScreens: React.FunctionComponent<null> = () => {
   const Tab = createBottomTabNavigator();
@@ -20,6 +22,21 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
         showLabel: false,
         style: {
           backgroundColor: darkMode ? ColorsDark.background : "white",
+          position: "absolute",
+          bottom: hp("1.5%"),
+          left: wp("5%"),
+          right: wp("5%"),
+          borderRadius: 50,
+          height: hp("7%"),
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 5,
+          },
+          shadowOpacity: 0.15,
+          shadowRadius: 3,
+
+          elevation: 3,
         },
       }}
       initialRouteName={"Map"}
@@ -32,6 +49,9 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
           tabBarIcon: ({ color, focused }) => (
             <Image
               style={{
+                ...ifIphoneX({
+                  top: 15,
+                }),
                 width: hp("4%"),
                 height: hp("4%"),
                 tintColor: focused
@@ -53,6 +73,9 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
           tabBarIcon: ({ color, focused }) => (
             <Image
               style={{
+                ...ifIphoneX({
+                  top: 15,
+                }),
                 width: hp("4%"),
                 height: hp("4%"),
                 tintColor: focused
@@ -74,6 +97,10 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
           tabBarIcon: ({ color, focused }) => (
             <Image
               style={{
+                ...ifIphoneX({
+                  top: 15,
+                }),
+                alignSelf: "center",
                 width: hp("4%"),
                 height: hp("4%"),
                 tintColor: focused
