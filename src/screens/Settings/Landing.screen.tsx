@@ -1,7 +1,7 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
-import { Platform } from "react-native";
+import { Platform, Pressable } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { GBButton } from "../../components/GBButton";
 import { GBContainer } from "../../components/GBContainer";
@@ -242,10 +242,15 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           {Platform.OS === "android" && (
             <GBSpacer visible={false} space={"6%"} />
           )}
-          <GBImage
-            source={require("../../assets/images/bench.png")}
-            size={"5%"}
-          />
+          <Pressable
+            onPress={() => GBToast("Geobench", "Version 1.5.0", "info")}
+          >
+            <GBImage
+              source={require("../../assets/images/bench.png")}
+              size={"5%"}
+            />
+          </Pressable>
+
           <GBSpacer visible={false} space={"2%"} />
           <GBContainer
             direction={"row"}
