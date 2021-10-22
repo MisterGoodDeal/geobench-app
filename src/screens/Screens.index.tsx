@@ -21,7 +21,7 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
       tabBarOptions={{
         showLabel: false,
         style: {
-          backgroundColor: darkMode ? ColorsDark.background : "white",
+          backgroundColor: darkMode ? ColorsDark.bottomTabBar : "white",
           position: "absolute",
           bottom: hp("1.5%"),
           left: wp("5%"),
@@ -29,6 +29,7 @@ export const IndexScreens: React.FunctionComponent<null> = () => {
           borderRadius: 50,
           height: hp("7%"),
           shadowColor: "#000",
+          borderTopWidth: 0,
           shadowOffset: {
             width: 0,
             height: 5,

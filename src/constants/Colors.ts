@@ -38,6 +38,7 @@ export const ColorsDark = {
   white: "#fff",
   black: "#000",
   background: "#171010",
+  bottomTabBar: "#261d1d",
   navigation: {
     focus: "#edab02",
     unfocus: "#bdbdbd",
