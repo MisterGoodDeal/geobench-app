@@ -54,9 +54,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
           style={[
             styles.modalView,
             {
-              backgroundColor: darkMode
-                ? ColorsDark.background
-                : Colors.background,
+              backgroundColor: darkMode ? ColorsDark.background : Colors.white,
             },
           ]}
         >
@@ -231,7 +229,7 @@ export const GBBenchDetails: React.FunctionComponent<GBBenchDetailsProps> = ({
           <GBText
             size={"1.2%"}
             style={"regular"}
-            color={darkMode ? ColorsDark.white : Colors.white}
+            color={darkMode ? ColorsDark.white : Colors.darkGrey}
             align={"center"}
           >
             {`${Lang.map.added_by} ${banc.user}`}
