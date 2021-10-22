@@ -49,6 +49,7 @@ export const GBButton: React.FunctionComponent<GBButtonProps> = ({
       { marginLeft: margins?.left },
       { marginRight: margins?.right },
       { backgroundColor: color === undefined ? Colors.main : color },
+      { alignItems: "center", justifyContent: "center" },
     ]}
     disabled={disable === null ? false : disable}
   >
