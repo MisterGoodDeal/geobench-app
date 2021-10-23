@@ -90,7 +90,13 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
   return (
     <GBContainer
       flex={1}
-      color={keyboardStatus ? Colors.background : Colors.main}
+      color={
+        keyboardStatus
+          ? Colors.background
+          : darkMode
+          ? ColorsDark.background
+          : Colors.background
+      }
     >
       {/* Photos de l'utilisateur */}
       <ImageView
