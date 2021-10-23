@@ -11,8 +11,7 @@ import { LoginScreen } from "./src/screens/Settings/Login.screen";
 import { ForgotPasswordScreen } from "./src/screens/Settings/ForgotPassword.screen";
 import { RegisterScreen } from "./src/screens/Settings/Register.screen";
 import { localStorage } from "./src/services/localStorage.service";
-
-import { AppearanceProvider, useColorScheme } from "react-native-appearance";
+import { useColorScheme } from "react-native-appearance";
 
 import Toast from "react-native-toast-message";
 
