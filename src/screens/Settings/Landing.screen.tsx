@@ -25,6 +25,7 @@ import { GBToast } from "../../components/GBToast";
 import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
 import { GBPopup } from "../../components/GBPopup";
 import ToggleSwitch from "toggle-switch-react-native";
+import { infos } from "@mistergooddeal/rn-components";
 
 const validator = require("email-validator");
 
@@ -243,7 +244,13 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             <GBSpacer visible={false} space={"6%"} />
           )}
           <Pressable
-            onPress={() => GBToast("Geobench", "Version 1.5.0", "info")}
+            onPress={() =>
+              GBToast(
+                "Geobench",
+                `Version 1.7.0 - Librairie @mistergooddeal ${infos.version}`,
+                "info"
+              )
+            }
           >
             <GBImage
               source={require("../../assets/images/bench.png")}

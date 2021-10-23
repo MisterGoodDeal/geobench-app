@@ -11,9 +11,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		47CF82EA7A9E75230615438F /* libPods-Geobench-GeobenchTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3931BEBE3971462CAA4E9C8 /* libPods-Geobench-GeobenchTests.a */; };
+		579403F2401A05FDB0C77551 /* libPods-Geobench-GeobenchTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1AB2BECEB7B9DD8A98D830 /* libPods-Geobench-GeobenchTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		BC99E8AE7AD15BF8986BADAE /* libPods-Geobench.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FA64C7D7AD617AE201ABD6 /* libPods-Geobench.a */; };
+		9AC31D720EFFC0AB4BAC70AD /* libPods-Geobench.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F053D25BCF730D881178CC /* libPods-Geobench.a */; };
 		F1A0374A2686A275008DEF03 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A037412686A275008DEF03 /* Poppins-ExtraLight.ttf */; };
 		F1A0374B2686A275008DEF03 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A037422686A275008DEF03 /* Poppins-Regular.ttf */; };
 		F1A0374C2686A275008DEF03 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A037432686A275008DEF03 /* Poppins-Light.ttf */; };
@@ -104,19 +104,19 @@
 		00E356EE1AD99517003FC87E /* GeobenchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeobenchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* GeobenchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeobenchTests.m; sourceTree = "<group>"; };
+		017411D40F267A95F07EC801 /* Pods-Geobench.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench.debug.xcconfig"; path = "Target Support Files/Pods-Geobench/Pods-Geobench.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Geobench.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geobench.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Geobench/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Geobench/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Geobench/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Geobench/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Geobench/main.m; sourceTree = "<group>"; };
-		6B845BAA6FDB35885B74F181 /* Pods-Geobench-GeobenchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench-GeobenchTests.debug.xcconfig"; path = "Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests.debug.xcconfig"; sourceTree = "<group>"; };
-		705C4D82D0BAC7F8940E6C0C /* Pods-Geobench.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench.release.xcconfig"; path = "Target Support Files/Pods-Geobench/Pods-Geobench.release.xcconfig"; sourceTree = "<group>"; };
-		748139CDB48A4D1372538BEB /* Pods-Geobench-GeobenchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench-GeobenchTests.release.xcconfig"; path = "Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests.release.xcconfig"; sourceTree = "<group>"; };
+		1BF8DAE5D0797BE6BB9321B1 /* Pods-Geobench-GeobenchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench-GeobenchTests.release.xcconfig"; path = "Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests.release.xcconfig"; sourceTree = "<group>"; };
+		2C1AB2BECEB7B9DD8A98D830 /* libPods-Geobench-GeobenchTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Geobench-GeobenchTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F053D25BCF730D881178CC /* libPods-Geobench.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Geobench.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Geobench/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		98F3224901AEECAD835EEF01 /* Pods-Geobench.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench.debug.xcconfig"; path = "Target Support Files/Pods-Geobench/Pods-Geobench.debug.xcconfig"; sourceTree = "<group>"; };
-		C3931BEBE3971462CAA4E9C8 /* libPods-Geobench-GeobenchTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Geobench-GeobenchTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9FA64C7D7AD617AE201ABD6 /* libPods-Geobench.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Geobench.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A963ADBDE7B05464A8A935 /* Pods-Geobench-GeobenchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench-GeobenchTests.debug.xcconfig"; path = "Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB9C410563385B1A2B41177B /* Pods-Geobench.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Geobench.release.xcconfig"; path = "Target Support Files/Pods-Geobench/Pods-Geobench.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F1A037412686A275008DEF03 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLight.ttf"; path = "../src/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		F1A037422686A275008DEF03 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47CF82EA7A9E75230615438F /* libPods-Geobench-GeobenchTests.a in Frameworks */,
+				579403F2401A05FDB0C77551 /* libPods-Geobench-GeobenchTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +159,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC99E8AE7AD15BF8986BADAE /* libPods-Geobench.a in Frameworks */,
+				9AC31D720EFFC0AB4BAC70AD /* libPods-Geobench.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90F57CABD1D2CC75BF6FC93A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,8 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				C9FA64C7D7AD617AE201ABD6 /* libPods-Geobench.a */,
-				C3931BEBE3971462CAA4E9C8 /* libPods-Geobench-GeobenchTests.a */,
+				50F053D25BCF730D881178CC /* libPods-Geobench.a */,
+				2C1AB2BECEB7B9DD8A98D830 /* libPods-Geobench-GeobenchTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -230,10 +237,10 @@
 		7204FC8525C7385DFA5C81F6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				98F3224901AEECAD835EEF01 /* Pods-Geobench.debug.xcconfig */,
-				705C4D82D0BAC7F8940E6C0C /* Pods-Geobench.release.xcconfig */,
-				6B845BAA6FDB35885B74F181 /* Pods-Geobench-GeobenchTests.debug.xcconfig */,
-				748139CDB48A4D1372538BEB /* Pods-Geobench-GeobenchTests.release.xcconfig */,
+				017411D40F267A95F07EC801 /* Pods-Geobench.debug.xcconfig */,
+				EB9C410563385B1A2B41177B /* Pods-Geobench.release.xcconfig */,
+				93A963ADBDE7B05464A8A935 /* Pods-Geobench-GeobenchTests.debug.xcconfig */,
+				1BF8DAE5D0797BE6BB9321B1 /* Pods-Geobench-GeobenchTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -332,12 +339,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "GeobenchTests" */;
 			buildPhases = (
-				CFABA3882B1749D219D40603 /* [CP] Check Pods Manifest.lock */,
+				0206AFB45CA78CA907B8EE8E /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				A56F4551C46A0DE18775FC62 /* [CP] Embed Pods Frameworks */,
-				F8C893D89B593FD62EDA6214 /* [CP] Copy Pods Resources */,
+				B121F65C46A4D3BEFDC3E2A0 /* [CP] Embed Pods Frameworks */,
+				D81F7F6AC58B0C4F07F198FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -353,15 +360,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Geobench" */;
 			buildPhases = (
-				0AD8D9B00E3DCDCF30619C3E /* [CP] Check Pods Manifest.lock */,
+				AEFB33C21313C02EE4CE8F9A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				47B3D8C09F3DA5F4D333BC9C /* [CP] Embed Pods Frameworks */,
-				E655D889661435CB7B41BF09 /* [CP] Copy Pods Resources */,
 				F1C81C5E27033DA200EC06FB /* Embed Watch Content */,
+				42CD24828E8E2CF017C14651 /* [CP] Embed Pods Frameworks */,
+				8EFABC14DE1ED1F74527B357 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,6 +386,7 @@
 			buildPhases = (
 				F1C81C2327033D9E00EC06FB /* Resources */,
 				F1C81C5A27033DA200EC06FB /* Embed App Extensions */,
+				90F57CABD1D2CC75BF6FC93A /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -573,63 +581,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		0AD8D9B00E3DCDCF30619C3E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Geobench-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		47B3D8C09F3DA5F4D333BC9C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Geobench/Pods-Geobench-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Geobench/Pods-Geobench-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Geobench/Pods-Geobench-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A56F4551C46A0DE18775FC62 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CFABA3882B1749D219D40603 /* [CP] Check Pods Manifest.lock */ = {
+		0206AFB45CA78CA907B8EE8E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -651,7 +603,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E655D889661435CB7B41BF09 /* [CP] Copy Pods Resources */ = {
+		42CD24828E8E2CF017C14651 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Geobench/Pods-Geobench-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Geobench/Pods-Geobench-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Geobench/Pods-Geobench-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8EFABC14DE1ED1F74527B357 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -668,7 +637,46 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Geobench/Pods-Geobench-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8C893D89B593FD62EDA6214 /* [CP] Copy Pods Resources */ = {
+		AEFB33C21313C02EE4CE8F9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Geobench-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B121F65C46A4D3BEFDC3E2A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Geobench-GeobenchTests/Pods-Geobench-GeobenchTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D81F7F6AC58B0C4F07F198FB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -798,7 +806,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6B845BAA6FDB35885B74F181 /* Pods-Geobench-GeobenchTests.debug.xcconfig */;
+			baseConfigurationReference = 93A963ADBDE7B05464A8A935 /* Pods-Geobench-GeobenchTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -825,7 +833,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 748139CDB48A4D1372538BEB /* Pods-Geobench-GeobenchTests.release.xcconfig */;
+			baseConfigurationReference = 1BF8DAE5D0797BE6BB9321B1 /* Pods-Geobench-GeobenchTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -849,7 +857,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98F3224901AEECAD835EEF01 /* Pods-Geobench.debug.xcconfig */;
+			baseConfigurationReference = 017411D40F267A95F07EC801 /* Pods-Geobench.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -877,7 +885,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 705C4D82D0BAC7F8940E6C0C /* Pods-Geobench.release.xcconfig */;
+			baseConfigurationReference = EB9C410563385B1A2B41177B /* Pods-Geobench.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1130,7 +1138,7 @@
 				IBSC_MODULE = GeobenchWatchApp_WatchKit_Extension;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = fr.turtlecorp.geobench;
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.7.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.turtlecorp.geobench.watchkitapp;
@@ -1169,7 +1177,7 @@
 				IBSC_MODULE = GeobenchWatchApp_WatchKit_Extension;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = fr.turtlecorp.geobench;
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.7.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.turtlecorp.geobench.watchkitapp;
 				PRODUCT_NAME = Geobench;
