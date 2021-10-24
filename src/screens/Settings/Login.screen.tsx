@@ -1,25 +1,25 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GBContainer } from "../../components/GBContainer";
-import { Colors, ColorsDark } from "../../constants/Colors";
-import { Lang } from "../../constants/Lang";
+import { GBContainer } from "@components/GBContainer";
+import { Colors, ColorsDark } from "@constants/Colors";
+import { Lang } from "@constants/Lang";
 import { useNavigation } from "@react-navigation/native";
-import { GBText } from "../../components/GBText";
-import { GBImage } from "../../components/GBImage";
-import { GBSpacer } from "../../components/GBSpacer";
-import { GBInput } from "../../components/GBInput";
+import { GBText } from "@components/GBText";
+import { GBImage } from "@components/GBImage";
+import { GBInput } from "@components/GBInput";
 import { useState } from "react";
-import { GBButton } from "../../components/GBButton";
-import { GBStatusBar } from "../../components/GBStatusBar";
-import { GBLink } from "../../components/GBLink";
-import { GBPopup } from "../../components/GBPopup";
-import { api } from "../../api";
-import { userSelector } from "../../store/slices/userSlice";
-import { actions } from "../../store/action";
-import { getLoginErrorMsg } from "../../api/utils";
-import { Popup } from "../../utils/interface";
-import { GBLoader } from "../../components/GBLoader";
-import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
+import { GBButton } from "@components/GBButton";
+import { GBStatusBar } from "@components/GBStatusBar";
+import { GBLink } from "@components/GBLink";
+import { GBPopup } from "@components/GBPopup";
+import { api } from "@api/index";
+import { userSelector } from "@store/slices/userSlice";
+import { actions } from "@store/action";
+import { getLoginErrorMsg } from "@api/utils";
+import { Popup } from "@utils/interface";
+import { GBLoader } from "@components/GBLoader";
+import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
+import { Spacer } from "@mistergooddeal/rn-components";
 
 export const LoginScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -123,7 +123,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           source={require("../../assets/images/bench.png")}
           size={"12%"}
         />
-        <GBSpacer space={"8%"} visible={false} />
+        <Spacer space={"8%"} visible={false} />
         <GBText
           size={"2.2%"}
           style={"bold"}
@@ -134,7 +134,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
           {Lang.login.connect}
         </GBText>
-        <GBSpacer space={"8%"} visible={false} />
+        <Spacer space={"8%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -144,7 +144,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         >
           {login}
         </GBInput>
-        <GBSpacer space={"2%"} visible={false} />
+        <Spacer space={"2%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -157,18 +157,18 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         >
           {password}
         </GBInput>
-        <GBSpacer space={"5%"} visible={false} />
+        <Spacer space={"5%"} visible={false} />
         <GBButton
           onPress={() => handleSubmit(login, password)}
           disable={disable}
         >
           {Lang.login.button}
         </GBButton>
-        <GBSpacer space={"1.5%"} visible={false} />
+        <Spacer space={"1.5%"} visible={false} />
         <GBLink onPress={() => nav.navigate("ForgotPassword")} size={"1.5%"}>
           {Lang.login.forgot_password}
         </GBLink>
-        <GBSpacer space={"5%"} visible={false} />
+        <Spacer space={"5%"} visible={false} />
         <GBContainer direction={"row"}>
           <GBText size={"1.5%"} color={Colors.darkGrey} style={"regular"}>
             {Lang.login.no_account.text}

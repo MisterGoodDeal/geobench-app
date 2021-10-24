@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Text } from "react-native";
-import { templateSelector } from "../store/slices/templateSlice";
-import { api } from "../api";
-import { Colors } from "../constants/Colors";
-import { Lang } from "../constants/Lang";
-import { GBContainer } from "../components/GBContainer";
+import { templateSelector } from "@store/slices/templateSlice";
+import { api } from "@api/index";
+import { Colors } from "@constants/Colors";
+import { Lang } from "@constants/Lang";
+import { GBContainer } from "@components/GBContainer";
 
 export const TemplateScreen: React.FunctionComponent<null> = () => {
   const dispatch = useDispatch();

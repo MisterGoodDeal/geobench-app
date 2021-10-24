@@ -1,15 +1,14 @@
 import * as React from "react";
-import { Image, Platform, View } from "react-native";
-import { Colors, ColorsDark } from "../constants/Colors";
-import { Lang } from "../constants/Lang";
+import { Image } from "react-native";
+import { Colors, ColorsDark } from "@constants/Colors";
+import { Lang } from "@constants/Lang";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { hp, wp } from "../utils/functions";
+import { hp, wp } from "@mistergooddeal/rn-components";
 import { CarteScreen } from "./Carte.screen";
 import { CommunauteScreen } from "./Communaute.screen";
 import { SettingsStack } from "./Settings/Settings.index";
 import { useSelector } from "react-redux";
-import { userSelector } from "../store/slices/userSlice";
-import { GBContainer } from "../components/GBContainer";
+import { userSelector } from "@store/slices/userSlice";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 
 export const IndexScreens: React.FunctionComponent<null> = () => {

@@ -4,24 +4,23 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { GBContainer } from "../components/GBContainer";
-import { GBImage } from "../components/GBImage";
-import { GBLoader } from "../components/GBLoader";
-import { GBSpacer } from "../components/GBSpacer";
-import { GBStatusBar } from "../components/GBStatusBar";
-import { GBText } from "../components/GBText";
-import { Colors, ColorsDark } from "../constants/Colors";
-import { Lang } from "../constants/Lang";
-import { actions } from "../store/action";
-import { userSelector } from "../store/slices/userSlice";
-import { UserLocal } from "../utils/interface";
-import { useKeyboard } from "../utils/keyboard";
-import { api } from "../api";
-import { GBToast } from "../components/GBToast";
-import { GBCard } from "../components/GBCard";
+import { GBContainer } from "@components/GBContainer";
+import { GBImage } from "@components/GBImage";
+import { GBLoader } from "@components/GBLoader";
+import { GBStatusBar } from "@components/GBStatusBar";
+import { GBText } from "@components/GBText";
+import { Colors, ColorsDark } from "@constants/Colors";
+import { Lang } from "@constants/Lang";
+import { actions } from "@store/action";
+import { userSelector } from "@store/slices/userSlice";
+import { UserLocal } from "@utils/interface";
+import { useKeyboard } from "@utils/keyboard";
+import { api } from "@api/index";
+import { GBToast } from "@components/GBToast";
+import { GBCard } from "@components/GBCard";
 import { Rating } from "react-native-ratings";
-import { FullscreenCaroussel, hp } from "@mistergooddeal/rn-components";
-import { GBClose } from "../components/GBClose";
+import { FullscreenCaroussel, hp, Spacer } from "@mistergooddeal/rn-components";
+import { GBClose } from "@components/GBClose";
 
 export const CommunauteScreen: React.FunctionComponent<null> = () => {
   const {
@@ -175,7 +174,7 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
               source={require("../assets/images/bench.png")}
               size={"5%"}
             />
-            <GBSpacer visible={false} space={"2%"} />
+            <Spacer visible={false} space={"2%"} />
             <GBContainer
               direction={"row"}
               alignItems={"center"}
@@ -277,7 +276,7 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
                 </GBCard>
               </TouchableOpacity>
             </GBContainer>
-            <GBSpacer visible={false} space={"2%"} />
+            <Spacer visible={false} space={"2%"} />
             <GBCard
               width={"85%"}
               color={darkMode ? ColorsDark.inputColor : undefined}
@@ -290,7 +289,7 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
               >
                 {`${Lang.community.rating} ${community?.user.avgBench.text}`}
               </GBText>
-              <GBSpacer visible={false} space={".5%"} />
+              <Spacer visible={false} space={".5%"} />
               <Rating
                 type="star"
                 startingValue={community?.user.avgBench.full}
@@ -300,7 +299,7 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
                 tintColor={darkMode ? ColorsDark.inputColor : Colors.white}
               />
             </GBCard>
-            <GBSpacer visible={false} space={"5%"} />
+            <Spacer visible={false} space={"5%"} />
             <GBText
               style={"black"}
               size={"3.5%"}

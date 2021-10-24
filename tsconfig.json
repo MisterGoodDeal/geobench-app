@@ -10,6 +10,33 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "./src" /* Get baseUrl for the alias */,
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@screens/*": [
+        "screens/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@images/*": [
+        "assets/images/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@api/*": [
+        "api/*"
+      ],
+    },
   }
 }

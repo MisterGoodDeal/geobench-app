@@ -1,28 +1,28 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GBContainer } from "../../components/GBContainer";
-import { Colors, ColorsDark } from "../../constants/Colors";
-import { Lang } from "../../constants/Lang";
+import { GBContainer } from "@components/GBContainer";
+import { Colors, ColorsDark } from "@constants/Colors";
+import { Lang } from "@constants/Lang";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { GBText } from "../../components/GBText";
-import { GBImage } from "../../components/GBImage";
-import { GBSpacer } from "../../components/GBSpacer";
-import { GBInput } from "../../components/GBInput";
+import { GBText } from "@components/GBText";
+import { GBImage } from "@components/GBImage";
+import { GBInput } from "@components/GBInput";
 import { useState } from "react";
-import { GBButton } from "../../components/GBButton";
-import { GBStatusBar } from "../../components/GBStatusBar";
-import { GBBack } from "../../components/GBBack";
-import { userSelector } from "../../store/slices/userSlice";
-import { GBLoader } from "../../components/GBLoader";
-import { api } from "../../api";
+import { GBButton } from "@components/GBButton";
+import { GBStatusBar } from "@components/GBStatusBar";
+import { GBBack } from "@components/GBBack";
+import { userSelector } from "@store/slices/userSlice";
+import { GBLoader } from "@components/GBLoader";
+import { api } from "@api/index";
 const validator = require("email-validator");
 import * as RNLocalize from "react-native-localize";
-import { actions } from "../../store/action";
-import { getLoginErrorMsg, getPasswordResetErrorMsg } from "../../api/utils";
-import { GBToast } from "../../components/GBToast";
-import { GBPopupReset } from "../../components/GBPopupReset";
-import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
+import { actions } from "@store/action";
+import { getLoginErrorMsg, getPasswordResetErrorMsg } from "@api/utils";
+import { GBToast } from "@components/GBToast";
+import { GBPopupReset } from "@components/GBPopupReset";
+import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
 const { passwordStrength } = require("check-password-strength");
+import { Spacer } from "@mistergooddeal/rn-components";
 
 export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -193,7 +193,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           source={require("../../assets/images/password.png")}
           size={"12%"}
         />
-        <GBSpacer space={"8%"} visible={false} />
+        <Spacer space={"8%"} visible={false} />
         <GBText
           size={"2.2%"}
           style={"bold"}
@@ -206,7 +206,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
         <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
           {Lang.forgotPassword.pickup}
         </GBText>
-        <GBSpacer space={"8%"} visible={false} />
+        <Spacer space={"8%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -218,7 +218,7 @@ export const ForgotPasswordScreen: React.FunctionComponent<null> = () => {
           {email}
         </GBInput>
 
-        <GBSpacer space={"5%"} visible={false} />
+        <Spacer space={"5%"} visible={false} />
         <GBButton
           onPress={() => handleSubmit()}
           disable={!validator.validate(email)}

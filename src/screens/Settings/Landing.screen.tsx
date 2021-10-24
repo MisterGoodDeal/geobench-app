@@ -1,31 +1,29 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
-import { Platform, Pressable } from "react-native";
+import { Platform, Pressable, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { GBButton } from "../../components/GBButton";
-import { GBContainer } from "../../components/GBContainer";
-import { GBImage } from "../../components/GBImage";
-import { GBInput } from "../../components/GBInput";
-import { GBLoader } from "../../components/GBLoader";
-import { GBRoundButton } from "../../components/GBRoundButton";
-import { GBSpacer } from "../../components/GBSpacer";
-import { GBStatusBar } from "../../components/GBStatusBar";
-import { GBText } from "../../components/GBText";
-import { Colors, ColorsDark } from "../../constants/Colors";
-import { Lang } from "../../constants/Lang";
-import { actions } from "../../store/action";
-import { userSelector } from "../../store/slices/userSlice";
-import { wp } from "../../utils/functions";
-import { UserLocal } from "../../utils/interface";
+import { GBButton } from "@components/GBButton";
+import { GBContainer } from "@components/GBContainer";
+import { GBImage } from "@components/GBImage";
+import { GBInput } from "@components/GBInput";
+import { GBLoader } from "@components/GBLoader";
+import { GBRoundButton } from "@components/GBRoundButton";
+import { GBStatusBar } from "@components/GBStatusBar";
+import { GBText } from "@components/GBText";
+import { Colors, ColorsDark } from "@constants/Colors";
+import { Lang } from "@constants/Lang";
+import { actions } from "@store/action";
+import { userSelector } from "@store/slices/userSlice";
+import { UserLocal } from "@utils/interface";
 import { localStorage } from "../../services/localStorage.service";
-import { useKeyboard } from "../../utils/keyboard";
-import { api } from "../../api";
-import { GBToast } from "../../components/GBToast";
-import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
-import { GBPopup } from "../../components/GBPopup";
+import { useKeyboard } from "@utils/keyboard";
+import { api } from "@api/index";
+import { GBToast } from "@components/GBToast";
+import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
+import { GBPopup } from "@components/GBPopup";
 import ToggleSwitch from "toggle-switch-react-native";
-import { infos } from "@mistergooddeal/rn-components";
+import { infos, Spacer, wp } from "@mistergooddeal/rn-components";
 
 const validator = require("email-validator");
 
@@ -240,14 +238,12 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          {Platform.OS === "android" && (
-            <GBSpacer visible={false} space={"6%"} />
-          )}
+          {Platform.OS === "android" && <Spacer visible={false} space={"6%"} />}
           <Pressable
             onPress={() =>
               GBToast(
-                "Geobench",
-                `Version 1.7.0 - Librairie @mistergooddeal ${infos.version}`,
+                "Geobench 1.7.0",
+                `@mistergooddeal/rn-components ${infos.version}`,
                 "info"
               )
             }
@@ -258,7 +254,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             />
           </Pressable>
 
-          <GBSpacer visible={false} space={"2%"} />
+          <Spacer visible={false} space={"2%"} />
           <GBContainer
             direction={"row"}
             alignItems={"center"}
@@ -294,13 +290,14 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             {Lang.settings.subtext}
           </GBText>
         </GBContainer>
+
         <GBContainer
           flex={3}
-          justifyContent={"center"}
           alignItems={"center"}
           color={darkMode ? ColorsDark.background : Colors.background}
           extraStyle={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
         >
+          <Spacer space={"5%"} visible={false} />
           <GBContainer
             direction={"row"}
             justifyContent={"space-between"}
@@ -327,7 +324,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
               disable={fullnameDisable}
             />
           </GBContainer>
-          <GBSpacer visible={false} space={"2%"} />
+          <Spacer visible={false} space={"2%"} />
           <GBContainer
             direction={"row"}
             justifyContent={"space-between"}
@@ -354,7 +351,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
               disable={emailDisable}
             />
           </GBContainer>
-          <GBSpacer visible={false} space={"2%"} />
+          <Spacer visible={false} space={"2%"} />
           <GBInput
             multiline={false}
             nbLines={1}
@@ -367,7 +364,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           >
             {u?.pseudo}
           </GBInput>
-          <GBSpacer visible={false} space={"2%"} />
+          <Spacer visible={false} space={"2%"} />
           <GBContainer
             direction={"row"}
             extraStyle={{ width: "90%" }}
@@ -387,7 +384,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
               onToggle={(isOn: boolean) => handleDarkMode(isOn)}
             />
           </GBContainer>
-          <GBSpacer visible={false} space={"10%"} />
+          <Spacer visible={false} space={"5%"} />
 
           <GBButton
             onPress={() =>
@@ -397,7 +394,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           >
             {Lang.settings.button_password}
           </GBButton>
-          <GBSpacer visible={false} space={"2%"} />
+          <Spacer visible={false} space={"2%"} />
           <GBContainer
             direction={"row"}
             extraStyle={{ width: "90%" }}

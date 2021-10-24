@@ -1,26 +1,26 @@
 import * as React from "react";
-import { GBContainer } from "../../components/GBContainer";
-import { Colors, ColorsDark } from "../../constants/Colors";
-import { Lang } from "../../constants/Lang";
+import { GBContainer } from "@components/GBContainer";
+import { Colors, ColorsDark } from "@constants/Colors";
+import { Lang } from "@constants/Lang";
 import { useNavigation } from "@react-navigation/native";
-import { GBText } from "../../components/GBText";
-import { GBImage } from "../../components/GBImage";
-import { GBSpacer } from "../../components/GBSpacer";
-import { GBInput } from "../../components/GBInput";
+import { GBText } from "@components/GBText";
+import { GBImage } from "@components/GBImage";
+import { GBInput } from "@components/GBInput";
 import { useState } from "react";
-import { GBButton } from "../../components/GBButton";
-import { GBStatusBar } from "../../components/GBStatusBar";
+import { GBButton } from "@components/GBButton";
+import { GBStatusBar } from "@components/GBStatusBar";
 const { passwordStrength } = require("check-password-strength");
 const validator = require("email-validator");
-import { GBLink } from "../../components/GBLink";
-import { api } from "../../api";
-import { GBLoader } from "../../components/GBLoader";
+import { GBLink } from "@components/GBLink";
+import { api } from "@api/index";
+import { GBLoader } from "@components/GBLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { userSelector } from "../../store/slices/userSlice";
-import { actions } from "../../store/action";
-import { getRegisterErrorMsg } from "../../api/utils";
-import { GBToast } from "../../components/GBToast";
-import { GBKeyboardDismiss } from "../../components/GBKeyboardDismiss";
+import { userSelector } from "@store/slices/userSlice";
+import { actions } from "@store/action";
+import { getRegisterErrorMsg } from "@api/utils";
+import { GBToast } from "@components/GBToast";
+import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
+import { Spacer } from "@mistergooddeal/rn-components";
 
 export const RegisterScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -130,7 +130,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           source={require("../../assets/images/bench.png")}
           size={"12%"}
         />
-        <GBSpacer space={"4%"} visible={false} />
+        <Spacer space={"4%"} visible={false} />
         <GBText
           size={"2.2%"}
           style={"bold"}
@@ -141,7 +141,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
         <GBText size={"1.5%"} style={"medium"} color={Colors.border}>
           {Lang.register.pickup}
         </GBText>
-        <GBSpacer space={"4%"} visible={false} />
+        <Spacer space={"4%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -151,7 +151,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
         >
           {fullname}
         </GBInput>
-        <GBSpacer space={"1%"} visible={false} />
+        <Spacer space={"1%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -162,7 +162,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
         >
           {email}
         </GBInput>
-        <GBSpacer space={"1%"} visible={false} />
+        <Spacer space={"1%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -173,8 +173,8 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
         >
           {username}
         </GBInput>
-        <GBSpacer space={"3%"} visible={false} />
-        <GBSpacer space={"1.5%"} visible={false} />
+        <Spacer space={"3%"} visible={false} />
+        <Spacer space={"1.5%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -187,7 +187,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
         >
           {pwd1}
         </GBInput>
-        <GBSpacer space={"1%"} visible={false} />
+        <Spacer space={"1%"} visible={false} />
         <GBInput
           multiline={false}
           nbLines={1}
@@ -203,7 +203,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
         <GBContainer extraStyle={{ width: "70%" }} alignItems={"center"}>
           {message !== "" && (
             <>
-              <GBSpacer visible={false} space={"1%"} />
+              <Spacer visible={false} space={"1%"} />
               <GBText
                 style={"regular"}
                 size={"1.2%"}
@@ -216,7 +216,7 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           )}
           {message2 !== "" && (
             <>
-              <GBSpacer visible={false} space={"1%"} />
+              <Spacer visible={false} space={"1%"} />
               <GBText
                 style={"regular"}
                 size={"1.2%"}
@@ -229,11 +229,11 @@ export const RegisterScreen: React.FunctionComponent<null> = () => {
           )}
         </GBContainer>
 
-        <GBSpacer space={"4%"} visible={false} />
+        <Spacer space={"4%"} visible={false} />
         <GBButton onPress={() => handleSubmit()} disable={!canRegister}>
           {Lang.register.button}
         </GBButton>
-        <GBSpacer space={"3%"} visible={false} />
+        <Spacer space={"3%"} visible={false} />
         <GBContainer direction={"row"}>
           <GBText size={"1.5%"} color={Colors.darkGrey} style={"regular"}>
             {Lang.register.alreadyAccount.text}

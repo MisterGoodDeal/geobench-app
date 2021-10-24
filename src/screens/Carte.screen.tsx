@@ -1,39 +1,39 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text } from "react-native";
-import { GBContainer } from "../components/GBContainer";
-import { Colors, ColorsDark } from "../constants/Colors";
-import { localStorage } from "../services/localStorage.service";
+import { GBContainer } from "@components/GBContainer";
+import { Colors, ColorsDark } from "@constants/Colors";
+import { localStorage } from "@services/localStorage.service";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { actions } from "../store/action";
+import { actions } from "@store/action";
 import { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps"; // remove PROVIDER_GOOGLE import if not using Google Maps
 import MapView from "react-native-map-clustering";
 import Toast from "react-native-toast-message";
 import { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import Geolocation from "@react-native-community/geolocation";
-import { GBStatusBar } from "../components/GBStatusBar";
-import { GBMapButton } from "../components/GBMapButton";
-import { api } from "../api";
-import { GBLoader } from "../components/GBLoader";
-import { mapSelector } from "../store/slices/mapSlice";
-import { GBBenchDetails } from "../components/GBBenchDetails";
-import { Banc } from "../store/model/map";
-import { userSelector } from "../store/slices/userSlice";
-import { Lang } from "../constants/Lang";
-import { GBAddBench } from "../components/GBAddBench";
-import { GBToast } from "../components/GBToast";
-import { GBText } from "../components/GBText";
-import { GBModal } from "../components/GBModal";
-import { GBPicker } from "../components/GBPicker";
-import { GBSpacer } from "../components/GBSpacer";
-import { darkMap, lightMap } from "../utils/mapStyle";
-import { GBButton } from "../components/GBButton";
+import { GBStatusBar } from "@components/GBStatusBar";
+import { GBMapButton } from "@components/GBMapButton";
+import { api } from "@api/index";
+import { GBLoader } from "@components/GBLoader";
+import { mapSelector } from "@store/slices/mapSlice";
+import { GBBenchDetails } from "@components/GBBenchDetails";
+import { Banc } from "@store/model/map";
+import { userSelector } from "@store/slices/userSlice";
+import { Lang } from "@constants/Lang";
+import { GBAddBench } from "@components/GBAddBench";
+import { GBToast } from "@components/GBToast";
+import { GBText } from "@components/GBText";
+import { GBModal } from "@components/GBModal";
+import { GBPicker } from "@components/GBPicker";
+import { darkMap, lightMap } from "@utils/mapStyle";
+import { GBButton } from "@components/GBButton";
 import GestureRecognizer from "react-native-swipe-gestures";
+import { Spacer } from "@mistergooddeal/rn-components";
 
-const marker = require("../assets/images/map/marker.png");
-const mymarker = require("../assets/images/map/my_marker.png");
-const favmarker = require("../assets/images/map/fav_marker.png");
+const marker = require("@images/map/marker.png");
+const mymarker = require("@images/map/my_marker.png");
+const favmarker = require("@images/map/fav_marker.png");
 
 export const CarteScreen: React.FunctionComponent<null> = () => {
   const dispatch = useDispatch();
@@ -435,7 +435,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
           >
             {Lang.map.filters.title}
           </GBText>
-          <GBSpacer visible={false} space={"2%"} />
+          <Spacer visible={false} space={"2%"} />
           <GBPicker
             items={Lang.map.add.location}
             setPickedItem={setLieuFiltre}
@@ -443,7 +443,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
             placeholder={Lang.map.filters.ph_lieu}
             darkMode={darkMode}
           />
-          <GBSpacer visible={false} space={"1%"} />
+          <Spacer visible={false} space={"1%"} />
           <GBPicker
             items={Lang.map.filters.filtre_photo}
             setPickedItem={setPhotoFiltre}
@@ -451,7 +451,7 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
             placeholder={Lang.map.filters.ph_photo}
             darkMode={darkMode}
           />
-          <GBSpacer visible={false} space={"2%"} />
+          <Spacer visible={false} space={"2%"} />
           <GBButton
             color={Colors.main}
             onPress={() => {
