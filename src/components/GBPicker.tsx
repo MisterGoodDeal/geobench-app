@@ -17,8 +17,11 @@ interface GBPickerProps {
   items: PickerItem[];
   placeholder: string;
   value?: string;
-  setPickedItem: React.Dispatch<React.SetStateAction<number>>;
+  setPickedItem:
+    | React.Dispatch<React.SetStateAction<number>>
+    | React.Dispatch<React.SetStateAction<string>>;
   darkMode: boolean;
+  width?: number;
 }
 
 export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
@@ -27,9 +30,14 @@ export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
   setPickedItem,
   value,
   darkMode,
+  width,
 }) => (
   <RNPickerSelect
-    onValueChange={(value) => setPickedItem!(parseInt(value))}
+    onValueChange={(value) =>
+      !isNaN(parseInt(value))
+        ? setPickedItem!(parseInt(value))
+        : setPickedItem(value)
+    }
     placeholder={{
       label: placeholder,
       value: "-1",
@@ -38,6 +46,7 @@ export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
     items={items}
     style={{
       inputIOS: {
+        width: width ? width : undefined,
         fontSize: heightPercentageToDP("1.5%"),
         backgroundColor: darkMode ? ColorsDark.inputColor : Colors.inputColor,
         fontWeight: "bold",
@@ -48,6 +57,7 @@ export const GBPicker: React.FunctionComponent<GBPickerProps> = ({
         textAlign: "center",
       },
       inputAndroid: {
+        width: width ? width : undefined,
         fontSize: heightPercentageToDP("1.5%"),
         backgroundColor: darkMode ? ColorsDark.inputColor : Colors.inputColor,
         fontWeight: "bold",
