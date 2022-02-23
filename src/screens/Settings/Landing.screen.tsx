@@ -1,7 +1,14 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
-import { Platform, Pressable, ScrollView, View } from "react-native";
+import {
+  Linking,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { GBButton } from "@components/GBButton";
 import { GBContainer } from "@components/GBContainer";
@@ -23,11 +30,12 @@ import { GBToast } from "@components/GBToast";
 import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
 import { GBPopup } from "@components/GBPopup";
 import ToggleSwitch from "toggle-switch-react-native";
-import { infos, Spacer, wp } from "@mistergooddeal/rn-components";
+import { hp, infos, Spacer, wp } from "@mistergooddeal/rn-components";
 import { sizes } from "@constants/Sizes";
 import { GBPicker } from "@components/GBPicker";
 import * as RNLocalize from "react-native-localize";
 import { useEffect } from "react";
+import { GBLink } from "@components/GBLink";
 
 const validator = require("email-validator");
 
@@ -323,7 +331,6 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           <ScrollView
             contentContainerStyle={{
               alignItems: "center",
-              height: "100%",
               width: wp("100%"),
             }}
             showsVerticalScrollIndicator={false}
@@ -415,18 +422,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 onToggle={(isOn: boolean) => handleDarkMode(isOn)}
               />
             </GBContainer>
-            <Spacer visible={false} space={"2%"} />
 
-            {/* <View>
-              <GBPicker
-                items={availableLanguages}
-                setPickedItem={setLang}
-                value={lang}
-                placeholder={Lang.chooseLanguage}
-                darkMode={darkMode}
-                width={wp("90%")}
-              />
-            </View> */}
             <Spacer visible={false} space={"5%"} />
 
             <GBButton
@@ -458,6 +454,33 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 {Lang.settings.button_delete}
               </GBButton>
             </GBContainer>
+            <Spacer visible={false} space={"5%"} />
+
+            {/* <View>
+              <GBPicker
+                items={availableLanguages}
+                setPickedItem={setLang}
+                value={lang}
+                placeholder={Lang.chooseLanguage}
+                darkMode={darkMode}
+                width={wp("90%")}
+              />
+            </View> */}
+            <GBText
+              style="regular"
+              color={darkMode ? Colors.white : Colors.darkGrey}
+              size={"1.5%"}
+            >
+              {Lang.lang.cantSee}
+            </GBText>
+            <GBLink
+              size="1.5%"
+              onPress={() =>
+                Linking.openURL("https://forms.gle/rL3sHwErKsfobWJv8")
+              }
+            >
+              {Lang.lang.help}
+            </GBLink>
             <Spacer space={"5%"} visible={false} />
           </ScrollView>
         </GBContainer>
