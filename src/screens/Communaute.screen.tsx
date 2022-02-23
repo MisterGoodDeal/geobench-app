@@ -210,7 +210,6 @@ export const CommunauteScreen: React.FunctionComponent<null> = () => {
             <ScrollView
               contentContainerStyle={{
                 alignItems: "center",
-                height: "100%",
                 width: wp("100%"),
               }}
               showsVerticalScrollIndicator={false}
