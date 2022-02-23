@@ -6,6 +6,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { sizes } from "@constants/Sizes";
 
 interface ButtonMargin {
   top?: number;
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   appButtonText: {
-    fontSize: hp("2%"),
+    fontSize: hp(sizes.texts.buttons),
     color: Colors.white,
     fontWeight: "bold",
     alignSelf: "center",
