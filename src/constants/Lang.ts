@@ -9,7 +9,7 @@ const locales = {
   fr: {
     chooseLanguage: "Choisissez votre langue",
     lang: {
-      cantSee: "Vous ne pouvez pas voir cette langue ?",
+      cantSee: "Vous ne voyez pas votre langue ?",
       help: "Aidez-nous à traduire",
     },
     community: {
@@ -288,8 +288,8 @@ const locales = {
   en: {
     chooseLanguage: "Choose your language",
     lang: {
-      cantSee: "Vous ne pouvez pas voir cette langue ?",
-      help: "Aidez-nous à traduire",
+      cantSee: "Can't see your language?",
+      help: "Help us translate the app.",
     },
     community: {
       hello: "Hello ",
