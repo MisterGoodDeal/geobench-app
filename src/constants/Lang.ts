@@ -1,7 +1,17 @@
 import * as RNLocalize from "react-native-localize";
 
+export const availableLanguages = [
+  { label: "Français (France)", value: "fr" },
+  { label: "English (UK and US)", value: "en" },
+];
+
 const locales = {
   fr: {
+    chooseLanguage: "Choisissez votre langue",
+    lang: {
+      cantSee: "Vous ne pouvez pas voir cette langue ?",
+      help: "Aidez-nous à traduire",
+    },
     community: {
       hello: "Salut ",
       exclamation: "!",
@@ -276,6 +286,11 @@ const locales = {
     },
   },
   en: {
+    chooseLanguage: "Choose your language",
+    lang: {
+      cantSee: "Vous ne pouvez pas voir cette langue ?",
+      help: "Aidez-nous à traduire",
+    },
     community: {
       hello: "Hello ",
       exclamation: "!",

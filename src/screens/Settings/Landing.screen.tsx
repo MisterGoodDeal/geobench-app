@@ -1,7 +1,7 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
-import { Platform, Pressable, ScrollView } from "react-native";
+import { Platform, Pressable, ScrollView, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { GBButton } from "@components/GBButton";
 import { GBContainer } from "@components/GBContainer";
@@ -12,7 +12,7 @@ import { GBRoundButton } from "@components/GBRoundButton";
 import { GBStatusBar } from "@components/GBStatusBar";
 import { GBText } from "@components/GBText";
 import { Colors, ColorsDark } from "@constants/Colors";
-import { Lang } from "@constants/Lang";
+import { availableLanguages, Lang } from "@constants/Lang";
 import { actions } from "@store/action";
 import { userSelector } from "@store/slices/userSlice";
 import { UserLocal } from "@utils/interface";
@@ -24,6 +24,10 @@ import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
 import { GBPopup } from "@components/GBPopup";
 import ToggleSwitch from "toggle-switch-react-native";
 import { infos, Spacer, wp } from "@mistergooddeal/rn-components";
+import { sizes } from "@constants/Sizes";
+import { GBPicker } from "@components/GBPicker";
+import * as RNLocalize from "react-native-localize";
+import { useEffect } from "react";
 
 const validator = require("email-validator");
 
@@ -45,6 +49,8 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   const [username, setUsername] = useState("");
   const [emailSubmit, setEmailSubmit] = useState(false);
   const [fullnameSubmit, setFullnameSubmit] = useState(false);
+
+  const [lang, setLang] = useState("");
 
   const [isDarkMode, setisDarkMode] = useState(false);
 
@@ -69,12 +75,29 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
       const usr: UserLocal = userInfo;
       setFullname(`${usr?.prenom} ${usr?.nom}`);
       setEmail(`${usr?.mail}`);
+      (async () => {
+        const customLang = await localStorage.get("lang");
+
+        if (customLang) {
+          setLang(customLang);
+        } else {
+          setLang(RNLocalize.getLocales()[0].languageCode);
+        }
+      })();
 
       return () => {
         // Quand le composant est déaffiché
       };
     }, [])
   );
+
+  React.useEffect(() => {
+    if (lang === "fr" || lang === "en") {
+      (async () => {
+        localStorage.store("lang", lang);
+      })();
+    }
+  }, [lang]);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -297,124 +320,146 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           color={darkMode ? ColorsDark.background : Colors.background}
           extraStyle={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
         >
-          <Spacer space={"5%"} visible={false} />
-          <GBContainer
-            direction={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            extraStyle={{ width: "90%" }}
+          <ScrollView
+            contentContainerStyle={{
+              alignItems: "center",
+              height: "100%",
+              width: wp("100%"),
+            }}
+            showsVerticalScrollIndicator={false}
           >
+            <Spacer space={"5%"} visible={false} />
+            <GBContainer
+              direction={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+              extraStyle={{ width: "90%" }}
+            >
+              <GBInput
+                multiline={false}
+                nbLines={1}
+                hook={setFullname}
+                type={"default"}
+                width={wp("70%")}
+                placeholder={Lang.settings.ph_fullname}
+                color={darkMode ? ColorsDark.inputColor : undefined}
+              >
+                {fullname}
+              </GBInput>
+              <GBRoundButton
+                width={"2%"}
+                color={Colors.main}
+                tint={Colors.white}
+                icon={require("../../assets/images/edit.png")}
+                onPress={() => handleFullnameSubmit()}
+                disable={fullnameDisable}
+              />
+            </GBContainer>
+            <Spacer visible={false} space={"2%"} />
+            <GBContainer
+              direction={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+              extraStyle={{ width: "90%" }}
+            >
+              <GBInput
+                multiline={false}
+                nbLines={1}
+                hook={setEmail}
+                type={"default"}
+                width={wp("70%")}
+                placeholder={Lang.settings.ph_email}
+                color={darkMode ? ColorsDark.inputColor : undefined}
+              >
+                {email}
+              </GBInput>
+              <GBRoundButton
+                width={"2%"}
+                color={Colors.main}
+                tint={Colors.white}
+                icon={require("../../assets/images/edit.png")}
+                onPress={() => handleEmailSubmit()}
+                disable={emailDisable}
+              />
+            </GBContainer>
+            <Spacer visible={false} space={"2%"} />
             <GBInput
               multiline={false}
               nbLines={1}
-              hook={setFullname}
+              hook={setUsername}
               type={"default"}
-              width={wp("70%")}
-              placeholder={Lang.settings.ph_fullname}
+              width={wp("90%")}
+              placeholder={"Easter egg discovered 🐣"}
+              disable={true}
               color={darkMode ? ColorsDark.inputColor : undefined}
             >
-              {fullname}
+              {u?.pseudo}
             </GBInput>
-            <GBRoundButton
-              width={"2%"}
-              color={Colors.main}
-              tint={Colors.white}
-              icon={require("../../assets/images/edit.png")}
-              onPress={() => handleFullnameSubmit()}
-              disable={fullnameDisable}
-            />
-          </GBContainer>
-          <Spacer visible={false} space={"2%"} />
-          <GBContainer
-            direction={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            extraStyle={{ width: "90%" }}
-          >
-            <GBInput
-              multiline={false}
-              nbLines={1}
-              hook={setEmail}
-              type={"default"}
-              width={wp("70%")}
-              placeholder={Lang.settings.ph_email}
-              color={darkMode ? ColorsDark.inputColor : undefined}
+            <Spacer visible={false} space={"2%"} />
+            <GBContainer
+              direction={"row"}
+              extraStyle={{ width: "90%" }}
+              justifyContent={"space-between"}
+              alignItems={"center"}
             >
-              {email}
-            </GBInput>
-            <GBRoundButton
-              width={"2%"}
-              color={Colors.main}
-              tint={Colors.white}
-              icon={require("../../assets/images/edit.png")}
-              onPress={() => handleEmailSubmit()}
-              disable={emailDisable}
-            />
-          </GBContainer>
-          <Spacer visible={false} space={"2%"} />
-          <GBInput
-            multiline={false}
-            nbLines={1}
-            hook={setUsername}
-            type={"default"}
-            width={wp("90%")}
-            placeholder={"Easter egg discovered 🐣"}
-            disable={true}
-            color={darkMode ? ColorsDark.inputColor : undefined}
-          >
-            {u?.pseudo}
-          </GBInput>
-          <Spacer visible={false} space={"2%"} />
-          <GBContainer
-            direction={"row"}
-            extraStyle={{ width: "90%" }}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <GBText color={Colors.darkGrey} size={"1.5%"} style={"regular"}>
-              {darkMode
-                ? Lang.settings.darkMode.on
-                : Lang.settings.darkMode.off}
-            </GBText>
-            <ToggleSwitch
-              isOn={darkMode}
-              onColor={Colors.darkGrey}
-              offColor={Colors.main}
-              size="large"
-              onToggle={(isOn: boolean) => handleDarkMode(isOn)}
-            />
-          </GBContainer>
-          <Spacer visible={false} space={"5%"} />
+              <GBText color={Colors.darkGrey} size={"1.5%"} style={"regular"}>
+                {darkMode
+                  ? Lang.settings.darkMode.on
+                  : Lang.settings.darkMode.off}
+              </GBText>
+              <ToggleSwitch
+                isOn={darkMode}
+                onColor={Colors.darkGrey}
+                offColor={Colors.main}
+                size="large"
+                onToggle={(isOn: boolean) => handleDarkMode(isOn)}
+              />
+            </GBContainer>
+            <Spacer visible={false} space={"2%"} />
 
-          <GBButton
-            onPress={() =>
-              nav.navigate("ForgotPassword", { changePassword: true })
-            }
-            width={wp("90%")}
-          >
-            {Lang.settings.button_password}
-          </GBButton>
-          <Spacer visible={false} space={"2%"} />
-          <GBContainer
-            direction={"row"}
-            extraStyle={{ width: "90%" }}
-            justifyContent={"space-between"}
-          >
+            {/* <View>
+              <GBPicker
+                items={availableLanguages}
+                setPickedItem={setLang}
+                value={lang}
+                placeholder={Lang.chooseLanguage}
+                darkMode={darkMode}
+                width={wp("90%")}
+              />
+            </View> */}
+            <Spacer visible={false} space={"5%"} />
+
             <GBButton
-              onPress={handleLogout}
-              color={Colors.lightRed}
-              width={wp("40%")}
+              onPress={() =>
+                nav.navigate("ForgotPassword", { changePassword: true })
+              }
+              width={wp("90%")}
             >
-              {Lang.settings.button_logout}
+              {Lang.settings.button_password}
             </GBButton>
-            <GBButton
-              onPress={() => setPopup(true)}
-              color={Colors.lightRed}
-              width={wp("40%")}
+            <Spacer visible={false} space={"2%"} />
+            <GBContainer
+              direction={"row"}
+              extraStyle={{ width: "90%" }}
+              justifyContent={"space-between"}
             >
-              {Lang.settings.button_delete}
-            </GBButton>
-          </GBContainer>
+              <GBButton
+                onPress={handleLogout}
+                color={Colors.lightRed}
+                width={wp("40%")}
+              >
+                {Lang.settings.button_logout}
+              </GBButton>
+              <GBButton
+                onPress={() => setPopup(true)}
+                color={Colors.lightRed}
+                width={wp("40%")}
+              >
+                {Lang.settings.button_delete}
+              </GBButton>
+            </GBContainer>
+            <Spacer space={"5%"} visible={false} />
+          </ScrollView>
         </GBContainer>
       </GBContainer>
     </GBKeyboardDismiss>
