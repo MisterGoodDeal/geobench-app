@@ -1,16 +1,16 @@
 {
   "name": "Geobench",
   "displayName": "Geobench",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "orientation": "portrait",
   "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "fr.mistergooddeal.geobench",
-      "buildNumber": "1.7.1",
+      "buildNumber": "1.7.2",
       "userInterfaceStyle": "automatic"
     },
     "android": {
       "package": "fr.mistergooddeal.geobench",
-      "versionCode": 18
+      "versionCode": 20
     }
 }
