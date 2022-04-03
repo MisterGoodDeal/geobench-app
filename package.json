@@ -14,7 +14,8 @@
     "android-bundle": "react-native bundle --platform android --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --dev false --reset-cache --assets-dest android/app/src/main/res/",
     "test": "jest",
     "mobile": "npm run ios && npm run android",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "androidStudio": "open -a /Applications/Android\\ Studio.app"
   },
   "rnpm": {
     "assets": [
