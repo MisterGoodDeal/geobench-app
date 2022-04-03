@@ -1,6 +1,7 @@
 import { Fetch } from "../utils";
 import { localStorage } from "../../services/localStorage.service";
 import { UserLocal } from "../../utils/interface";
+import { Platform } from "react-native";
 
 /* LOGIN USER */
 interface ReturnUserLoginParams {
@@ -18,6 +19,7 @@ export const makeUserLoginApi = (fetchFn: Fetch): UserLoginApi => ({
       body: JSON.stringify({
         login: returnParams.login,
         password: returnParams.password,
+        platform: Platform.OS,
       }),
     });
     return res;
