@@ -21,6 +21,8 @@ import { GBLoader } from "@components/GBLoader";
 import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
 import { Spacer } from "@mistergooddeal/rn-components";
 import { Platform } from "react-native";
+import { appleAuth } from "@invertase/react-native-apple-authentication";
+import jwt_decode from "jwt-decode";
 
 export const LoginScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -44,6 +46,65 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
       };
     }, [])
   );
+
+  /**
+   * LOGIN WITH APPLE
+   */
+  async function onAppleButtonPress() {
+    console.warn("Beginning Apple Authentication");
+
+    // start a login request
+    try {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
+
+      console.log("appleAuthRequestResponse", appleAuthRequestResponse);
+
+      const {
+        user: newUser,
+        email,
+        nonce,
+        identityToken,
+        realUserStatus /* etc */,
+      } = appleAuthRequestResponse;
+
+      const user = newUser;
+
+      if (identityToken) {
+        // e.g. sign in with Firebase Auth using `nonce` & `identityToken`
+        console.log(nonce, identityToken);
+      } else {
+        // no token - failed sign-in?
+      }
+
+      if (realUserStatus === appleAuth.UserStatus.LIKELY_REAL) {
+        console.log("I'm a real person!");
+      }
+
+      console.warn(`Apple Authentication Completed, ${user}, ${email}`);
+    } catch (error) {
+      if (error.code === appleAuth.Error.CANCELED) {
+        console.warn("User canceled Apple Sign in.");
+      } else {
+        console.error(error);
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
+    return appleAuth.onCredentialRevoked(async () => {
+      console.warn(
+        "If this function executes, User Credentials have been Revoked"
+      );
+    });
+  }, []); // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
+
+  /**
+   * END LOGIN WITH APPLE
+   */
 
   React.useEffect(() => {
     if (isFetching) {
@@ -200,7 +261,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           <>
             <Spacer space={"1.5%"} visible={false} />
             <GBButton
-              onPress={() => null}
+              onPress={onAppleButtonPress}
               color={Colors.apple}
               icon={require("@images/apple.png")}
             >
