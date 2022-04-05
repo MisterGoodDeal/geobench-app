@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GBContainer } from "@components/GBContainer";
 import { Colors, ColorsDark } from "@constants/Colors";
 import { Lang } from "@constants/Lang";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { GBText } from "@components/GBText";
 import { GBImage } from "@components/GBImage";
 import { GBInput } from "@components/GBInput";
@@ -20,6 +20,7 @@ import { Popup } from "@utils/interface";
 import { GBLoader } from "@components/GBLoader";
 import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
 import { Spacer } from "@mistergooddeal/rn-components";
+import { Platform } from "react-native";
 
 export const LoginScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -34,6 +35,15 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   const [popup, setPopup] = useState<Popup>();
+
+  // Use focus effect
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        // Quand le composant est déaffiché
+      };
+    }, [])
+  );
 
   React.useEffect(() => {
     if (isFetching) {
@@ -177,6 +187,27 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
             {Lang.login.no_account.link}
           </GBLink>
         </GBContainer>
+        {/* <Spacer space={"1.5%"} visible={false} />
+        <GBButton
+          onPress={() => null}
+          color={Colors.google}
+          icon={require("@images/google.png")}
+        >
+          {Lang.login.buttonGoogle}
+        </GBButton> */}
+
+        {Platform.OS === "ios" && (
+          <>
+            <Spacer space={"1.5%"} visible={false} />
+            <GBButton
+              onPress={() => null}
+              color={Colors.apple}
+              icon={require("@images/apple.png")}
+            >
+              {Lang.login.buttonApple}
+            </GBButton>
+          </>
+        )}
       </GBContainer>
     </GBKeyboardDismiss>
   );

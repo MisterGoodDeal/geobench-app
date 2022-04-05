@@ -19,6 +19,8 @@ export const Colors = {
     focus: "#edab02",
     unfocus: "#bdbdbd",
   },
+  google: "#4285f4",
+  apple: "#000",
 };
 
 export const ColorsDark = {

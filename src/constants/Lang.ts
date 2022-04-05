@@ -187,6 +187,8 @@ const locales = {
       ph_login: "Adresse mail ou pseudo...",
       ph_password: "Mot de passe...",
       button: "Se connecter",
+      buttonGoogle: "Connexion avec Google",
+      buttonApple: "Connexion avec Apple",
       forgot_password: "Mot de passe oublié ?",
       no_account: {
         text: "Vous n'avez pas de compte ? ",
@@ -464,6 +466,8 @@ const locales = {
       ph_login: "Email address or username...",
       ph_password: "Password...",
       button: "Sign In",
+      buttonGoogle: "Sign in with Google",
+      buttonApple: "Sign in with Apple",
       forgot_password: "Forgot password?",
       no_account: {
         text: "You don't have an account? ",

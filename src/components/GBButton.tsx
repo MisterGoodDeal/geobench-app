@@ -1,5 +1,11 @@
 import * as React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { Colors } from "../constants/Colors";
 
 import {
@@ -7,6 +13,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { sizes } from "@constants/Sizes";
+import { Container } from "@mistergooddeal/rn-components";
 
 interface ButtonMargin {
   top?: number;
@@ -23,6 +30,7 @@ interface GBButtonProps {
   width?: number;
   margins?: ButtonMargin;
   color?: string;
+  icon?: ImageSourcePropType;
 }
 
 export const GBButton: React.FunctionComponent<GBButtonProps> = ({
@@ -33,6 +41,7 @@ export const GBButton: React.FunctionComponent<GBButtonProps> = ({
   width,
   margins,
   color,
+  icon,
 }) => (
   <TouchableOpacity
     onPress={onPress}
@@ -54,7 +63,20 @@ export const GBButton: React.FunctionComponent<GBButtonProps> = ({
     ]}
     disabled={disable === null ? false : disable}
   >
-    <Text style={styles.appButtonText}>{children}</Text>
+    {icon && (
+      <Container direction="row" justifyContent="space-between">
+        <Image
+          source={icon}
+          style={{
+            width: hp("2.5%"),
+            height: hp("2.5%"),
+            marginRight: wp("2%"),
+          }}
+        />
+        <Text style={styles.appButtonText}>{children}</Text>
+      </Container>
+    )}
+    {!icon && <Text style={styles.appButtonText}>{children}</Text>}
   </TouchableOpacity>
 );
 
