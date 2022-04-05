@@ -189,6 +189,26 @@ const locales = {
       button: "Se connecter",
       buttonGoogle: "Connexion avec Google",
       buttonApple: "Connexion avec Apple",
+      apple: {
+        yes: "Oui",
+        no: "Non",
+        warning:
+          "Attention ! En créant votre compte Geobench avec Apple, vous ne pourrez modifier aucune information personnelle (nom, prénom, adresse mail et pseudo) et vous ne pourrez vous connecter qu'avec un appareil Apple lié à votre compte Apple.\n\nVoulez-vous vraiment créer votre compte Geobench avec Apple ?",
+        button: "Se connecter avec Apple",
+        canceled: {
+          title: "Oups !",
+          message: "Vous avez annulé la connexion avec Apple !",
+        },
+        failed: {
+          title: "Oups !",
+          message:
+            "Une erreur s'est produite lors de la connexion avec Apple...",
+        },
+        success: {
+          title: "Super !",
+          message: "Vous êtes connecté avec Apple !",
+        },
+      },
       forgot_password: "Mot de passe oublié ?",
       no_account: {
         text: "Vous n'avez pas de compte ? ",
@@ -469,6 +489,24 @@ const locales = {
       buttonGoogle: "Sign in with Google",
       buttonApple: "Sign in with Apple",
       forgot_password: "Forgot password?",
+      apple: {
+        yes: "Yes",
+        no: "No",
+        warning:
+          "Warning ! By creating your Geobench account with Apple, you won't be able to change you personal information (lastname, firstname, email and username) and you'll be able to connect to your account only with an Apple device linked to your Apple account.\n\nDo you want to continue ?",
+        failed: {
+          title: "Oops !",
+          message: "An error occurred during the process, please try again!",
+        },
+        canceled: {
+          title: "Cancelled",
+          message: "You canceled the sign in process",
+        },
+        success: {
+          title: "Yeay !",
+          message: "You're connected successfully!",
+        },
+      },
       no_account: {
         text: "You don't have an account? ",
         link: "Sign up",

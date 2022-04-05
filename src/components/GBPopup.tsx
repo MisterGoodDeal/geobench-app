@@ -12,7 +12,7 @@ interface GBPopupProps {
   visible: boolean;
   title: string;
   content: string;
-  image?: "success" | "error" | "bin";
+  image?: "success" | "error" | "bin" | "warning";
   validText: string;
   valid: () => void;
   notValidText?: string;
@@ -47,6 +47,8 @@ export const GBPopup: React.FunctionComponent<GBPopupProps> = ({
               ? require("../assets/images/popup/error.png")
               : image === "bin"
               ? require("../assets/images/recycling-bin.png")
+              : image === "warning"
+              ? require("../assets/images/popup/warning.png")
               : undefined
           }
           size={"5%"}

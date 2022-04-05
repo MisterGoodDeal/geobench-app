@@ -26,6 +26,37 @@ export const makeUserLoginApi = (fetchFn: Fetch): UserLoginApi => ({
   },
 });
 
+/* LOGIN APPLE USER */
+interface ReturnUserLoginAppleParams {
+  prenom?: string;
+  nom?: string;
+  email?: string;
+  identityToken: string;
+  authorizationCode: string;
+  user: string;
+  nonce: string;
+}
+export interface UserLoginAppleApi {
+  return: (returnParams: ReturnUserLoginAppleParams) => Promise<any>;
+}
+
+export const makeUserLoginAppleApi = (fetchFn: Fetch): UserLoginAppleApi => ({
+  return: async (returnParams) => {
+    const res = await fetchFn(`user/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        prenom: returnParams.prenom ?? null,
+        nom: returnParams.nom ?? null,
+        email: returnParams.email ?? null,
+        identityToken: returnParams.identityToken,
+        authorizationCode: returnParams.authorizationCode,
+        user: returnParams.user,
+      }),
+    });
+    return res;
+  },
+});
+
 /* RESET PASSWORD */
 interface ReturnUserResetParams {
   lang: string;

@@ -9,6 +9,7 @@ import {
   fetchUserCheckAndChange,
   fetchUserDelete,
   fetchUserLogin,
+  fetchUserLoginApple,
   fetchUserRegister,
   fetchUserReset,
   fetchUserUpdateEmail,
@@ -19,6 +20,7 @@ import {
 export const api = {
   user: {
     login: fetchUserLogin,
+    loginApple: fetchUserLoginApple,
     reset: fetchUserReset,
     checkAndChange: fetchUserCheckAndChange,
     register: fetchUserRegister,

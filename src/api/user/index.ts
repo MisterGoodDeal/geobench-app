@@ -6,6 +6,7 @@ import {
   getUserCheckAndChangeApi,
   getUserDeleteApi,
   getUserLoginApi,
+  getUserLoginAppleApi,
   getUserRegisterApi,
   getUserResetApi,
   getUserUpdateEmailApi,
@@ -28,6 +29,57 @@ export const fetchUserLogin = createAsyncThunk(
       const res = await userLoginApi.login.return({
         login: login,
         password: password,
+      });
+
+      const userData = await res.json();
+      if (res.ok) {
+        await localStorage.store("user", JSON.stringify(userData));
+        return userData;
+      } else {
+        return thunkAPI.rejectWithValue(userData);
+      }
+    } catch (e) {
+      thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+/* USER LOGIN */
+const userLoginAppleApi = getUserLoginAppleApi(env.apiUrl);
+
+interface ParametersLoginApple {
+  prenom?: string;
+  nom?: string;
+  email?: string;
+  identityToken: string;
+  authorizationCode: string;
+  user: string;
+  nonce: string;
+}
+
+export const fetchUserLoginApple = createAsyncThunk(
+  "user/apple",
+  async (
+    {
+      prenom,
+      nom,
+      email,
+      identityToken,
+      authorizationCode,
+      user,
+      nonce,
+    }: ParametersLoginApple,
+    thunkAPI
+  ) => {
+    try {
+      const res = await userLoginAppleApi.login.return({
+        prenom: prenom,
+        nom: nom,
+        email: email,
+        identityToken: identityToken,
+        authorizationCode: authorizationCode,
+        user: user,
+        nonce: nonce,
       });
 
       const userData = await res.json();

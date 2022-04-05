@@ -23,6 +23,7 @@ import { Spacer } from "@mistergooddeal/rn-components";
 import { Platform } from "react-native";
 import { appleAuth } from "@invertase/react-native-apple-authentication";
 import jwt_decode from "jwt-decode";
+import { GBToast } from "@components/GBToast";
 
 export const LoginScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -50,6 +51,24 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
   /**
    * LOGIN WITH APPLE
    */
+
+  const handleAppleLogin = () => {
+    setPopup({
+      visible: true,
+      title: Lang.login.buttonApple,
+      content: Lang.login.apple.warning,
+      validText: Lang.login.apple.yes,
+      notValidText: Lang.login.apple.no,
+      image: "warning",
+      valid: () => {
+        (async () => {
+          hidePopup();
+          await onAppleButtonPress();
+        })();
+      },
+      notValid: () => hidePopup(),
+    });
+  };
   async function onAppleButtonPress() {
     console.warn("Beginning Apple Authentication");
 
@@ -68,6 +87,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         nonce,
         identityToken,
         realUserStatus /* etc */,
+        fullName,
       } = appleAuthRequestResponse;
 
       const user = newUser;
@@ -76,19 +96,41 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         // e.g. sign in with Firebase Auth using `nonce` & `identityToken`
         console.log(nonce, identityToken);
       } else {
-        // no token - failed sign-in?
-      }
-
-      if (realUserStatus === appleAuth.UserStatus.LIKELY_REAL) {
-        console.log("I'm a real person!");
+        GBToast(
+          Lang.login.apple.failed.title,
+          Lang.login.apple.failed.message,
+          "error"
+        );
       }
 
       console.warn(`Apple Authentication Completed, ${user}, ${email}`);
+      const prenom = "";
+      const nom = "";
+      dispatch(
+        api.user.loginApple({
+          prenom: prenom,
+          nom: nom,
+          email: email ?? undefined,
+          identityToken: identityToken!,
+          authorizationCode: appleAuthRequestResponse.authorizationCode!,
+          nonce: nonce!,
+          user: appleAuthRequestResponse.user ?? undefined,
+        })
+      );
     } catch (error) {
       if (error.code === appleAuth.Error.CANCELED) {
-        console.warn("User canceled Apple Sign in.");
+        GBToast(
+          Lang.login.apple.canceled.title,
+          Lang.login.apple.canceled.message,
+          "error"
+        );
       } else {
         console.error(error);
+        GBToast(
+          Lang.login.apple.failed.title,
+          Lang.login.apple.failed.message,
+          "error"
+        );
       }
     }
   }
@@ -261,7 +303,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           <>
             <Spacer space={"1.5%"} visible={false} />
             <GBButton
-              onPress={onAppleButtonPress}
+              onPress={handleAppleLogin}
               color={Colors.apple}
               icon={require("@images/apple.png")}
             >
