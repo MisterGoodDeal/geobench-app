@@ -62,6 +62,8 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
 
   const [isDarkMode, setisDarkMode] = useState(false);
 
+  const [isAppleOAuth, setIsAppleOAuth] = useState(false);
+
   React.useEffect(() => {
     fullname.length === 0
       ? setFullnameDisable(true)
@@ -81,6 +83,9 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
     React.useCallback(() => {
       //Quand le composant est affiché
       const usr: UserLocal = userInfo;
+      console.log(usr);
+      setIsAppleOAuth(usr.external_user === "apple");
+
       setFullname(`${usr?.prenom} ${usr?.nom}`);
       setEmail(`${usr?.mail}`);
       (async () => {
@@ -350,6 +355,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 width={wp("70%")}
                 placeholder={Lang.settings.ph_fullname}
                 color={darkMode ? ColorsDark.inputColor : undefined}
+                disable={isAppleOAuth}
               >
                 {fullname}
               </GBInput>
@@ -358,8 +364,16 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 color={Colors.main}
                 tint={Colors.white}
                 icon={require("../../assets/images/edit.png")}
-                onPress={() => handleFullnameSubmit()}
-                disable={fullnameDisable}
+                onPress={() => {
+                  isAppleOAuth
+                    ? GBToast(
+                        Lang.login.apple.infoUpdate.title,
+                        Lang.login.apple.infoUpdate.text,
+                        "error"
+                      )
+                    : handleFullnameSubmit();
+                }}
+                disable={fullnameDisable && !isAppleOAuth}
               />
             </GBContainer>
             <Spacer visible={false} space={"2%"} />
@@ -377,6 +391,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 width={wp("70%")}
                 placeholder={Lang.settings.ph_email}
                 color={darkMode ? ColorsDark.inputColor : undefined}
+                disable={isAppleOAuth}
               >
                 {email}
               </GBInput>
@@ -385,8 +400,16 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 color={Colors.main}
                 tint={Colors.white}
                 icon={require("../../assets/images/edit.png")}
-                onPress={() => handleEmailSubmit()}
-                disable={emailDisable}
+                onPress={() => {
+                  isAppleOAuth
+                    ? GBToast(
+                        Lang.login.apple.infoUpdate.title,
+                        Lang.login.apple.infoUpdate.text,
+                        "error"
+                      )
+                    : handleEmailSubmit();
+                }}
+                disable={emailDisable && !isAppleOAuth}
               />
             </GBContainer>
             <Spacer visible={false} space={"2%"} />
@@ -476,7 +499,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
             <GBLink
               size="1.5%"
               onPress={() =>
-                Linking.openURL("https://forms.gle/rL3sHwErKsfobWJv8")
+                Linking.openURL("http://translate.geobench.turtlecorp.fr")
               }
             >
               {Lang.lang.help}

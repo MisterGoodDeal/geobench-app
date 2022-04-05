@@ -50,6 +50,7 @@ export const makeUserLoginAppleApi = (fetchFn: Fetch): UserLoginAppleApi => ({
         email: returnParams.email ?? null,
         identityToken: returnParams.identityToken,
         authorizationCode: returnParams.authorizationCode,
+        nonce: returnParams.nonce,
         user: returnParams.user,
       }),
     });

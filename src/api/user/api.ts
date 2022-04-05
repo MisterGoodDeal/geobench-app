@@ -91,7 +91,9 @@ const getUserLoginAppleFetch = (fetch: Fetch, baseUrl: string): Fetch => {
       },
     };
 
-    const url = `${baseUrl}/${routeUrl}`;
+    const url = `${baseUrl}/user/apple`;
+
+    console.log(url, requestInit);
 
     const res = await fetch(url, requestInit);
     return res;

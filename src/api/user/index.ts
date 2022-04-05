@@ -84,6 +84,7 @@ export const fetchUserLoginApple = createAsyncThunk(
 
       const userData = await res.json();
       if (res.ok) {
+        console.log("userDataApple", userData);
         await localStorage.store("user", JSON.stringify(userData));
         return userData;
       } else {

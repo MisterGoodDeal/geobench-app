@@ -1,5 +1,8 @@
 import * as React from "react";
 import { ImageSourcePropType, StyleSheet, Image } from "react-native";
+import { Image as ImageRNE } from "react-native-elements";
+import { ActivityIndicator } from "react-native";
+
 import { hp } from "../utils/functions";
 
 interface GBImageProps {
@@ -19,6 +22,7 @@ export const GBImage: React.FunctionComponent<GBImageProps> = ({
       { width: hp(size), height: hp(size), resizeMode: "contain" },
       { tintColor: tint !== undefined ? tint : undefined },
     ]}
+    // PlaceholderContent={<ActivityIndicator />}
   />
 );
 

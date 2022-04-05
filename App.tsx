@@ -26,8 +26,6 @@ const App = () => {
         localStorage.store("darkMode", "false");
       }
     })();
-
-    console.log(isDarkMode);
   }, [isDarkMode]);
   const Stack = createStackNavigator();
 

@@ -70,7 +70,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
     });
   };
   async function onAppleButtonPress() {
-    console.warn("Beginning Apple Authentication");
+    setIsLogin(true);
 
     // start a login request
     try {
@@ -103,13 +103,12 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         );
       }
 
-      console.warn(`Apple Authentication Completed, ${user}, ${email}`);
-      const prenom = "";
-      const nom = "";
+      const prenom = fullName!.givenName;
+      const nom = fullName!.familyName;
       dispatch(
         api.user.loginApple({
-          prenom: prenom,
-          nom: nom,
+          prenom: prenom ?? undefined,
+          nom: nom ?? undefined,
           email: email ?? undefined,
           identityToken: identityToken!,
           authorizationCode: appleAuthRequestResponse.authorizationCode!,
@@ -117,7 +116,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
           user: appleAuthRequestResponse.user ?? undefined,
         })
       );
-    } catch (error) {
+    } catch (error: any) {
       if (error.code === appleAuth.Error.CANCELED) {
         GBToast(
           Lang.login.apple.canceled.title,
@@ -137,11 +136,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
 
   React.useEffect(() => {
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
-    return appleAuth.onCredentialRevoked(async () => {
-      console.warn(
-        "If this function executes, User Credentials have been Revoked"
-      );
-    });
+    return appleAuth.onCredentialRevoked(async () => {});
   }, []); // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
 
   /**

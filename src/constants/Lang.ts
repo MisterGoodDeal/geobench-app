@@ -193,7 +193,11 @@ const locales = {
         yes: "Oui",
         no: "Non",
         warning:
-          "Attention ! En créant votre compte Geobench avec Apple, vous ne pourrez modifier aucune information personnelle (nom, prénom, adresse mail et pseudo) et vous ne pourrez vous connecter qu'avec un appareil Apple lié à votre compte Apple.\n\nVoulez-vous vraiment créer votre compte Geobench avec Apple ?",
+          "Attention ! En créant votre compte Geobench avec Apple, vous ne pourrez modifier aucune information personnelle (nom, prénom, adresse mail et pseudo) et vous ne pourrez vous connecter qu'avec un appareil Apple lié à votre compte Apple.\nVoulez-vous continuer ?",
+        infoUpdate: {
+          title: "Mise à jour de vos informations",
+          text: "Impossible de modifier ses infos avec un compte Apple.",
+        },
         button: "Se connecter avec Apple",
         canceled: {
           title: "Oups !",
@@ -493,7 +497,11 @@ const locales = {
         yes: "Yes",
         no: "No",
         warning:
-          "Warning ! By creating your Geobench account with Apple, you won't be able to change you personal information (lastname, firstname, email and username) and you'll be able to connect to your account only with an Apple device linked to your Apple account.\n\nDo you want to continue ?",
+          "Warning ! By creating your Geobench account with Apple, you won't be able to change you personal information (lastname, firstname, email and username) and you'll be able to connect to your account only with an Apple device linked to your Apple account.\nDo you want to continue ?",
+        infoUpdate: {
+          title: "Personal information update",
+          text: "Can't change your personal information with an Apple account.",
+        },
         failed: {
           title: "Oops !",
           message: "An error occurred during the process, please try again!",

@@ -9,13 +9,15 @@ export interface UserLocal {
   pseudo: string;
   favoris: string;
   reset_key: string;
+  external_user?: string;
+  external_user_id?: string;
 }
 
 export interface Popup {
   visible: boolean;
   title: string;
   content: string;
-  image?: "success" | "error";
+  image?: "success" | "error" | "warning";
   validText: string;
   valid: () => void;
   notValidText?: string;
