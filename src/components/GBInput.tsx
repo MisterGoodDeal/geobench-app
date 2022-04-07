@@ -73,7 +73,7 @@ export const GBInput: React.FunctionComponent<GBInputProps> = ({
             ? Colors.placeholder
             : color === undefined
             ? Colors.black
-            : ColorsDark.white,
+            : ColorsDark.black,
           fontFamily: "Poppins-Regular",
           padding: 0,
         },
