@@ -472,8 +472,10 @@ export const CarteScreen: React.FunctionComponent<null> = () => {
         moveOnMarkerPress={true}
         showsPointsOfInterest={false}
         showsUserLocation={true}
-        provider={PROVIDER_GOOGLE}
+        userInterfaceStyle={darkMode ? "dark" : "light"}
+        provider={null}
         style={styles.map}
+        cacheEnabled={false}
         clusterColor={Colors.main}
         clusterFontFamily={"Poppins-Black"}
         customMapStyle={darkMode ? darkMap : lightMap}
