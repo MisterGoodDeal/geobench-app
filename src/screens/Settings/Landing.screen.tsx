@@ -1,14 +1,7 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
-import {
-  Linking,
-  Platform,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { Linking, Platform, Pressable, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { GBButton } from "@components/GBButton";
 import { GBContainer } from "@components/GBContainer";
@@ -19,7 +12,7 @@ import { GBRoundButton } from "@components/GBRoundButton";
 import { GBStatusBar } from "@components/GBStatusBar";
 import { GBText } from "@components/GBText";
 import { Colors, ColorsDark } from "@constants/Colors";
-import { availableLanguages, Lang } from "@constants/Lang";
+import { Lang } from "@constants/Lang";
 import { actions } from "@store/action";
 import { userSelector } from "@store/slices/userSlice";
 import { UserLocal } from "@utils/interface";
@@ -30,11 +23,8 @@ import { GBToast } from "@components/GBToast";
 import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
 import { GBPopup } from "@components/GBPopup";
 import ToggleSwitch from "toggle-switch-react-native";
-import { hp, infos, Spacer, wp } from "@mistergooddeal/rn-components";
-import { sizes } from "@constants/Sizes";
-import { GBPicker } from "@components/GBPicker";
+import { infos, Spacer, wp } from "@mistergooddeal/rn-components";
 import * as RNLocalize from "react-native-localize";
-import { useEffect } from "react";
 import { GBLink } from "@components/GBLink";
 
 const validator = require("email-validator");
@@ -63,6 +53,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
   const [isDarkMode, setisDarkMode] = useState(false);
 
   const [isAppleOAuth, setIsAppleOAuth] = useState(false);
+  const [isGoogleOAuth, setIsGoogleOAuth] = useState(false);
 
   React.useEffect(() => {
     fullname.length === 0
@@ -84,7 +75,11 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
       //Quand le composant est affiché
       const usr: UserLocal = userInfo;
       console.log(usr);
-      setIsAppleOAuth(usr.external_user === "apple");
+      (async () => {
+        const userLocal: UserLocal = JSON.parse(await localStorage.get("user"));
+        setIsAppleOAuth(userLocal.external_user === "apple");
+        setIsGoogleOAuth(userLocal.external_user === "google");
+      })();
 
       setFullname(`${usr?.prenom} ${usr?.nom}`);
       setEmail(`${usr?.mail}`);
@@ -355,7 +350,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 width={wp("70%")}
                 placeholder={Lang.settings.ph_fullname}
                 color={darkMode ? ColorsDark.inputColor : undefined}
-                disable={isAppleOAuth}
+                disable={isAppleOAuth || isGoogleOAuth}
               >
                 {fullname}
               </GBInput>
@@ -371,9 +366,15 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                         Lang.login.apple.infoUpdate.text,
                         "error"
                       )
+                    : isGoogleOAuth
+                    ? GBToast(
+                        Lang.login.google.infoUpdate.title,
+                        Lang.login.google.infoUpdate.text,
+                        "error"
+                      )
                     : handleFullnameSubmit();
                 }}
-                disable={fullnameDisable && !isAppleOAuth}
+                disable={fullnameDisable && !isAppleOAuth && !isGoogleOAuth}
               />
             </GBContainer>
             <Spacer visible={false} space={"2%"} />
@@ -391,7 +392,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                 width={wp("70%")}
                 placeholder={Lang.settings.ph_email}
                 color={darkMode ? ColorsDark.inputColor : undefined}
-                disable={isAppleOAuth}
+                disable={isAppleOAuth || isGoogleOAuth}
               >
                 {email}
               </GBInput>
@@ -407,9 +408,15 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
                         Lang.login.apple.infoUpdate.text,
                         "error"
                       )
+                    : isGoogleOAuth
+                    ? GBToast(
+                        Lang.login.google.infoUpdate.title,
+                        Lang.login.google.infoUpdate.text,
+                        "error"
+                      )
                     : handleEmailSubmit();
                 }}
-                disable={emailDisable && !isAppleOAuth}
+                disable={emailDisable && !isAppleOAuth && !isGoogleOAuth}
               />
             </GBContainer>
             <Spacer visible={false} space={"2%"} />
@@ -450,7 +457,19 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
 
             <GBButton
               onPress={() =>
-                nav.navigate("ForgotPassword", { changePassword: true })
+                isAppleOAuth
+                  ? GBToast(
+                      Lang.login.apple.infoUpdate.title,
+                      Lang.login.apple.infoUpdate.text,
+                      "error"
+                    )
+                  : isGoogleOAuth
+                  ? GBToast(
+                      Lang.login.google.infoUpdate.title,
+                      Lang.login.google.infoUpdate.text,
+                      "error"
+                    )
+                  : nav.navigate("ForgotPassword", { changePassword: true })
               }
               width={wp("90%")}
             >

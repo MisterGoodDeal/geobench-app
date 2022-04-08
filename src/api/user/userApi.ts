@@ -26,6 +26,37 @@ export const makeUserLoginApi = (fetchFn: Fetch): UserLoginApi => ({
   },
 });
 
+/* LOGIN GOOGLE USER */
+interface ReturnUserLoginGoogleParams {
+  idToken: string;
+  serverAuthCode: string;
+  idUser: string;
+  givenName: string;
+  familyName: string;
+  email: string;
+}
+
+export interface UserLoginGoogleApi {
+  return: (returnParams: ReturnUserLoginGoogleParams) => Promise<any>;
+}
+
+export const makeUserLoginGoogleApi = (fetchFn: Fetch): UserLoginGoogleApi => ({
+  return: async (returnParams) => {
+    const res = await fetchFn(`user/google`, {
+      method: "POST",
+      body: JSON.stringify({
+        idToken: returnParams.idToken,
+        serverAuthCode: returnParams.serverAuthCode,
+        idUser: returnParams.idUser,
+        givenName: returnParams.givenName,
+        familyName: returnParams.familyName,
+        email: returnParams.email,
+      }),
+    });
+    return res;
+  },
+});
+
 /* LOGIN APPLE USER */
 interface ReturnUserLoginAppleParams {
   prenom?: string;
@@ -42,7 +73,7 @@ export interface UserLoginAppleApi {
 
 export const makeUserLoginAppleApi = (fetchFn: Fetch): UserLoginAppleApi => ({
   return: async (returnParams) => {
-    const res = await fetchFn(`user/login`, {
+    const res = await fetchFn(`user/apple`, {
       method: "POST",
       body: JSON.stringify({
         prenom: returnParams.prenom ?? null,

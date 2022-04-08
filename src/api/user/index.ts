@@ -7,6 +7,7 @@ import {
   getUserDeleteApi,
   getUserLoginApi,
   getUserLoginAppleApi,
+  getUserLoginGoogleApi,
   getUserRegisterApi,
   getUserResetApi,
   getUserUpdateEmailApi,
@@ -44,7 +45,56 @@ export const fetchUserLogin = createAsyncThunk(
   }
 );
 
-/* USER LOGIN */
+/* USER GOOGLE LOGIN */
+const userLoginGoogleApi = getUserLoginGoogleApi(env.apiUrl);
+
+interface ParametersLoginGoogle {
+  idToken: string;
+  serverAuthCode: string;
+  idUser: string;
+  givenName: string;
+  familyName: string;
+  email: string;
+}
+
+export const fetchUserLoginGoogle = createAsyncThunk(
+  "user/google",
+  async (
+    {
+      idToken,
+      serverAuthCode,
+      idUser,
+      givenName,
+      familyName,
+      email,
+    }: ParametersLoginGoogle,
+    thunkAPI
+  ) => {
+    try {
+      const res = await userLoginGoogleApi.login.return({
+        idToken: idToken,
+        serverAuthCode: serverAuthCode,
+        idUser: idUser,
+        givenName: givenName,
+        familyName: familyName,
+        email: email,
+      });
+
+      const userData = await res.json();
+      if (res.ok) {
+        console.log("userDataGoogle", userData);
+        await localStorage.store("user", JSON.stringify(userData));
+        return userData;
+      } else {
+        return thunkAPI.rejectWithValue(userData);
+      }
+    } catch (e) {
+      thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+/* USER APPLE LOGIN */
 const userLoginAppleApi = getUserLoginAppleApi(env.apiUrl);
 
 interface ParametersLoginApple {

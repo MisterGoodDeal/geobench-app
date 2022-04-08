@@ -13,6 +13,17 @@ export interface UserLocal {
   external_user_id?: string;
 }
 
+export interface GoogleOAuth {
+  idToken: string;
+  serverAuthCode: string;
+  user: {
+    givenName: string;
+    familyName: string;
+    email: string;
+    id: string;
+  };
+}
+
 export interface Popup {
   visible: boolean;
   title: string;

@@ -53,6 +53,26 @@ export const userSlice = createSlice({
       state.errorMessage = payload;
     });
 
+    /* Login de l'utilisateur Google */
+    builder.addCase(api.user.loginGoogle.pending, (state) => {
+      state.isFetching = true;
+      return state;
+    });
+    builder.addCase(api.user.loginGoogle.fulfilled, (state, { payload }) => {
+      state.userInfo = payload;
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+    });
+    builder.addCase(
+      api.user.loginGoogle.rejected,
+      (state, { payload }: any) => {
+        state.isFetching = false;
+        state.isError = true;
+        state.errorMessage = payload;
+      }
+    );
+
     /* Login de l'utilisateur Apple */
     builder.addCase(api.user.loginApple.pending, (state) => {
       state.isFetching = true;

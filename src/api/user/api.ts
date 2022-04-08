@@ -5,6 +5,7 @@ import {
   makeUserDeleteApi,
   makeUserLoginApi,
   makeUserLoginAppleApi,
+  makeUserLoginGoogleApi,
   makeUserRegisterApi,
   makeUserResetApi,
   makeUserUpdateEmailApi,
@@ -14,6 +15,7 @@ import {
   UserDeleteApi,
   UserLoginApi,
   UserLoginAppleApi,
+  UserLoginGoogleApi,
   UserRegisterApi,
   UserResetApi,
   UserUpdateEmailApi,
@@ -59,6 +61,47 @@ const getUserLoginFetch = (fetch: Fetch, baseUrl: string): Fetch => {
   };
 };
 
+/* USER GOOGLE LOGIN */
+interface UserLoginGoogleApiInterface {
+  login: UserLoginGoogleApi;
+}
+
+export const getUserLoginGoogleApi = (
+  baseUrl: string
+): UserLoginGoogleApiInterface => {
+  const UserLoginGoogleFetch = getUserLoginGoogleFetch(fetch, baseUrl);
+
+  return {
+    login: makeUserLoginGoogleApi(UserLoginGoogleFetch),
+  };
+};
+
+const getUserLoginGoogleFetch = (fetch: Fetch, baseUrl: string): Fetch => {
+  return async (input: RequestInfo, init?: RequestInit) => {
+    const routeUrl =
+      typeof input === "string"
+        ? input
+        : hasOwnProperty(input, "href")
+        ? input.href
+        : input.url;
+
+    const requestInit: RequestInit = {
+      ...init,
+      headers: {
+        ...init?.headers,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const url = `${baseUrl}/${routeUrl}`;
+
+    console.log(url, requestInit);
+
+    const res = await fetch(url, requestInit);
+    return res;
+  };
+};
+
 /* USER APPLE LOGIN */
 interface UserLoginAppleApiInterface {
   login: UserLoginAppleApi;
@@ -91,7 +134,7 @@ const getUserLoginAppleFetch = (fetch: Fetch, baseUrl: string): Fetch => {
       },
     };
 
-    const url = `${baseUrl}/user/apple`;
+    const url = `${baseUrl}/${routeUrl}`;
 
     console.log(url, requestInit);
 

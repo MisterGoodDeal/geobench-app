@@ -189,6 +189,24 @@ const locales = {
       button: "Se connecter",
       buttonGoogle: "Connexion avec Google",
       buttonApple: "Connexion avec Apple",
+      google: {
+        yes: "Oui",
+        no: "Non",
+        warning:
+          "Attention ! En créant votre compte Geobench avec Google, vous ne pourrez modifier aucune information personnelle (nom, prénom, adresse mail et pseudo).\nVoulez-vous continuer ?",
+        infoUpdate: {
+          title: "Mise à jour de vos informations",
+          text: "Impossible de modifier ses infos avec un compte Google.",
+        },
+        canceled: {
+          title: "Oups !",
+          message: "Vous avez annulé la connexion avec Google !",
+        },
+        playServiceOutdated: {
+          title: "Oups !",
+          message: "Veuillez mettre à jour les services Google Play !",
+        },
+      },
       apple: {
         yes: "Oui",
         no: "Non",
@@ -493,6 +511,24 @@ const locales = {
       buttonGoogle: "Sign in with Google",
       buttonApple: "Sign in with Apple",
       forgot_password: "Forgot password?",
+      google: {
+        yes: "Yes",
+        no: "No",
+        warning:
+          "Warning ! By creating your Geobench account with Google, you won't be able to change you personal information (lastname, firstname, email and username).\nDo you want to continue ?",
+        infoUpdate: {
+          title: "Personal information update",
+          text: "Can't change your personal information with an Google account.",
+        },
+        canceled: {
+          title: "Cancelled",
+          message: "You canceled the sign in process with Google",
+        },
+        playServiceOutdated: {
+          title: "Oops!",
+          message: "Please update Google Play services!",
+        },
+      },
       apple: {
         yes: "Yes",
         no: "No",
@@ -508,7 +544,7 @@ const locales = {
         },
         canceled: {
           title: "Cancelled",
-          message: "You canceled the sign in process",
+          message: "You canceled the sign in process with Google",
         },
         success: {
           title: "Yeay !",
@@ -584,9 +620,9 @@ const locales = {
           },
         },
         success: {
-          title: "Super ! 😀",
+          title: "Yeay ! 😀",
           message:
-            "Votre compte a été créé avec succès, vous pouvez désormais vous connecter.",
+            "Your account has been created successfully! You can now sign in with your credentials.",
         },
       },
     },

@@ -16,7 +16,7 @@ import { api } from "@api/index";
 import { userSelector } from "@store/slices/userSlice";
 import { actions } from "@store/action";
 import { getLoginErrorMsg } from "@api/utils";
-import { Popup } from "@utils/interface";
+import { GoogleOAuth, Popup } from "@utils/interface";
 import { GBLoader } from "@components/GBLoader";
 import { GBKeyboardDismiss } from "@components/GBKeyboardDismiss";
 import { Spacer } from "@mistergooddeal/rn-components";
@@ -24,6 +24,12 @@ import { Platform } from "react-native";
 import { appleAuth } from "@invertase/react-native-apple-authentication";
 import jwt_decode from "jwt-decode";
 import { GBToast } from "@components/GBToast";
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
+import { env } from "@utils/env";
 
 export const LoginScreen: React.FunctionComponent<null> = () => {
   const nav = useNavigation();
@@ -39,9 +45,108 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
 
   const [popup, setPopup] = useState<Popup>();
 
-  // Use focus effect
+  /**
+   * LOGIN WITH GOOGLE
+   */
+  const handleGoogleLogin = () => {
+    setPopup({
+      visible: true,
+      title: Lang.login.buttonGoogle,
+      content: Lang.login.google.warning,
+      validText: Lang.login.google.yes,
+      notValidText: Lang.login.google.no,
+      image: "warning",
+      valid: () => {
+        (async () => {
+          hidePopup();
+          await signInGoogle();
+        })();
+      },
+      notValid: () => hidePopup(),
+    });
+  };
+
+  const signInGoogle = async () => {
+    setIsLogin(true);
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log(userInfo);
+      dispatch(
+        api.user.loginGoogle({
+          idToken: userInfo.idToken!,
+          serverAuthCode: userInfo.serverAuthCode!,
+          idUser: userInfo.user.id!,
+          givenName: userInfo.user.givenName!,
+          familyName: userInfo.user.familyName!,
+          email: userInfo.user.email!,
+        })
+      );
+      //setUser(userInfo);
+    } catch (error: any) {
+      console.log("Message", error.message);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        GBToast(
+          Lang.login.google.canceled.title,
+          Lang.login.google.canceled.message,
+          "error"
+        );
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log("Signing In");
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        GBToast(
+          Lang.login.google.playServiceOutdated.title,
+          Lang.login.google.playServiceOutdated.message,
+          "error"
+        );
+      } else {
+        GBToast(
+          Lang.login.apple.failed.title,
+          Lang.login.apple.failed.message,
+          "error"
+        );
+      }
+    }
+  };
+  const isSignedIn = async () => {
+    const isSignedIn = await GoogleSignin.isSignedIn();
+    if (!!isSignedIn) {
+      getCurrentUserInfo();
+    } else {
+      console.log("Please Login");
+    }
+  };
+  const getCurrentUserInfo = async () => {
+    try {
+      const userInfo = await GoogleSignin.signInSilently();
+      //setUser(userInfo);
+    } catch (error: any) {
+      GBToast(
+        Lang.login.apple.failed.title,
+        `${Lang.login.apple.failed.message} (error ${error.code})`,
+        "error"
+      );
+    }
+  };
+  const signOut = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      //setUser({}); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useFocusEffect(
     React.useCallback(() => {
+      GoogleSignin.configure({
+        webClientId: env.googleOAuth.clientId.android,
+        offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+        forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+        iosClientId: env.googleOAuth.clientId.ios, // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+      });
+      //isSignedIn();
       return () => {
         // Quand le composant est déaffiché
       };
@@ -229,9 +334,9 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         )}
         <GBImage
           source={require("../../assets/images/bench.png")}
-          size={"12%"}
+          size={"10%"}
         />
-        <Spacer space={"8%"} visible={false} />
+        <Spacer space={"3%"} visible={false} />
         <GBText
           size={"2.2%"}
           style={"bold"}
@@ -285,14 +390,6 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
             {Lang.login.no_account.link}
           </GBLink>
         </GBContainer>
-        {/* <Spacer space={"1.5%"} visible={false} />
-        <GBButton
-          onPress={() => null}
-          color={Colors.google}
-          icon={require("@images/google.png")}
-        >
-          {Lang.login.buttonGoogle}
-        </GBButton> */}
 
         {Platform.OS === "ios" && (
           <>
@@ -306,6 +403,15 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
             </GBButton>
           </>
         )}
+
+        <Spacer space={"1.5%"} visible={false} />
+        <GBButton
+          onPress={() => handleGoogleLogin()}
+          color={Colors.google}
+          icon={require("@images/google.png")}
+        >
+          {Lang.login.buttonGoogle}
+        </GBButton>
       </GBContainer>
     </GBKeyboardDismiss>
   );
