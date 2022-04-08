@@ -11,6 +11,6 @@
     },
     "android": {
       "package": "fr.mistergooddeal.geobench",
-      "versionCode": 23
+      "versionCode": 24
     }
 }
