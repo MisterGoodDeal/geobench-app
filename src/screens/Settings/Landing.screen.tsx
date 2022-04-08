@@ -273,7 +273,7 @@ export const SettingsLandingScreen: React.FunctionComponent<null> = () => {
           <Pressable
             onPress={() =>
               GBToast(
-                "Geobench 1.7.5",
+                "Geobench 1.7.6",
                 `@mistergooddeal/rn-components ${infos.version}`,
                 "info"
               )
