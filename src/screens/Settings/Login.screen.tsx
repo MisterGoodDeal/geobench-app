@@ -26,7 +26,6 @@ import jwt_decode from "jwt-decode";
 import { GBToast } from "@components/GBToast";
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 import { env } from "@utils/env";
@@ -174,7 +173,7 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
       notValid: () => hidePopup(),
     });
   };
-  async function onAppleButtonPress() {
+  const onAppleButtonPress = async () => {
     setIsLogin(true);
 
     // start a login request
@@ -237,11 +236,13 @@ export const LoginScreen: React.FunctionComponent<null> = () => {
         );
       }
     }
-  }
+  };
 
   React.useEffect(() => {
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
-    return appleAuth.onCredentialRevoked(async () => {});
+    return appleAuth.isSupported
+      ? appleAuth.onCredentialRevoked(async () => {})
+      : undefined;
   }, []); // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
 
   /**
